@@ -78,7 +78,7 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
         <p className="text-sm text-gray-500">{documents.length} document{documents.length !== 1 ? 's' : ''}</p>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+          className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
         >
           {showForm ? 'Cancel' : '+ Add Document'}
         </button>
@@ -88,22 +88,22 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
         <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input required placeholder="Document Name *" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
             <select value={form.document_type} onChange={e => setForm(f => ({ ...f, document_type: e.target.value as DocumentType }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               {docTypes.map(t => <option key={t} value={t}>{docTypeLabels[t]}</option>)}
             </select>
             <input placeholder="File URL (paste link)" value={form.file_url} onChange={e => setForm(f => ({ ...f, file_url: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
             <div>
               <label className="block text-xs text-gray-500 mb-1">Expiry Date</label>
               <input type="date" value={form.expiry_date} onChange={e => setForm(f => ({ ...f, expiry_date: e.target.value }))}
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+                className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
             </div>
           </div>
           <textarea placeholder="Notes" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
-          <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
             Add Document
           </button>
         </form>
@@ -130,7 +130,7 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
                 <span>Added: {new Date(doc.uploaded_at).toLocaleDateString()}</span>
               </div>
               {doc.file_url && (
-                <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-sm text-red-600 hover:underline mt-1 inline-block">
+                <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline mt-1 inline-block">
                   View File
                 </a>
               )}

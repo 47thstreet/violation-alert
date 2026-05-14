@@ -23,7 +23,7 @@ export default function AuthError({
       <div className="flex gap-3">
         <button
           onClick={reset}
-          className="bg-red-600 text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
+          className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all"
         >
           Try again
         </button>

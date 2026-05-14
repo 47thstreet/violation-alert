@@ -108,7 +108,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
         <div className="flex items-center gap-3">
           <p className="text-sm text-gray-500">{openCount} open request{openCount !== 1 ? 's' : ''}</p>
           <select value={filter} onChange={e => setFilter(e.target.value as MaintenanceStatus | 'all')}
-            className="border rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
+            className="border rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             <option value="all">All ({requests.length})</option>
             {statuses.map(s => (
               <option key={s} value={s}>{s.replace('_', ' ')} ({requests.filter(r => r.status === s).length})</option>
@@ -117,7 +117,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+          className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
         >
           {showForm ? 'Cancel' : '+ New Request'}
         </button>
@@ -127,12 +127,12 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
         <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
           <div>
             <input required placeholder="Title *" value={form.title} onChange={e => { setForm(f => ({ ...f, title: e.target.value })); setFormErrors(fe => ({ ...fe, title: '' })); }}
-              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.title ? 'border-red-500' : ''}`} />
+              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.title ? 'border-red-500' : ''}`} />
             {formErrors.title && <p className="text-red-600 text-sm mt-1">{formErrors.title}</p>}
           </div>
           <div>
             <textarea required minLength={10} placeholder="Description * (min 10 characters)" value={form.description} onChange={e => { setForm(f => ({ ...f, description: e.target.value })); setFormErrors(fe => ({ ...fe, description: '' })); }} rows={3}
-              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.description ? 'border-red-500' : ''}`} />
+              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.description ? 'border-red-500' : ''}`} />
             <div className="flex justify-between mt-1">
               {formErrors.description ? <p className="text-red-600 text-sm">{formErrors.description}</p> : <span />}
               <span className={`text-xs ${form.description.length < 10 ? 'text-gray-400' : 'text-green-600'}`}>{form.description.length} / 10 min</span>
@@ -140,19 +140,19 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <select value={form.priority} onChange={e => setForm(f => ({ ...f, priority: e.target.value as MaintenancePriority }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               {priorities.map(p => <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
             </select>
             <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as MaintenanceCategory }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               {categories.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
             </select>
             <input placeholder="Unit #" value={form.unit_number} onChange={e => setForm(f => ({ ...f, unit_number: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
             <input placeholder="Assign to" value={form.assigned_to} onChange={e => setForm(f => ({ ...f, assigned_to: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
-          <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+          <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
             Create Request
           </button>
         </form>
@@ -183,7 +183,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
                 <select
                   value={req.status}
                   onChange={e => updateStatus(req.id, e.target.value as MaintenanceStatus)}
-                  className="border rounded px-2 py-1 text-xs focus:ring-2 focus:ring-red-500"
+                  className="border rounded px-2 py-1 text-xs focus:ring-2 focus:ring-indigo-500"
                 >
                   {statuses.map(s => <option key={s} value={s}>{s.replace('_', ' ')}</option>)}
                 </select>

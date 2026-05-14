@@ -8,7 +8,7 @@ import { TIER_LABELS, PLAN_FEATURES } from '@/lib/tier-limits';
 
 const TIER_BADGE_COLORS: Record<SubscriptionTier, string> = {
   free: 'bg-gray-100 text-gray-700',
-  pro: 'bg-red-100 text-red-700',
+  pro: 'bg-indigo-100 text-indigo-700',
   enterprise: 'bg-purple-100 text-purple-700',
 };
 
@@ -169,7 +169,7 @@ export default function BillingPage() {
             <button
               onClick={() => handleUpgrade('pro')}
               disabled={actionLoading}
-              className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
+              className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
             >
               {actionLoading ? 'Loading...' : 'Upgrade to Pro'}
             </button>
@@ -196,12 +196,12 @@ export default function BillingPage() {
             <div className="mt-2">
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
-                  className="bg-red-600 h-2 rounded-full transition-all"
+                  className="bg-indigo-600 h-2 rounded-full transition-all"
                   style={{ width: `${Math.min((propertyCount / 3) * 100, 100)}%` }}
                 />
               </div>
               {propertyCount >= 3 && (
-                <p className="text-xs text-red-600 mt-1">
+                <p className="text-xs text-indigo-600 mt-1">
                   You&apos;ve reached the free plan limit. Upgrade to add more properties.
                 </p>
               )}
@@ -234,10 +234,10 @@ export default function BillingPage() {
           </div>
 
           {/* Pro */}
-          <div className={`rounded-xl border-2 p-5 ${tier === 'pro' ? 'border-red-600 bg-red-50/30' : 'border-red-300'}`}>
+          <div className={`rounded-xl border-2 p-5 ${tier === 'pro' ? 'border-indigo-600 bg-indigo-50/30' : 'border-indigo-300'}`}>
             <div className="flex items-center justify-between">
               <h3 className="font-semibold text-gray-900">Pro</h3>
-              <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full">Popular</span>
+              <span className="text-xs bg-indigo-600 text-white px-2 py-0.5 rounded-full">Popular</span>
             </div>
             <p className="text-2xl font-bold mt-1">$29<span className="text-sm text-gray-500 font-normal">/mo</span></p>
             <ul className="mt-4 space-y-2">
@@ -251,12 +251,12 @@ export default function BillingPage() {
               ))}
             </ul>
             {tier === 'pro' ? (
-              <div className="mt-4 text-center text-xs text-red-600 font-medium uppercase">Current plan</div>
+              <div className="mt-4 text-center text-xs text-indigo-600 font-medium uppercase">Current plan</div>
             ) : tier === 'free' ? (
               <button
                 onClick={() => handleUpgrade('pro')}
                 disabled={actionLoading}
-                className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50"
+                className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 disabled:opacity-50"
               >
                 Upgrade
               </button>

@@ -189,7 +189,7 @@ export default function NewPropertyPage() {
           <div className="flex gap-3 mt-4">
             <Link
               href={`/properties/${newPropertyId}`}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
             >
               View Property
             </Link>
@@ -214,7 +214,7 @@ export default function NewPropertyPage() {
                 value={address}
                 onChange={e => { setAddress(e.target.value); setAddressError(''); setDuplicateId(null); }}
                 placeholder="123 Main Street, Brooklyn, NY"
-                className={`flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none ${addressError ? 'border-red-500' : ''}`}
+                className={`flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none ${addressError ? 'border-red-500' : ''}`}
                 onKeyDown={e => e.key === 'Enter' && handleResolve()}
               />
               <button
@@ -253,7 +253,7 @@ export default function NewPropertyPage() {
               <button
                 onClick={handleAdd}
                 disabled={loading || scanning}
-                className="mt-2 bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
+                className="mt-2 bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
               >
                 {loading ? 'Adding...' : 'Add This Property'}
               </button>

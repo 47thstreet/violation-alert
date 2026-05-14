@@ -132,7 +132,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
       </div>
     );
   }
@@ -141,7 +141,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
     return (
       <div className="text-center py-20">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Violation not found</h2>
-        <Link href="/violations" className="text-red-600 hover:text-red-700 text-sm">
+        <Link href="/violations" className="text-indigo-600 hover:text-indigo-800 text-sm">
           Back to violations
         </Link>
       </div>
@@ -261,7 +261,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
               onClick={() => setActiveNotesTab('notes')}
               className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
                 activeNotesTab === 'notes'
-                  ? 'border-gray-900 text-gray-900'
+                  ? 'border-indigo-600 text-indigo-700'
                   : 'border-transparent text-gray-400 hover:text-gray-600'
               }`}
             >
@@ -271,7 +271,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
               onClick={() => setActiveNotesTab('activity')}
               className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
                 activeNotesTab === 'activity'
-                  ? 'border-gray-900 text-gray-900'
+                  ? 'border-indigo-600 text-indigo-700'
                   : 'border-transparent text-gray-400 hover:text-gray-600'
               }`}
             >

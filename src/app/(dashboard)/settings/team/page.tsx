@@ -228,13 +228,13 @@ export default function TeamPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="colleague@example.com"
-              className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
               required
             />
             <select
               value={role}
               onChange={e => setRole(e.target.value as TeamRole)}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
             >
               <option value="viewer">Viewer</option>
               <option value="editor">Editor</option>
@@ -243,7 +243,7 @@ export default function TeamPage() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
             >
               {loading ? 'Inviting...' : 'Invite'}
             </button>

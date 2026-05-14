@@ -121,7 +121,7 @@ export default function SignupPage() {
               type="text"
               value={orgName}
               onChange={e => setOrgName(e.target.value)}
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="Brooklyn Properties LLC"
             />
           </div>
@@ -134,7 +134,7 @@ export default function SignupPage() {
               onChange={e => setEmail(e.target.value)}
               onBlur={() => setEmailTouched(true)}
               required
-              className={`w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm ${emailError ? 'border-red-500' : ''}`}
+              className={`w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm ${emailError ? 'border-red-500' : ''}`}
               placeholder="you@company.com"
             />
             {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
@@ -148,7 +148,7 @@ export default function SignupPage() {
               onChange={e => setPassword(e.target.value)}
               required
               minLength={8}
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="Min 8 characters"
             />
             {pwStrength && (
@@ -166,14 +166,14 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[48px]"
+            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all min-h-[48px]"
           >
             {loading ? 'Creating account...' : 'Create account'}
           </button>
 
           <p className="text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <Link href="/login" className="text-red-600 font-medium hover:underline">Sign in</Link>
+            <Link href="/login" className="text-indigo-600 font-medium hover:text-indigo-800 hover:underline">Sign in</Link>
           </p>
         </form>
 

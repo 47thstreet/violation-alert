@@ -52,7 +52,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
       </div>
     );
   }
@@ -61,7 +61,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
     return (
       <div className="text-center py-20">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Contractor not found</h2>
-        <Link href="/marketplace" className="text-red-600 hover:text-red-700 text-sm">
+        <Link href="/marketplace" className="text-indigo-600 hover:text-indigo-800 text-sm">
           Back to marketplace
         </Link>
       </div>
@@ -141,7 +141,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
             ) : (
               <button
                 onClick={() => setQuoteRequested(true)}
-                className="bg-red-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
+                className="bg-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all"
               >
                 Request Quote
               </button>
@@ -159,7 +159,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
           {contractor.email && (
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-500">Email</p>
-              <a href={`mailto:${contractor.email}`} className="text-sm text-red-600 hover:text-red-700">
+              <a href={`mailto:${contractor.email}`} className="text-sm text-indigo-600 hover:text-indigo-800">
                 {contractor.email}
               </a>
             </div>
@@ -167,7 +167,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
           {contractor.phone && (
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-500">Phone</p>
-              <a href={`tel:${contractor.phone}`} className="text-sm text-red-600 hover:text-red-700">
+              <a href={`tel:${contractor.phone}`} className="text-sm text-indigo-600 hover:text-indigo-800">
                 {contractor.phone}
               </a>
             </div>
@@ -179,7 +179,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
                 href={contractor.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-red-600 hover:text-red-700"
+                className="text-sm text-indigo-600 hover:text-indigo-800"
               >
                 {contractor.website.replace(/^https?:\/\//, '')}
               </a>
@@ -204,7 +204,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
           {contractor.violation_types_served && contractor.violation_types_served.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {contractor.violation_types_served.map((type) => (
-                <span key={type} className="bg-red-50 text-red-600 text-sm px-3 py-1 rounded-full">
+                <span key={type} className="bg-indigo-50 text-indigo-600 text-sm px-3 py-1 rounded-full">
                   {type}
                 </span>
               ))}
@@ -270,7 +270,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
                   </span>
                 </div>
                 {review.violation_type && (
-                  <span className="bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full mb-2 inline-block">
+                  <span className="bg-indigo-50 text-indigo-600 text-xs px-2 py-0.5 rounded-full mb-2 inline-block">
                     {review.violation_type}
                   </span>
                 )}

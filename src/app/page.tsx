@@ -190,32 +190,35 @@ export default function Home() {
       </header>
 
       {/* ===== 1. HERO ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50/80 via-white to-[#FAFAF9]">
-        {/* Animated gradient orb */}
-        <div className="absolute top-1/3 left-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-200/40 to-violet-200/30 blur-3xl animate-orb pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
-          <div className="inline-block bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-indigo-100">
+      <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-indigo-950 to-indigo-900">
+        {/* Dot pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+        {/* Glowing indigo orb */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-indigo-500/30 to-violet-500/20 blur-3xl pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
+          <div className="inline-block bg-white/10 text-indigo-200 text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-white/10 backdrop-blur-sm">
             Now watching 10+ NYC agencies
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight max-w-4xl mx-auto">
-            Your buildings,{' '}
-            <span className="text-indigo-600">protected.</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight max-w-4xl mx-auto bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+            Your buildings, protected.
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-indigo-200 mt-6 max-w-2xl mx-auto leading-relaxed">
             While you sleep, we&apos;re watching every agency in New York City.
             DOB. HPD. FDNY. ECB. All of them. When something hits your building,
             you&apos;ll know &mdash; with a plan to fix it.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-            <Link href="/signup" className="bg-indigo-600 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 btn-press">
+            <Link href="/signup" className="bg-white text-gray-900 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl hover:shadow-black/20 active:scale-[0.97] transition-all duration-200 btn-press">
               Protect your first property
             </Link>
-            <a href="#how-it-works" className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-gray-50 hover:border-gray-400 active:scale-[0.97] transition-all duration-200 btn-press">
+            <a href="#how-it-works" className="border border-white/30 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-white/10 active:scale-[0.97] transition-all duration-200 btn-press">
               See how it works
             </a>
           </div>
-          <p className="text-sm text-gray-500 mt-4">Free for 3 properties. No credit card. No time limit.</p>
+          <p className="text-sm text-indigo-300/70 mt-4">Free for 3 properties. No credit card. No time limit.</p>
         </div>
+        {/* Smooth transition gradient to light bg */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#FAFAF9]" />
       </section>
 
       {/* ===== 2. PROBLEM / PAIN ===== */}

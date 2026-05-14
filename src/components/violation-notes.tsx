@@ -104,12 +104,12 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
             placeholder="Your name (optional)"
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm w-40 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            className="border rounded-lg px-3 py-2 text-sm w-40 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           />
           <select
             value={noteType}
             onChange={(e) => setNoteType(e.target.value as ViolationNoteType)}
-            className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           >
             {violationNoteTypes.map((t) => (
               <option key={t} value={t}>
@@ -124,12 +124,12 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={3}
-          className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         />
         <button
           type="submit"
           disabled={submitting || !content.trim()}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {submitting ? 'Adding...' : 'Add Note'}
         </button>
@@ -143,13 +143,13 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
             <div
               key={note.id}
               className={`bg-white border rounded-lg p-4 ${
-                note.pinned ? 'border-red-200 ring-1 ring-red-100' : ''
+                note.pinned ? 'border-indigo-200 ring-1 ring-indigo-100' : ''
               }`}
             >
               <div className="flex justify-between items-start mb-2">
                 <div className="flex items-center gap-2 flex-wrap">
                   {note.pinned && (
-                    <span className="text-xs text-red-500 font-medium flex items-center gap-1">
+                    <span className="text-xs text-indigo-500 font-medium flex items-center gap-1">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616L17 11.5a1 1 0 01-.553.894l-4.447 2.224V19a1 1 0 11-2 0v-4.382l-4.447-2.224A1 1 0 015 11.5l.786-3.989-1.233-.616a1 1 0 01.894-1.79l1.599.8L11 4.323V3a1 1 0 011-1z" />
                       </svg>
@@ -169,14 +169,14 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
                   <span>{formatDistanceToNow(new Date(note.created_at), { addSuffix: true })}</span>
                   <button
                     onClick={() => togglePin(note)}
-                    className="hover:text-red-600 transition-colors"
+                    className="hover:text-gray-700 transition-colors"
                     title={note.pinned ? 'Unpin' : 'Pin'}
                   >
                     {note.pinned ? 'Unpin' : 'Pin'}
                   </button>
                   <button
                     onClick={() => handleDelete(note.id)}
-                    className="hover:text-red-600 transition-colors"
+                    className="hover:text-gray-700 transition-colors"
                   >
                     Delete
                   </button>

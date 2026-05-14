@@ -115,7 +115,7 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
         <p className="text-sm text-gray-500">{contacts.length} contact{contacts.length !== 1 ? 's' : ''}</p>
         <button
           onClick={() => { resetForm(); setShowForm(!showForm); }}
-          className="bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+          className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
         >
           {showForm ? 'Cancel' : '+ Add Contact'}
         </button>
@@ -126,29 +126,29 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <input required placeholder="Name *" value={form.name} onChange={e => { setForm(f => ({ ...f, name: e.target.value })); setFormErrors(fe => ({ ...fe, name: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.name ? 'border-red-500' : ''}`} />
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.name ? 'border-red-500' : ''}`} />
               {formErrors.name && <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>}
             </div>
             <select value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value as ContactRole }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               {roles.map(r => <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>)}
             </select>
             <div>
               <input placeholder="Phone" value={form.phone} onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setFormErrors(fe => ({ ...fe, phone: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.phone ? 'border-red-500' : ''}`} />
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.phone ? 'border-red-500' : ''}`} />
               {formErrors.phone && <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>}
             </div>
             <div>
               <input placeholder="Email" type="email" value={form.email} onChange={e => { setForm(f => ({ ...f, email: e.target.value })); setFormErrors(fe => ({ ...fe, email: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.email ? 'border-red-500' : ''}`} />
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.email ? 'border-red-500' : ''}`} />
               {formErrors.email && <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>}
             </div>
             <input placeholder="Unit #" value={form.unit_number} onChange={e => setForm(f => ({ ...f, unit_number: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
           <textarea placeholder="Notes" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
-          <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
             {editingId ? 'Update Contact' : 'Add Contact'}
           </button>
         </form>

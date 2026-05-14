@@ -160,7 +160,7 @@ export default function SettingsPage() {
             <select
               value={channel}
               onChange={e => { setChannel(e.target.value as 'email' | 'sms' | 'whatsapp'); setDestError(''); }}
-              className="border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
+              className="border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
             >
               <option value="email">Email</option>
               <option value="sms">SMS</option>
@@ -171,7 +171,7 @@ export default function SettingsPage() {
               value={destination}
               onChange={e => { setDestination(e.target.value); setDestError(''); }}
               placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
-              className={`flex-1 px-3.5 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-gray-900 outline-none min-h-[44px] ${destError ? 'border-red-500' : 'border-gray-200'}`}
+              className={`flex-1 px-3.5 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none min-h-[44px] ${destError ? 'border-red-500' : 'border-gray-200'}`}
             />
             <button
               type="submit"

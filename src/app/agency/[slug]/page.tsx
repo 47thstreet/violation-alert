@@ -109,7 +109,7 @@ export default async function AgencyPage({ params }: Props) {
       <header className="border-b sticky top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-gray-900">
-            Violation<span className="text-red-600">Alert</span>
+            Violation<span className="text-indigo-600">Alert</span>
           </Link>
           <div className="flex gap-3 items-center">
             <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2">
@@ -117,7 +117,7 @@ export default async function AgencyPage({ params }: Props) {
             </Link>
             <Link
               href="/signup"
-              className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
+              className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all"
             >
               Start free
             </Link>
@@ -149,13 +149,13 @@ export default async function AgencyPage({ params }: Props) {
         <div className="max-w-4xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-4xl">{agency.icon}</span>
-            <span className="bg-red-50 text-red-700 text-sm font-medium px-3 py-1 rounded-full">
+            <span className="bg-indigo-50 text-indigo-700 text-sm font-medium px-3 py-1 rounded-full">
               {agency.abbr}
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
             {agency.fullName} Violations{' '}
-            <span className="text-red-600">&mdash; NYC Violation Monitor</span>
+            <span className="text-indigo-600">&mdash; NYC Violation Monitor</span>
           </h1>
           <p className="text-lg text-gray-600 mt-4 leading-relaxed max-w-3xl">
             {agency.description}
@@ -163,7 +163,7 @@ export default async function AgencyPage({ params }: Props) {
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link
               href="/signup"
-              className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all shadow-sm text-center"
+              className="bg-indigo-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all shadow-sm text-center"
             >
               Check your property
             </Link>
@@ -227,9 +227,9 @@ export default async function AgencyPage({ params }: Props) {
 
             {/* Penalty sidebar */}
             <div>
-              <div className="bg-red-50 border border-red-100 rounded-2xl p-6 sticky top-24">
+              <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 sticky top-24">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Penalty range</h3>
-                <p className="text-2xl font-bold text-red-600 mb-4">{agency.penaltyRange}</p>
+                <p className="text-2xl font-bold text-indigo-600 mb-4">{agency.penaltyRange}</p>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6">
                   Penalties vary based on violation severity, correction timeline, and repeat
                   offense history. Penalties increase for non-compliance and can become liens on
@@ -237,7 +237,7 @@ export default async function AgencyPage({ params }: Props) {
                 </p>
                 <Link
                   href="/signup"
-                  className="block text-center bg-red-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-red-700 transition-colors"
+                  className="block text-center bg-indigo-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors"
                 >
                   Monitor {agency.abbr} violations free
                 </Link>
@@ -257,7 +257,7 @@ export default async function AgencyPage({ params }: Props) {
             <ol className="space-y-4">
               {agency.resolutionSteps.map((step, i) => (
                 <li key={i} className="flex items-start gap-4">
-                  <span className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-sm font-bold">{i + 1}</span>
                   </span>
                   <p className="text-gray-700 leading-relaxed pt-1">{step}</p>
@@ -276,7 +276,7 @@ export default async function AgencyPage({ params }: Props) {
             </p>
             <Link
               href="/signup"
-              className="inline-block bg-red-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+              className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
             >
               Get AI-powered resolution guides
             </Link>
@@ -298,7 +298,7 @@ export default async function AgencyPage({ params }: Props) {
               href={agency.datasetUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-red-400 hover:text-red-300 font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
             >
               View {agency.abbr} dataset on NYC Open Data
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -356,11 +356,11 @@ export default async function AgencyPage({ params }: Props) {
               <Link
                 key={other.slug}
                 href={`/agency/${other.slug}`}
-                className="bg-white rounded-xl p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all group"
+                className="bg-white rounded-xl p-5 border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all group"
               >
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">{other.icon}</span>
-                  <span className="font-bold text-gray-900 group-hover:text-red-600 transition-colors">
+                  <span className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
                     {other.abbr}
                   </span>
                 </div>
@@ -372,24 +372,24 @@ export default async function AgencyPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="bg-red-600 py-16">
+      <section className="bg-gradient-to-br from-indigo-600 to-indigo-700 py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white">
             Stop missing {agency.abbr} violations.
           </h2>
-          <p className="text-red-100 text-lg mt-4 max-w-xl mx-auto">
+          <p className="text-indigo-100 text-lg mt-4 max-w-xl mx-auto">
             Monitor your properties for {agency.abbr} violations and 9 other NYC agencies. Free
             for 3 properties, forever.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
             <Link
               href="/signup"
-              className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 active:scale-[0.98] transition-all"
+              className="bg-white text-indigo-700 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-indigo-50 active:scale-[0.97] transition-all"
             >
               Start monitoring free
             </Link>
           </div>
-          <p className="text-red-100 text-sm mt-4">
+          <p className="text-indigo-200 text-sm mt-4">
             No credit card required. Set up in under 2 minutes.
           </p>
         </div>
@@ -400,7 +400,7 @@ export default async function AgencyPage({ params }: Props) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <Link href="/" className="text-sm font-semibold text-white">
-              Violation<span className="text-red-500">Alert</span>
+              Violation<span className="text-indigo-400">Alert</span>
             </Link>
             <p className="text-sm">NYC Building Violation Monitoring &amp; Resolution Platform</p>
             <div className="flex gap-6 text-sm">

@@ -37,7 +37,7 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
               onClick={() => setActiveTab(tab.id)}
               className={`px-5 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap min-h-[48px] ${
                 activeTab === tab.id
-                  ? 'border-gray-900 text-gray-900'
+                  ? 'border-indigo-600 text-indigo-700'
                   : 'border-transparent text-gray-400 hover:text-gray-600'
               }`}
             >

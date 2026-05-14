@@ -103,7 +103,7 @@ export default function MarketplacePage() {
               placeholder="Search by name or company..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
+              className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function MarketplacePage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
           >
             <option value="">All violation types</option>
             {violationTypes.map((t) => (
@@ -125,7 +125,7 @@ export default function MarketplacePage() {
           <select
             value={boroughFilter}
             onChange={(e) => setBoroughFilter(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
           >
             <option value="">All boroughs</option>
             {BOROUGHS.map((b) => (
@@ -139,7 +139,7 @@ export default function MarketplacePage() {
           <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
           >
             {RATINGS.map((r) => (
               <option key={r.value} value={r.value}>
@@ -182,7 +182,7 @@ export default function MarketplacePage() {
       {/* Results */}
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
         </div>
       ) : contractors.length > 0 ? (
         <>

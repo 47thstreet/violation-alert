@@ -74,7 +74,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
         </p>
         <Link
           href="/marketplace"
-          className="text-sm text-red-600 hover:text-red-700 font-medium"
+          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
         >
           Browse all contractors &rarr;
         </Link>
@@ -88,7 +88,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
         <h2 className="text-lg font-semibold text-gray-900">Hire a Pro</h2>
         <Link
           href={`/marketplace?type=${encodeURIComponent(violationType)}`}
-          className="text-sm text-red-600 hover:text-red-700 font-medium"
+          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
         >
           View all &rarr;
         </Link>
