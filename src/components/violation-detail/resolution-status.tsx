@@ -145,8 +145,8 @@ export function ResolutionStatusSection({
                 <div key={s} className="flex items-center gap-1 flex-1">
                   <div
                     className={`flex-1 h-1.5 rounded-full transition-colors ${
-                      isActive ? 'bg-gray-900' : 'bg-gray-200'
-                    } ${isCurrent ? 'ring-2 ring-gray-300' : ''}`}
+                      isActive ? 'bg-indigo-600' : 'bg-gray-200'
+                    } ${isCurrent ? 'ring-2 ring-indigo-200' : ''}`}
                   />
                 </div>
               );
@@ -192,7 +192,7 @@ export function ResolutionStatusSection({
             <button
               onClick={advanceStatus}
               disabled={statusUpdating}
-              className="w-full bg-gray-900 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all"
+              className="w-full bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
               {statusUpdating
                 ? 'Updating...'
@@ -214,13 +214,13 @@ export function ResolutionStatusSection({
             <button
               onClick={() => startResolution('diy')}
               disabled={statusUpdating}
-              className="w-full bg-gray-900 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all"
+              className="w-full bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
               Start Resolution (DIY)
             </button>
             <Link
               href={`/marketplace${violation.violation_type ? `?type=${encodeURIComponent(violation.violation_type)}` : ''}`}
-              className="w-full border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors text-center"
+              className="w-full border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200 text-center"
             >
               Hire a Pro
             </Link>

@@ -32,7 +32,7 @@ export function PropertyCard({ property, violationCount }: PropertyCardProps) {
   return (
     <Link
       href={`/properties/${property.id}`}
-      className="bg-white rounded-2xl border border-gray-100 p-6 block group card-hover hover:border-indigo-200"
+      className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 block group"
     >
       {/* Address + borough */}
       <div className="mb-4">

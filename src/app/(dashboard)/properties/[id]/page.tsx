@@ -48,7 +48,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           </div>
           <Link
             href={`/properties/${id}/crm`}
-            className="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 active:scale-[0.98] transition-all shrink-0 w-full sm:w-auto text-center"
+            className="border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200 shrink-0 w-full sm:w-auto text-center"
           >
             Manage
           </Link>
