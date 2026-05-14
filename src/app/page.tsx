@@ -222,13 +222,13 @@ export default function Home() {
       </section>
 
       {/* ===== 2. PROBLEM / PAIN ===== */}
-      <section className="bg-gray-900 text-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-[#FAFAF9]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
               The violation you don&apos;t see is the one that costs you.
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-12">
+            <p className="text-gray-600 text-lg leading-relaxed mb-12">
               Most tools only watch DOB. But HPD, FDNY, DSNY, DEP &mdash; they&apos;re
               all filing violations against your building too. By the time you find out,
               the fines have doubled. The deadline has passed. And the tenant&apos;s lawyer
@@ -237,14 +237,14 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { stat: '$10K+', label: 'In fines per building, per year, when violations go unchecked' },
-              { stat: '10+', label: 'City agencies that can file against your property right now' },
-              { stat: '72hrs', label: 'The window on some violations before fines double' },
-              { stat: '3x', label: 'More tenant lawsuits when violations sit unresolved' },
+              { stat: '$10K+', label: 'In fines per building, per year, when violations go unchecked', color: 'text-red-500' },
+              { stat: '10+', label: 'City agencies that can file against your property right now', color: 'text-indigo-600' },
+              { stat: '72hrs', label: 'The window on some violations before fines double', color: 'text-amber-500' },
+              { stat: '3x', label: 'More tenant lawsuits when violations sit unresolved', color: 'text-red-500' },
             ].map((item) => (
-              <div key={item.stat} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-2">{item.stat}</div>
-                <p className="text-sm text-gray-400">{item.label}</p>
+              <div key={item.stat} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center hover:shadow-md transition-all duration-200">
+                <div className={`text-3xl sm:text-4xl font-bold ${item.color} mb-2`}>{item.stat}</div>
+                <p className="text-sm text-gray-500">{item.label}</p>
               </div>
             ))}
           </div>
@@ -252,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* ===== 3. SOLUTION - 3 PILLARS ===== */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -359,7 +359,7 @@ export default function Home() {
       </section>
 
       {/* ===== 5. COMPARISON TABLE ===== */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -468,7 +468,7 @@ export default function Home() {
       </section>
 
       {/* ===== 7. SOCIAL PROOF ===== */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -582,7 +582,7 @@ export default function Home() {
       </section>
 
       {/* ===== 9. FAQ ===== */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Questions you&apos;re probably asking</h2>
