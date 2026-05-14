@@ -165,7 +165,7 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
                     <span className="text-sm font-medium text-gray-700">{note.author_name}</span>
                   )}
                 </div>
-                <div className="flex items-center gap-2 text-xs text-gray-400 shrink-0 ml-4">
+                <div className="flex items-center gap-2 text-xs text-gray-500 shrink-0 ml-4">
                   <span>{formatDistanceToNow(new Date(note.created_at), { addSuffix: true })}</span>
                   <button
                     onClick={() => togglePin(note)}
@@ -187,7 +187,7 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
           );
         })}
         {notes.length === 0 && (
-          <p className="text-center text-gray-400 py-8 text-sm">
+          <p className="text-center text-gray-500 py-8 text-sm">
             No notes yet. Add one above to start tracking this violation.
           </p>
         )}

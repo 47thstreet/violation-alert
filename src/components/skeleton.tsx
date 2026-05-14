@@ -10,7 +10,7 @@ export function SkeletonText({
 
 export function SkeletonCard() {
   return (
-    <div className="bg-white rounded-xl border p-6">
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
       <SkeletonText width="w-2/3" height="h-5" />
       <div className="mt-4 space-y-3">
         <SkeletonText width="w-full" />
@@ -23,7 +23,7 @@ export function SkeletonCard() {
 
 export function SkeletonTable({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="bg-white rounded-xl border overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
       {/* Header row */}
       <div className="border-b px-4 py-3 flex gap-4">
         <SkeletonText width="w-1/6" height="h-4" />

@@ -117,7 +117,7 @@ export default async function AgencyPage({ params }: Props) {
             </Link>
             <Link
               href="/signup"
-              className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
             >
               Start free
             </Link>
@@ -157,13 +157,13 @@ export default async function AgencyPage({ params }: Props) {
             {agency.fullName} Violations{' '}
             <span className="text-red-600">&mdash; NYC Violation Monitor</span>
           </h1>
-          <p className="text-lg text-gray-500 mt-4 leading-relaxed max-w-3xl">
+          <p className="text-lg text-gray-600 mt-4 leading-relaxed max-w-3xl">
             {agency.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link
               href="/signup"
-              className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 transition-colors shadow-sm text-center"
+              className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all shadow-sm text-center"
             >
               Check your property
             </Link>
@@ -269,7 +269,7 @@ export default async function AgencyPage({ params }: Props) {
             <h3 className="font-bold text-gray-900 mb-2">
               Need help resolving {agency.abbr} violations?
             </h3>
-            <p className="text-gray-500 text-sm mb-4">
+            <p className="text-gray-600 text-sm mb-4">
               ViolationAlert&apos;s AI resolution engine generates step-by-step guides for each
               violation, including cost estimates, permit requirements, and contractor
               recommendations specific to your violation type.
@@ -334,7 +334,7 @@ export default async function AgencyPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
-                <p className="px-6 pb-5 text-gray-500 leading-relaxed">{faq.answer}</p>
+                <p className="px-6 pb-5 text-gray-600 leading-relaxed">{faq.answer}</p>
               </details>
             ))}
           </div>
@@ -347,7 +347,7 @@ export default async function AgencyPage({ params }: Props) {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
             Also monitor these NYC agencies
           </h2>
-          <p className="text-gray-500 mb-8 max-w-2xl">
+          <p className="text-gray-600 mb-8 max-w-2xl">
             {agency.abbr} is just one of 10+ agencies that can issue violations against your
             property. ViolationAlert monitors all of them in one dashboard.
           </p>
@@ -384,12 +384,12 @@ export default async function AgencyPage({ params }: Props) {
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
             <Link
               href="/signup"
-              className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 transition-colors"
+              className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 active:scale-[0.98] transition-all"
             >
               Start monitoring free
             </Link>
           </div>
-          <p className="text-red-200 text-sm mt-4">
+          <p className="text-red-100 text-sm mt-4">
             No credit card required. Set up in under 2 minutes.
           </p>
         </div>

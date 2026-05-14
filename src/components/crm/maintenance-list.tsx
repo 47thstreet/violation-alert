@@ -187,7 +187,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
                 >
                   {statuses.map(s => <option key={s} value={s}>{s.replace('_', ' ')}</option>)}
                 </select>
-                <button onClick={() => handleDelete(req.id)} className="text-sm text-gray-400 hover:text-red-600">Delete</button>
+                <button onClick={() => handleDelete(req.id)} className="text-sm text-gray-500 hover:text-red-600 transition-colors">Delete</button>
               </div>
             </div>
             {req.description && <p className="text-sm text-gray-600 mt-1">{req.description}</p>}

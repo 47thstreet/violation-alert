@@ -196,7 +196,7 @@ export function ViolationActivity({ violationId, violationSourceId }: ViolationA
 
   if (events.length === 0) {
     return (
-      <p className="text-center text-gray-400 py-8 text-sm">
+      <p className="text-center text-gray-500 py-8 text-sm">
         No activity yet. Start a resolution or add a note to begin tracking.
       </p>
     );
@@ -233,7 +233,7 @@ export function ViolationActivity({ violationId, violationSourceId }: ViolationA
             <div className="flex-1 min-w-0 pt-0.5">
               <div className="flex items-baseline justify-between gap-2">
                 <p className={`text-sm font-medium ${event.color}`}>{event.title}</p>
-                <span className="text-xs text-gray-400 shrink-0">
+                <span className="text-xs text-gray-500 shrink-0">
                   {formatDistanceToNow(new Date(event.timestamp), { addSuffix: true })}
                 </span>
               </div>

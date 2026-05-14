@@ -159,7 +159,7 @@ export default function NewPropertyPage() {
         { label: 'Add Property' },
       ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">Add Property</h1>
-      <p className="text-gray-500 mb-6">Enter an NYC address to look up the building and start monitoring.</p>
+      <p className="text-gray-600 mb-6">Enter an NYC address to look up the building and start monitoring.</p>
 
       {error && (
         <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm mb-4">{error}</div>
@@ -205,7 +205,7 @@ export default function NewPropertyPage() {
 
       {/* Hide the form once scan results are shown */}
       {!scanResult && (
-        <div className="bg-white rounded-xl border p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">NYC Address</label>
             <div className="flex gap-2">
@@ -253,7 +253,7 @@ export default function NewPropertyPage() {
               <button
                 onClick={handleAdd}
                 disabled={loading || scanning}
-                className="mt-2 bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
+                className="mt-2 bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
               >
                 {loading ? 'Adding...' : 'Add This Property'}
               </button>

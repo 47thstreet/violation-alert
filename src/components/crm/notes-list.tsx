@@ -103,7 +103,7 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
                 </span>
                 {note.author_name && <span className="text-sm font-medium text-gray-700">{note.author_name}</span>}
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400 shrink-0 ml-4">
+              <div className="flex items-center gap-2 text-sm text-gray-500 shrink-0 ml-4">
                 <span>{formatDistanceToNow(new Date(note.created_at), { addSuffix: true })}</span>
                 <button onClick={() => togglePin(note)} className="hover:text-red-600" title={note.pinned ? 'Unpin' : 'Pin'}>
                   {note.pinned ? 'Unpin' : 'Pin'}
