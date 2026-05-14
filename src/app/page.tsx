@@ -12,16 +12,16 @@ export const metadata: Metadata = {
 };
 
 const AGENCIES = [
-  { abbr: 'DOB', name: 'Dept. of Buildings', desc: 'Construction, safety, zoning, stop work', icon: '\u{1F3D7}\uFE0F', color: 'border-blue-400' },
-  { abbr: 'HPD', name: 'Housing Preservation', desc: 'Maintenance, habitability, lead paint', icon: '\u{1F3E0}', color: 'border-green-400' },
-  { abbr: 'ECB', name: 'Environmental Control Board', desc: 'Penalties, hearings, fines', icon: '\u2696\uFE0F', color: 'border-orange-400' },
-  { abbr: 'FDNY', name: 'Fire Department', desc: 'Fire code, sprinklers, egress', icon: '\u{1F525}', color: 'border-red-400' },
-  { abbr: 'DSNY', name: 'Dept. of Sanitation', desc: 'Waste, recycling, sidewalks', icon: '\u{1F5D1}\uFE0F', color: 'border-amber-400' },
-  { abbr: 'DOT', name: 'Dept. of Transportation', desc: 'Sidewalks, curb cuts, scaffolding', icon: '\u{1F6A7}', color: 'border-gray-400' },
-  { abbr: 'LPC', name: 'Landmarks Preservation', desc: 'Historic districts, facades, signage', icon: '\u{1F3DB}\uFE0F', color: 'border-purple-400' },
-  { abbr: 'DEP', name: 'Environmental Protection', desc: 'Water, sewer, noise, air quality', icon: '\u{1F4A7}', color: 'border-teal-400' },
-  { abbr: 'DOHMH', name: 'Dept. of Health', desc: 'Lead, asbestos, mold, pests', icon: '\u{1F3E5}', color: 'border-pink-400' },
-  { abbr: 'OATH', name: 'Trials & Hearings', desc: 'Hearings, adjudications', icon: '\u{1F4CB}', color: 'border-indigo-400' },
+  { abbr: 'DOB', name: 'Dept. of Buildings', desc: 'Construction, safety, zoning, stop work', icon: '\u{1F3D7}\uFE0F' },
+  { abbr: 'HPD', name: 'Housing Preservation', desc: 'Maintenance, habitability, lead paint', icon: '\u{1F3E0}' },
+  { abbr: 'ECB', name: 'Environmental Control Board', desc: 'Penalties, hearings, fines', icon: '\u2696\uFE0F' },
+  { abbr: 'FDNY', name: 'Fire Department', desc: 'Fire code, sprinklers, egress', icon: '\u{1F525}' },
+  { abbr: 'DSNY', name: 'Dept. of Sanitation', desc: 'Waste, recycling, sidewalks', icon: '\u{1F5D1}\uFE0F' },
+  { abbr: 'DOT', name: 'Dept. of Transportation', desc: 'Sidewalks, curb cuts, scaffolding', icon: '\u{1F6A7}' },
+  { abbr: 'LPC', name: 'Landmarks Preservation', desc: 'Historic districts, facades, signage', icon: '\u{1F3DB}\uFE0F' },
+  { abbr: 'DEP', name: 'Environmental Protection', desc: 'Water, sewer, noise, air quality', icon: '\u{1F4A7}' },
+  { abbr: 'DOHMH', name: 'Dept. of Health', desc: 'Lead, asbestos, mold, pests', icon: '\u{1F3E5}' },
+  { abbr: 'OATH', name: 'Trials & Hearings', desc: 'Hearings, adjudications', icon: '\u{1F4CB}' },
 ];
 
 const COMPARISON = [
@@ -182,8 +182,8 @@ export default function Home() {
             <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors">
               Sign in
             </Link>
-            <Link href="/signup" className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200">
-              Get started
+            <Link href="/signup" className="text-sm text-indigo-600 font-semibold hover:text-indigo-800 px-3 py-2 transition-colors">
+              Start free &rarr;
             </Link>
           </div>
         </div>
@@ -201,9 +201,8 @@ export default function Home() {
             Your buildings, protected.
           </h1>
           <p className="text-lg sm:text-xl text-indigo-200 mt-6 max-w-2xl mx-auto leading-relaxed">
-            While you sleep, we&apos;re watching every agency in New York City.
-            DOB. HPD. FDNY. ECB. All of them. When something hits your building,
-            you&apos;ll know &mdash; with a plan to fix it.
+            You&apos;re not watching 10 city agencies 24/7. But they&apos;re watching your building.
+            When they find something, you get a bill. Unless you hear about it first &mdash; with a plan to fix it.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
             <Link href="/signup" className="bg-white text-gray-900 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl hover:shadow-black/20 active:scale-[0.97] transition-all duration-200">
@@ -213,20 +212,27 @@ export default function Home() {
               See how it works
             </a>
           </div>
-          <p className="text-sm text-indigo-300/70 mt-4">Free for 3 properties. No credit card. No time limit.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-5">
+            <p className="text-sm text-indigo-300/70">Free for 3 properties. No credit card required.</p>
+            <span className="text-sm text-indigo-300/50">|</span>
+            <div className="flex items-center gap-1.5 text-sm text-indigo-300/70">
+              <span className="text-amber-400">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span>4.8/5 from 120+ property owners</span>
+            </div>
+          </div>
         </div>
         {/* Smooth transition gradient to light bg */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#FAFAF9]" />
       </section>
 
       {/* ===== 2. PROBLEM / PAIN ===== */}
-      <section className="py-16 sm:py-20 bg-[#FAFAF9]">
+      <section className="py-20 sm:py-24 bg-[#FAFAF9]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               The violation you don&apos;t see is the one that costs you.
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed mb-12">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-12">
               Most tools only watch DOB. But HPD, FDNY, DSNY, DEP &mdash; they&apos;re
               all filing violations against your building too. By the time you find out,
               the fines have doubled. The deadline has passed. And the tenant&apos;s lawyer
@@ -235,12 +241,12 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { stat: '$10K+', label: 'In fines per building, per year, when violations go unchecked', color: 'text-red-500', accent: 'border-t-4 border-t-red-400' },
-              { stat: '10+', label: 'City agencies that can file against your property right now', color: 'text-indigo-600', accent: 'border-t-4 border-t-indigo-400' },
-              { stat: '72hrs', label: 'The window on some violations before fines double', color: 'text-amber-500', accent: 'border-t-4 border-t-amber-400' },
-              { stat: '3x', label: 'More tenant lawsuits when violations sit unresolved', color: 'text-red-500', accent: 'border-t-4 border-t-red-400' },
+              { stat: '$10K+', label: 'In fines per building, per year, when violations go unchecked', color: 'text-indigo-600' },
+              { stat: '10+', label: 'City agencies that can file against your property right now', color: 'text-indigo-600' },
+              { stat: '72hrs', label: 'The window on some violations before fines double', color: 'text-indigo-600' },
+              { stat: '3x', label: 'More tenant lawsuits when violations sit unresolved', color: 'text-indigo-600' },
             ].map((item) => (
-              <div key={item.stat} className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 ${item.accent}`}>
+              <div key={item.stat} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
                 <div className={`text-4xl sm:text-5xl font-bold ${item.color} mb-3`}>{item.stat}</div>
                 <p className="text-sm text-gray-500">{item.label}</p>
               </div>
@@ -250,19 +256,19 @@ export default function Home() {
       </section>
 
       {/* ===== 3. SOLUTION - 3 PILLARS ===== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Know it. Fix it. Move on.
             </h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               From the moment a violation is filed to the moment it&apos;s resolved. One platform, start to finish.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Monitor */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
               <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
                 <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
@@ -281,7 +287,7 @@ export default function Home() {
               </ul>
             </div>
             {/* Resolve */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
               <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
                 <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
@@ -300,7 +306,7 @@ export default function Home() {
               </ul>
             </div>
             {/* Connect */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
               <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
                 <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
@@ -323,13 +329,13 @@ export default function Home() {
       </section>
 
       {/* ===== 4. ALL AGENCIES ===== */}
-      <section id="agencies" className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-20">
+      <section id="agencies" className="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Ten agencies. One place to watch them all.
             </h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               If a city agency can fine your building, it&apos;s on our radar. No blind spots. No surprises.
             </p>
           </div>
@@ -341,7 +347,7 @@ export default function Home() {
                 <Link
                   key={agency.abbr}
                   href={href}
-                  className={`bg-white rounded-2xl p-5 border border-gray-100 shadow-sm border-t-4 ${agency.color} hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center group`}
+                  className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200 text-center group"
                 >
                   <div className="text-3xl mb-2">{agency.icon}</div>
                   <h3 className="font-bold text-gray-900 text-lg group-hover:text-indigo-600 transition-colors">{agency.abbr}</h3>
@@ -357,13 +363,13 @@ export default function Home() {
       </section>
 
       {/* ===== 5. COMPARISON TABLE ===== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Other tools alert you. We actually help.
             </h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               An alert without a resolution plan is just a notification that you owe money.
             </p>
           </div>
@@ -422,11 +428,11 @@ export default function Home() {
       </section>
 
       {/* ===== 6. HOW IT WORKS ===== */}
-      <section id="how-it-works" className="bg-gradient-to-b from-white to-gray-50 py-16 sm:py-20">
+      <section id="how-it-works" className="bg-gradient-to-b from-white to-gray-50 py-20 sm:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Up and running in 30 seconds.</h2>
-            <p className="text-lg text-gray-600 mt-4">No setup. No software. Just type an address.</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Up and running in 30 seconds.</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">No setup. No software. Just type an address.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -452,7 +458,7 @@ export default function Home() {
               },
             ].map((item) => (
               <div key={item.step} className="relative">
-                <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
                   <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center mb-4">
                     <span className="text-white text-sm font-bold">{item.step}</span>
                   </div>
@@ -466,13 +472,13 @@ export default function Home() {
       </section>
 
       {/* ===== 7. SOCIAL PROOF ===== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               They found out in time.
             </h2>
-            <p className="text-lg text-gray-600 mt-4">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Property owners across all five boroughs trust ViolationAlert to keep them ahead of city agencies.
             </p>
           </div>
@@ -494,7 +500,7 @@ export default function Home() {
                 role: 'Greenpoint Property Management \u2014 Queens, 200+ units',
               },
             ].map((testimonial) => (
-              <div key={testimonial.name} className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm border-l-4 border-l-indigo-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+              <div key={testimonial.name} className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-200">
                 <div className="flex gap-1 mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <StarIcon key={star} />
@@ -512,15 +518,15 @@ export default function Home() {
       </section>
 
       {/* ===== 8. PRICING ===== */}
-      <section className="bg-gray-50 py-16 sm:py-20">
+      <section className="bg-gray-50 py-20 sm:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Start free. Stay free if you want.</h2>
-            <p className="text-lg text-gray-600 mt-4">No trials. No gimmicks. Upgrade only when your portfolio demands it.</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Start free. Stay free if you want.</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">No trials. No gimmicks. Upgrade only when your portfolio demands it.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Free */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
               <h3 className="font-semibold text-lg text-gray-900">Free</h3>
               <p className="text-4xl font-bold mt-2 text-gray-900">$0<span className="text-base text-gray-500 font-normal">/forever</span></p>
               <p className="text-sm text-gray-500 mt-2">Real protection, no strings attached</p>
@@ -532,13 +538,13 @@ export default function Home() {
                 <li className="flex items-center gap-2 text-gray-500"><XIcon /> Multi-agency coverage</li>
                 <li className="flex items-center gap-2 text-gray-500"><XIcon /> Resolution guides</li>
               </ul>
-              <Link href="/signup" className="mt-8 block text-center border border-gray-300 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200">
+              <Link href="/signup" className="mt-8 block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl text-sm hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">
                 Add your building &mdash; free
               </Link>
             </div>
             {/* Pro */}
             <div className="bg-white rounded-2xl border-2 border-indigo-600 p-8 text-left relative flex flex-col shadow-xl ring-4 ring-indigo-50 hover:-translate-y-0.5 transition-all duration-200">
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs px-4 py-1 rounded-full font-medium shadow-lg shadow-indigo-300/50">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs px-4 py-1 rounded-full font-medium shadow-sm">
                 Most popular
               </span>
               <h3 className="font-semibold text-lg text-gray-900">Pro</h3>
@@ -553,12 +559,13 @@ export default function Home() {
                 <li className="flex items-center gap-2"><CheckIcon /> Contractor matching</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Priority support</li>
               </ul>
-              <Link href="/signup" className="mt-8 block text-center bg-indigo-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200">
+              <Link href="/signup" className="mt-8 block text-center bg-indigo-600 text-white font-semibold py-3 rounded-xl text-sm shadow-sm hover:bg-indigo-700 hover:shadow-md active:scale-[0.97] transition-all duration-200">
                 Try Pro free for 14 days
               </Link>
+              <p className="text-xs text-gray-400 text-center mt-2">Cancel anytime. No credit card needed.</p>
             </div>
             {/* Enterprise */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
               <h3 className="font-semibold text-lg text-gray-900">Enterprise</h3>
               <p className="text-4xl font-bold mt-2 text-gray-900">Custom</p>
               <p className="text-sm text-gray-500 mt-2">For portfolios that can&apos;t afford blind spots</p>
@@ -571,7 +578,7 @@ export default function Home() {
                 <li className="flex items-center gap-2"><CheckIcon /> Custom reporting</li>
                 <li className="flex items-center gap-2"><CheckIcon /> SLA guarantee</li>
               </ul>
-              <a href="mailto:sales@violationalert.com" className="mt-8 block text-center border border-gray-300 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200">
+              <a href="mailto:sales@violationalert.com" className="mt-8 block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl text-sm hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">
                 Contact sales
               </a>
             </div>
@@ -580,10 +587,10 @@ export default function Home() {
       </section>
 
       {/* ===== 9. FAQ ===== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Questions you&apos;re probably asking</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Questions you&apos;re probably asking</h2>
           </div>
           <div className="divide-y divide-gray-200">
             {FAQ_ITEMS.map((faq) => (
@@ -602,7 +609,7 @@ export default function Home() {
       </section>
 
       {/* ===== 10. FINAL CTA ===== */}
-      <section className="bg-gradient-to-br from-indigo-600 to-indigo-700 py-16 sm:py-20">
+      <section className="bg-gradient-to-br from-indigo-600 to-indigo-700 py-20 sm:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white">
             Know before they knock.
@@ -612,10 +619,10 @@ export default function Home() {
             No time limit. Just protection.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-            <Link href="/signup" className="bg-white text-indigo-700 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl active:scale-[0.97] transition-all duration-200">
+            <Link href="/signup" className="bg-white text-gray-900 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl active:scale-[0.97] transition-all duration-200">
               Protect your first property
             </Link>
-            <a href="mailto:sales@violationalert.com" className="border border-white/40 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-white/10 active:scale-[0.97] transition-all duration-200">
+            <a href="mailto:sales@violationalert.com" className="border border-white/30 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-white/10 active:scale-[0.97] transition-all duration-200">
               Talk to sales
             </a>
           </div>
@@ -640,7 +647,7 @@ export default function Home() {
             </div>
             {/* Product */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-200 mb-4">Product</h4>
+              <h4 className="text-sm font-semibold text-white/80 mb-4">Product</h4>
               <ul className="space-y-2.5 text-sm">
                 <li><a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
                 <li><Link href="/signup" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
@@ -650,7 +657,7 @@ export default function Home() {
             </div>
             {/* Company */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-200 mb-4">Company</h4>
+              <h4 className="text-sm font-semibold text-white/80 mb-4">Company</h4>
               <ul className="space-y-2.5 text-sm">
                 <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About</a></li>
                 <li><a href="mailto:sales@violationalert.com" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
@@ -659,7 +666,7 @@ export default function Home() {
             </div>
             {/* Legal */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-200 mb-4">Legal</h4>
+              <h4 className="text-sm font-semibold text-white/80 mb-4">Legal</h4>
               <ul className="space-y-2.5 text-sm">
                 <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
                 <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms</a></li>
@@ -667,7 +674,7 @@ export default function Home() {
             </div>
             {/* Resources */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-200 mb-4">Resources</h4>
+              <h4 className="text-sm font-semibold text-white/80 mb-4">Resources</h4>
               <ul className="space-y-2.5 text-sm">
                 <li><a href="/docs" className="text-gray-400 hover:text-white transition-colors">API Docs</a></li>
                 <li><a href="/help" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
