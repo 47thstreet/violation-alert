@@ -13,6 +13,8 @@ import type {
   ViolationAgency,
 } from '@/lib/supabase/types';
 import { ContractorMatch } from '@/components/contractor-match';
+import { ViolationNotes } from '@/components/violation-notes';
+import { ViolationActivity } from '@/components/violation-activity';
 
 const STATUS_FLOW: ResolutionStatus[] = ['open', 'researching', 'in_progress', 'submitted', 'resolved'];
 
@@ -68,6 +70,8 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
   const [kbLoading, setKbLoading] = useState(false);
   const [researchLoading, setResearchLoading] = useState(false);
   const [statusUpdating, setStatusUpdating] = useState(false);
+  const [activeNotesTab, setActiveNotesTab] = useState<'notes' | 'activity'>('notes');
+  const [tenantId, setTenantId] = useState<string | null>(null);
 
   const supabase = createClient();
 
@@ -103,6 +107,17 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
         .eq('id', v.property_id)
         .single();
       if (p) setProperty(p);
+
+      // Get tenant for notes
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: t } = await supabase
+          .from('tenants')
+          .select('id')
+          .eq('user_id', user.id)
+          .single();
+        if (t) setTenantId(t.id);
+      }
 
       // Get KB entry
       if (v.violation_type && v.source) {
@@ -279,7 +294,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
       ]} />
 
       {/* Violation Header */}
-      <div className="bg-white rounded-xl border p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex justify-between items-start flex-wrap gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
@@ -344,7 +359,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* How to Fix Section */}
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">How to Fix</h2>
 
           {kbLoading ? (
@@ -371,7 +386,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                         <div className="pt-0.5">
                           <span className="text-gray-700">{step.instruction}</span>
                           {step.estimated_time && (
-                            <span className="text-gray-400 text-xs ml-2">({step.estimated_time})</span>
+                            <span className="text-gray-500 text-xs ml-2">({step.estimated_time})</span>
                           )}
                         </div>
                       </li>
@@ -426,7 +441,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                   <ul className="space-y-1">
                     {kbEntry.required_documents.map((doc, i) => (
                       <li key={i} className="text-sm text-gray-600 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 bg-gray-500 rounded-full flex-shrink-0" />
                         {doc}
                       </li>
                     ))}
@@ -442,7 +457,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                 </svg>
               </div>
               <p className="text-sm text-gray-500 mb-3">
-                Researching this violation type...
+                No remedy found yet for this violation type.
               </p>
               <button
                 onClick={triggerResearch}
@@ -452,10 +467,10 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                 {researchLoading ? (
                   <span className="flex items-center gap-2">
                     <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                    Researching...
+                    Finding remedy...
                   </span>
                 ) : (
-                  'Research with AI'
+                  'Get Remedy'
                 )}
               </button>
             </div>
@@ -463,7 +478,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
         </div>
 
         {/* Resolution Status Section */}
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Resolution Status</h2>
 
           {resolution && resolution.status !== 'dismissed' ? (
@@ -553,7 +568,7 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                 <button
                   onClick={() => startResolution('diy')}
                   disabled={statusUpdating}
-                  className="w-full bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
+                  className="w-full bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
                 >
                   Start Resolution (DIY)
                 </button>
@@ -583,6 +598,59 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
             violationType={violation.violation_type}
             borough={property?.borough || null}
           />
+        </div>
+      )}
+
+      {/* Notes & Activity Section */}
+      {tenantId && violation.property_id && (
+        <div className="mt-6 bg-white rounded-xl border p-6">
+          {/* Tabs */}
+          <div className="flex gap-1 mb-6 border-b">
+            <button
+              onClick={() => setActiveNotesTab('notes')}
+              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
+                activeNotesTab === 'notes'
+                  ? 'border-red-600 text-red-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Notes
+              </span>
+            </button>
+            <button
+              onClick={() => setActiveNotesTab('activity')}
+              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
+                activeNotesTab === 'activity'
+                  ? 'border-red-600 text-red-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Activity
+              </span>
+            </button>
+          </div>
+
+          {/* Tab content */}
+          {activeNotesTab === 'notes' ? (
+            <ViolationNotes
+              violationSourceId={violation.source_id}
+              propertyId={violation.property_id}
+              tenantId={tenantId}
+            />
+          ) : (
+            <ViolationActivity
+              violationId={violationId!}
+              violationSourceId={violation.source_id}
+            />
+          )}
         </div>
       )}
     </div>

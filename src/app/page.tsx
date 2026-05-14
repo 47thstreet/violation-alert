@@ -147,7 +147,7 @@ function CheckIcon() {
 
 function XIcon() {
   return (
-    <svg className="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
@@ -180,7 +180,7 @@ export default function Home() {
             <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2">
               Sign in
             </Link>
-            <Link href="/signup" className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
+            <Link href="/signup" className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all">
               Start free
             </Link>
           </div>
@@ -196,20 +196,20 @@ export default function Home() {
           Never miss a violation.{' '}
           <span className="text-red-600">From any NYC agency.</span>
         </h1>
-        <p className="text-lg sm:text-xl text-gray-500 mt-6 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg sm:text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
           The only platform that monitors DOB, HPD, ECB, FDNY, and 6 more agencies,
           tells you exactly how to fix each violation, and connects you with
           contractors who can do the work.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-          <Link href="/signup" className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 transition-colors shadow-sm">
+          <Link href="/signup" className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all shadow-sm">
             Start monitoring free
           </Link>
-          <a href="#how-it-works" className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-gray-50 transition-colors">
+          <a href="#how-it-works" className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-gray-50 active:scale-[0.98] transition-all">
             See how it works
           </a>
         </div>
-        <p className="text-sm text-gray-400 mt-4">Free forever for 3 properties. No credit card required.</p>
+        <p className="text-sm text-gray-500 mt-4">Free forever for 3 properties. No credit card required.</p>
       </section>
 
       {/* ===== 2. PROBLEM / PAIN ===== */}
@@ -249,7 +249,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
               See it. Understand it. Fix it.
             </h2>
-            <p className="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
               ViolationAlert is the only end-to-end platform that takes you from discovery to resolution.
             </p>
           </div>
@@ -262,7 +262,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Monitor</h3>
-              <p className="text-gray-500 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-4">
                 We scan 10+ NYC agency databases every 15 minutes. DOB, HPD, ECB,
                 FDNY, DSNY, DOT, LPC, DEP, DOHMH, and OATH &mdash; all in one dashboard.
               </p>
@@ -280,7 +280,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Resolve</h3>
-              <p className="text-gray-500 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-4">
                 Our AI resolution engine analyzes each violation and gives you a
                 step-by-step guide: what to fix, what it costs, what permits you
                 need, and when the deadline is.
@@ -299,7 +299,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Connect</h3>
-              <p className="text-gray-500 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-4">
                 Don&apos;t want to DIY? Our contractor marketplace matches you with licensed
                 professionals who specialize in the exact type of violation you&apos;re facing.
               </p>
@@ -320,7 +320,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
               Every NYC agency. One dashboard.
             </h2>
-            <p className="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
               No other violation monitoring tool covers this many agencies. If a city
               agency can fine your property, we&apos;re watching it.
             </p>
@@ -342,7 +342,7 @@ export default function Home() {
               );
             })}
           </div>
-          <p className="text-center text-sm text-gray-400 mt-8">
+          <p className="text-center text-sm text-gray-500 mt-8">
             Plus 311 complaints, DOB NOW, and more sources added regularly.
           </p>
         </div>
@@ -355,7 +355,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
               See how we compare
             </h2>
-            <p className="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
               We built ViolationAlert because existing tools leave you with alerts and no answers.
             </p>
           </div>
@@ -418,7 +418,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">How it works</h2>
-            <p className="text-gray-500 mt-4 text-lg">Four steps to full violation coverage.</p>
+            <p className="text-gray-600 mt-4 text-lg">Four steps to full violation coverage.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -444,12 +444,12 @@ export default function Home() {
               },
             ].map((item) => (
               <div key={item.step} className="relative">
-                <div className="bg-white rounded-2xl p-7 border border-gray-200 h-full">
+                <div className="bg-white rounded-xl p-7 border border-gray-100 shadow-sm h-full">
                   <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mb-4">
                     <span className="text-white text-sm font-bold">{item.step}</span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -464,7 +464,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
               Trusted by NYC property managers
             </h2>
-            <p className="text-gray-500 mt-4 text-lg">
+            <p className="text-gray-600 mt-4 text-lg">
               Landlords and management companies rely on ViolationAlert to protect their portfolios.
             </p>
           </div>
@@ -495,7 +495,7 @@ export default function Home() {
                 <p className="text-gray-700 leading-relaxed mb-6 italic">{testimonial.quote}</p>
                 <div>
                   <div className="font-semibold text-gray-900 text-sm">{testimonial.name}</div>
-                  <div className="text-gray-400 text-sm">{testimonial.role}</div>
+                  <div className="text-gray-500 text-sm">{testimonial.role}</div>
                 </div>
               </div>
             ))}
@@ -508,21 +508,21 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Simple, transparent pricing</h2>
-            <p className="text-gray-500 mt-4 text-lg">Start free. Upgrade when you need more coverage.</p>
+            <p className="text-gray-600 mt-4 text-lg">Start free. Upgrade when you need more coverage.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Free */}
             <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col">
               <h3 className="font-semibold text-lg text-gray-900">Free</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$0<span className="text-base text-gray-400 font-normal">/mo</span></p>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$0<span className="text-base text-gray-500 font-normal">/mo</span></p>
               <p className="text-sm text-gray-500 mt-2">Perfect for getting started</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
                 <li className="flex items-center gap-2"><CheckIcon /> Up to 3 properties</li>
                 <li className="flex items-center gap-2"><CheckIcon /> DOB violations only</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Daily scanning</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Email notifications</li>
-                <li className="flex items-center gap-2 text-gray-400"><XIcon /> Resolution engine</li>
-                <li className="flex items-center gap-2 text-gray-400"><XIcon /> Contractor marketplace</li>
+                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Resolution engine</li>
+                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Contractor marketplace</li>
               </ul>
               <Link href="/signup" className="mt-8 block text-center border border-gray-300 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
                 Get started free
@@ -534,7 +534,7 @@ export default function Home() {
                 Most popular
               </span>
               <h3 className="font-semibold text-lg text-gray-900">Pro</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$29<span className="text-base text-gray-400 font-normal">/mo</span></p>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$29<span className="text-base text-gray-500 font-normal">/mo</span></p>
               <p className="text-sm text-gray-500 mt-2">Full coverage for serious landlords</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
                 <li className="flex items-center gap-2"><CheckIcon /> Unlimited properties</li>
@@ -545,7 +545,7 @@ export default function Home() {
                 <li className="flex items-center gap-2"><CheckIcon /> Contractor marketplace</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Priority support</li>
               </ul>
-              <Link href="/signup" className="mt-8 block text-center bg-red-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-red-700 transition-colors">
+              <Link href="/signup" className="mt-8 block text-center bg-red-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all">
                 Start 14-day free trial
               </Link>
             </div>
@@ -586,7 +586,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
-                <p className="mt-3 text-gray-500 leading-relaxed pr-8">{faq.answer}</p>
+                <p className="mt-3 text-gray-600 leading-relaxed pr-8">{faq.answer}</p>
               </details>
             ))}
           </div>
@@ -604,14 +604,14 @@ export default function Home() {
             NYC agencies. Free for 3 properties, forever.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-            <Link href="/signup" className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 transition-colors">
+            <Link href="/signup" className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 active:scale-[0.98] transition-all">
               Start monitoring free
             </Link>
             <a href="mailto:sales@violationalert.com" className="border border-white/50 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-white/10 transition-colors">
               Talk to sales
             </a>
           </div>
-          <p className="text-red-200 text-sm mt-4">No credit card required. Set up in under 2 minutes.</p>
+          <p className="text-red-100 text-sm mt-4">No credit card required. Set up in under 2 minutes.</p>
         </div>
       </section>
 

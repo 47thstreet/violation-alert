@@ -26,7 +26,7 @@ export function PropertyCard({ property, violationCount }: PropertyCardProps) {
   return (
     <Link
       href={`/properties/${property.id}`}
-      className="bg-white rounded-xl border p-5 hover:shadow-lg transition-shadow block relative group"
+      className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all block relative group"
     >
       {/* Violation count badge — top right */}
       {violationCount > 0 && (
@@ -51,7 +51,7 @@ export function PropertyCard({ property, violationCount }: PropertyCardProps) {
       )}
 
       {/* Meta row */}
-      <div className="mt-auto pt-3 border-t flex items-center justify-between text-xs text-gray-400">
+      <div className="mt-auto pt-3 border-t flex items-center justify-between text-xs text-gray-500">
         <span>
           {property.last_polled_at
             ? `Scanned ${formatDistanceToNow(new Date(property.last_polled_at), { addSuffix: true })}`

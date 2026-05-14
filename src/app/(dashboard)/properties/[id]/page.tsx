@@ -36,7 +36,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
         { label: property.address },
       ]} />
 
-      <div className="bg-white rounded-xl border p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{property.address}</h1>
@@ -48,7 +48,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           </div>
           <Link
             href={`/properties/${id}/crm`}
-            className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shrink-0 w-full sm:w-auto text-center"
+            className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all shrink-0 w-full sm:w-auto text-center"
           >
             CRM / Manage
           </Link>
@@ -70,7 +70,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-500">
             {property.last_polled_at
               ? `Last checked ${formatDistanceToNow(new Date(property.last_polled_at), { addSuffix: true })}`
               : 'Not yet checked'

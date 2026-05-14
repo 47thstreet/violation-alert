@@ -166,10 +166,8 @@ export async function researchViolation(
     const message = err instanceof Error ? err.message : String(err);
     console.error(`[ai-research] NVIDIA API call failed: ${message}`);
 
-    // If API key is missing, throw so the route can return a clear error
-    if (message.includes('NVIDIA_API_KEY not set')) {
-      throw err;
-    }
+    // If API key is missing, return fallback instead of crashing
+    // The fallback gives basic guidance; real AI gives detailed remedies
 
     // For transient errors (timeout, rate limit, etc.), return a fallback
     return {

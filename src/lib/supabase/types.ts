@@ -146,6 +146,8 @@ export interface PropertyDocument {
   notes: string | null;
 }
 
+export type ViolationNoteType = 'general' | 'action-taken' | 'follow-up' | 'escalation' | 'resolved';
+
 export interface PropertyNote {
   id: string;
   property_id: string;
@@ -153,7 +155,9 @@ export interface PropertyNote {
   author_name: string | null;
   content: string;
   note_type: NoteType;
+  violation_note_type?: ViolationNoteType;
   pinned: boolean;
+  violation_id: string | null;
   created_at: string;
 }
 

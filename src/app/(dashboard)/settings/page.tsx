@@ -114,11 +114,11 @@ export default function SettingsPage() {
           { label: 'Settings' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Settings</h1>
-        <p className="text-gray-500 text-sm">Manage your notification preferences and account.</p>
+        <p className="text-gray-600 text-sm">Manage your notification preferences and account.</p>
       </div>
 
       {/* Notification Preferences */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">Notification Channels</h2>
         <p className="text-sm text-gray-500 mb-4">
           Get notified when new violations are found on your properties.
@@ -176,7 +176,7 @@ export default function SettingsPage() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 min-h-[44px]"
+              className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[44px]"
             >
               Add
             </button>
@@ -188,7 +188,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Billing */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold">Billing</h2>
@@ -206,7 +206,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Team */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold">Team</h2>
@@ -224,7 +224,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Account */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">Account</h2>
         <button
           onClick={handleLogout}
