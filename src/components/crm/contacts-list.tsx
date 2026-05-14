@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { PropertyContact, ContactRole } from '@/lib/supabase/types';
+import { useToast } from '@/components/toast';
 
 interface ContactsListProps {
   propertyId: string;
@@ -22,10 +23,12 @@ const roleColors: Record<ContactRole, string> = {
 
 export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
   const supabase = createClient();
+  const { toast } = useToast();
   const [contacts, setContacts] = useState<PropertyContact[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', role: 'tenant' as ContactRole, phone: '', email: '', unit_number: '', notes: '' });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   useEffect(() => { loadContacts(); }, []);
 
@@ -40,6 +43,7 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
 
   function resetForm() {
     setForm({ name: '', role: 'tenant', phone: '', email: '', unit_number: '', notes: '' });
+    setFormErrors({});
     setShowForm(false);
     setEditingId(null);
   }
@@ -57,8 +61,25 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
     setShowForm(true);
   }
 
+  function validateContactForm(): Record<string, string> {
+    const errors: Record<string, string> = {};
+    if (!form.name.trim()) errors.name = 'Name is required.';
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Please enter a valid email address.';
+    if (form.phone) {
+      const digits = form.phone.replace(/[\s\-().+]/g, '');
+      if (!/^\d{10,15}$/.test(digits)) errors.phone = 'Please enter a valid phone number (10-15 digits).';
+    }
+    return errors;
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const errors = validateContactForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
     const payload = {
       property_id: propertyId,
       tenant_id: tenantId,
@@ -72,8 +93,10 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
 
     if (editingId) {
       await supabase.from('property_contacts').update(payload).eq('id', editingId);
+      toast.success('Contact updated');
     } else {
       await supabase.from('property_contacts').insert(payload);
+      toast.success('Contact added');
     }
     resetForm();
     loadContacts();
@@ -82,6 +105,7 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
   async function handleDelete(id: string) {
     if (!confirm('Delete this contact?')) return;
     await supabase.from('property_contacts').delete().eq('id', id);
+    toast.success('Contact deleted');
     loadContacts();
   }
 
@@ -100,16 +124,25 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input required placeholder="Name *" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+            <div>
+              <input required placeholder="Name *" value={form.name} onChange={e => { setForm(f => ({ ...f, name: e.target.value })); setFormErrors(fe => ({ ...fe, name: '' })); }}
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.name ? 'border-red-500' : ''}`} />
+              {formErrors.name && <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>}
+            </div>
             <select value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value as ContactRole }))}
               className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">
               {roles.map(r => <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>)}
             </select>
-            <input placeholder="Phone" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
-            <input placeholder="Email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+            <div>
+              <input placeholder="Phone" value={form.phone} onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setFormErrors(fe => ({ ...fe, phone: '' })); }}
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.phone ? 'border-red-500' : ''}`} />
+              {formErrors.phone && <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>}
+            </div>
+            <div>
+              <input placeholder="Email" type="email" value={form.email} onChange={e => { setForm(f => ({ ...f, email: e.target.value })); setFormErrors(fe => ({ ...fe, email: '' })); }}
+                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.email ? 'border-red-500' : ''}`} />
+              {formErrors.email && <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>}
+            </div>
             <input placeholder="Unit #" value={form.unit_number} onChange={e => setForm(f => ({ ...f, unit_number: e.target.value }))}
               className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
           </div>

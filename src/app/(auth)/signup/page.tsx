@@ -5,6 +5,23 @@ import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+function getPasswordStrength(pw: string): { label: string; color: string; width: string } {
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (pw.length >= 12) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+  if (score <= 1) return { label: 'Weak', color: 'bg-red-500', width: 'w-1/4' };
+  if (score <= 3) return { label: 'Medium', color: 'bg-yellow-500', width: 'w-2/4' };
+  return { label: 'Strong', color: 'bg-green-500', width: 'w-full' };
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,10 +29,22 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
   const router = useRouter();
+
+  const emailError = emailTouched && email && !isValidEmail(email) ? 'Please enter a valid email address.' : '';
+  const pwStrength = password ? getPasswordStrength(password) : null;
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
     setLoading(true);
     setError('');
 
@@ -87,7 +116,7 @@ export default function SignupPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Company / Org name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Company / Org name <span className="text-gray-400 font-normal">(optional)</span></label>
             <input
               type="text"
               value={orgName}
@@ -103,10 +132,12 @@ export default function SignupPage() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
               required
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className={`w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm ${emailError ? 'border-red-500' : ''}`}
               placeholder="you@company.com"
             />
+            {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
           </div>
 
           <div>
@@ -120,6 +151,16 @@ export default function SignupPage() {
               className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="Min 8 characters"
             />
+            {pwStrength && (
+              <div className="mt-2">
+                <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                  <div className={`h-full rounded-full transition-all ${pwStrength.color} ${pwStrength.width}`} />
+                </div>
+                <p className={`text-xs mt-1 ${pwStrength.color === 'bg-red-500' ? 'text-red-600' : pwStrength.color === 'bg-yellow-500' ? 'text-yellow-600' : 'text-green-600'}`}>
+                  {pwStrength.label}
+                </p>
+              </div>
+            )}
           </div>
 
           <button

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { Contractor, ContractorReview } from '@/lib/supabase/types';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 export default function ContractorProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const [contractorId, setContractorId] = useState<string | null>(null);
@@ -69,9 +70,11 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
 
   return (
     <div>
-      <Link href="/marketplace" className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block">
-        &larr; Back to marketplace
-      </Link>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Marketplace', href: '/marketplace' },
+        { label: contractor.name },
+      ]} />
 
       {/* Profile Header */}
       <div className="bg-white rounded-xl border p-6 mb-6">

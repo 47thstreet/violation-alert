@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/toast';
 
 interface ScanNowButtonProps {
   propertyId: string;
@@ -11,6 +12,7 @@ export function ScanNowButton({ propertyId }: ScanNowButtonProps) {
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState<{ violations_found: number; agencies_count: number; errors: string[] } | null>(null);
   const router = useRouter();
+  const { toast } = useToast();
 
   async function handleScan() {
     setScanning(true);
@@ -24,9 +26,15 @@ export function ScanNowButton({ propertyId }: ScanNowButtonProps) {
       });
       const data = await res.json();
       setResult(data);
+      if (data.errors?.length > 0) {
+        toast.info(`Found ${data.violations_found} violation${data.violations_found !== 1 ? 's' : ''} (${data.errors.length} error${data.errors.length !== 1 ? 's' : ''})`);
+      } else {
+        toast.success(`Scan complete — found ${data.violations_found} violation${data.violations_found !== 1 ? 's' : ''}`);
+      }
       // Refresh the page to show updated violations
       router.refresh();
     } catch {
+      toast.error('Scan request failed');
       setResult({ violations_found: 0, agencies_count: 0, errors: ['Scan request failed'] });
     }
     setScanning(false);

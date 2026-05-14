@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { AGENCIES as AGENCY_DATA } from '@/lib/agency-data';
 
 export const metadata: Metadata = {
   title: 'NYC Building Violation Monitor — Track 10+ Agency Violations | ViolationAlert',
@@ -313,7 +314,7 @@ export default function Home() {
       </section>
 
       {/* ===== 4. ALL AGENCIES ===== */}
-      <section className="bg-gray-50 py-16 sm:py-20">
+      <section id="agencies" className="bg-gray-50 py-16 sm:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -325,16 +326,21 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {AGENCIES.map((agency) => (
-              <div
-                key={agency.abbr}
-                className="bg-white rounded-xl p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all text-center"
-              >
-                <div className="text-3xl mb-2">{agency.icon}</div>
-                <h3 className="font-bold text-gray-900 text-lg">{agency.abbr}</h3>
-                <p className="text-xs text-gray-500 mt-1 leading-snug">{agency.desc}</p>
-              </div>
-            ))}
+            {AGENCIES.map((agency) => {
+              const agencyData = AGENCY_DATA.find((a) => a.abbr === agency.abbr);
+              const href = agencyData ? `/violations/${agencyData.slug}` : '#';
+              return (
+                <Link
+                  key={agency.abbr}
+                  href={href}
+                  className="bg-white rounded-xl p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all text-center group"
+                >
+                  <div className="text-3xl mb-2">{agency.icon}</div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-red-600 transition-colors">{agency.abbr}</h3>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">{agency.desc}</p>
+                </Link>
+              );
+            })}
           </div>
           <p className="text-center text-sm text-gray-400 mt-8">
             Plus 311 complaints, DOB NOW, and more sources added regularly.

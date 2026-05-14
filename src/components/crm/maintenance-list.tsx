@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { MaintenanceRequest, MaintenancePriority, MaintenanceStatus, MaintenanceCategory } from '@/lib/supabase/types';
 import { formatDistanceToNow } from 'date-fns';
+import { useToast } from '@/components/toast';
 
 interface MaintenanceListProps {
   propertyId: string;
@@ -31,6 +32,7 @@ const statusColors: Record<MaintenanceStatus, string> = {
 
 export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) {
   const supabase = createClient();
+  const { toast } = useToast();
   const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [filter, setFilter] = useState<MaintenanceStatus | 'all'>('all');
@@ -42,6 +44,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
     unit_number: '',
     assigned_to: '',
   });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   useEffect(() => { loadRequests(); }, []);
 
@@ -56,6 +59,15 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const errors: Record<string, string> = {};
+    if (!form.title.trim()) errors.title = 'Title is required.';
+    if (!form.description.trim()) errors.description = 'Description is required (min 10 characters).';
+    else if (form.description.trim().length < 10) errors.description = 'Description must be at least 10 characters.';
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
     await supabase.from('maintenance_requests').insert({
       property_id: propertyId,
       tenant_id: tenantId,
@@ -67,7 +79,9 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
       assigned_to: form.assigned_to || null,
     });
     setForm({ title: '', description: '', priority: 'medium', category: 'other', unit_number: '', assigned_to: '' });
+    setFormErrors({});
     setShowForm(false);
+    toast.success('Maintenance request created');
     loadRequests();
   }
 
@@ -75,6 +89,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
     const update: Record<string, unknown> = { status };
     if (status === 'completed') update.completed_at = new Date().toISOString();
     await supabase.from('maintenance_requests').update(update).eq('id', id);
+    toast.success(`Status updated to ${status.replace('_', ' ')}`);
     loadRequests();
   }
 
@@ -110,10 +125,19 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
 
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
-          <input required placeholder="Title *" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
-          <textarea placeholder="Description" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" />
+          <div>
+            <input required placeholder="Title *" value={form.title} onChange={e => { setForm(f => ({ ...f, title: e.target.value })); setFormErrors(fe => ({ ...fe, title: '' })); }}
+              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.title ? 'border-red-500' : ''}`} />
+            {formErrors.title && <p className="text-red-600 text-sm mt-1">{formErrors.title}</p>}
+          </div>
+          <div>
+            <textarea required minLength={10} placeholder="Description * (min 10 characters)" value={form.description} onChange={e => { setForm(f => ({ ...f, description: e.target.value })); setFormErrors(fe => ({ ...fe, description: '' })); }} rows={3}
+              className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 ${formErrors.description ? 'border-red-500' : ''}`} />
+            <div className="flex justify-between mt-1">
+              {formErrors.description ? <p className="text-red-600 text-sm">{formErrors.description}</p> : <span />}
+              <span className={`text-xs ${form.description.length < 10 ? 'text-gray-400' : 'text-green-600'}`}>{form.description.length} / 10 min</span>
+            </div>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <select value={form.priority} onChange={e => setForm(f => ({ ...f, priority: e.target.value as MaintenancePriority }))}
               className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500">

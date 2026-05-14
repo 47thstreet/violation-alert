@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 import type {
   Violation,
   Property,
@@ -271,9 +272,11 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
 
   return (
     <div>
-      <Link href="/violations" className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block">
-        &larr; Back to violations
-      </Link>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Violations', href: '/violations' },
+        { label: violation.violation_type || violation.description || 'Violation Details' },
+      ]} />
 
       {/* Violation Header */}
       <div className="bg-white rounded-xl border p-6 mb-6">

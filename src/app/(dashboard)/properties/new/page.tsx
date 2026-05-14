@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useToast } from '@/components/toast';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 interface ResolvedAddress {
   bin: string | null;
@@ -30,9 +32,20 @@ export default function NewPropertyPage() {
   const [scanResult, setScanResult] = useState<ScanResult | null>(null);
   const [newPropertyId, setNewPropertyId] = useState<string | null>(null);
   const [error, setError] = useState('');
+  const [addressError, setAddressError] = useState('');
+  const [duplicateId, setDuplicateId] = useState<string | null>(null);
   const router = useRouter();
+  const { toast } = useToast();
 
   async function handleResolve() {
+    setAddressError('');
+    setDuplicateId(null);
+
+    if (!address.trim()) {
+      setAddressError('Please enter an address.');
+      return;
+    }
+
     setResolving(true);
     setError('');
     setResolved(null);
@@ -48,8 +61,35 @@ export default function NewPropertyPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'Could not resolve address');
+        setAddressError("We couldn't find this address. Make sure it's a valid NYC address.");
+      } else if (!data.bin && !data.bbl) {
+        setAddressError("We couldn't find this address. Make sure it's a valid NYC address.");
       } else {
+        // Check for duplicate BIN in user's properties
+        if (data.bin) {
+          const supabase = createClient();
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            const { data: tenant } = await supabase
+              .from('tenants')
+              .select('id')
+              .eq('user_id', user.id)
+              .single();
+            if (tenant) {
+              const { data: existing } = await supabase
+                .from('properties')
+                .select('id')
+                .eq('bin', data.bin)
+                .eq('tenant_id', tenant.id);
+              if (existing && existing.length > 0) {
+                setDuplicateId(existing[0].id);
+                setResolved(data);
+                setResolving(false);
+                return;
+              }
+            }
+          }
+        }
         setResolved(data);
       }
     } catch {
@@ -92,6 +132,7 @@ export default function NewPropertyPage() {
 
     setNewPropertyId(inserted.id);
     setLoading(false);
+    toast.success('Property added successfully');
 
     // Immediately trigger a scan
     setScanning(true);
@@ -103,6 +144,7 @@ export default function NewPropertyPage() {
       });
       const data = await res.json();
       setScanResult(data);
+      toast.info(`Scan complete — found ${data.violations_found} violation${data.violations_found !== 1 ? 's' : ''}`);
     } catch {
       setScanResult({ violations_found: 0, agencies_count: 0, errors: ['Scan failed — violations will appear after the next polling cycle'] });
     }
@@ -111,6 +153,11 @@ export default function NewPropertyPage() {
 
   return (
     <div className="max-w-lg">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Properties', href: '/properties' },
+        { label: 'Add Property' },
+      ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">Add Property</h1>
       <p className="text-gray-500 mb-6">Enter an NYC address to look up the building and start monitoring.</p>
 
@@ -165,9 +212,9 @@ export default function NewPropertyPage() {
               <input
                 type="text"
                 value={address}
-                onChange={e => setAddress(e.target.value)}
+                onChange={e => { setAddress(e.target.value); setAddressError(''); setDuplicateId(null); }}
                 placeholder="123 Main Street, Brooklyn, NY"
-                className="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                className={`flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none ${addressError ? 'border-red-500' : ''}`}
                 onKeyDown={e => e.key === 'Enter' && handleResolve()}
               />
               <button
@@ -178,9 +225,23 @@ export default function NewPropertyPage() {
                 {resolving ? 'Looking up...' : 'Look up'}
               </button>
             </div>
+            {addressError && <p className="text-red-600 text-sm mt-1">{addressError}</p>}
           </div>
 
-          {resolved && (
+          {duplicateId && resolved && (
+            <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4 space-y-2">
+              <p className="font-semibold text-yellow-800">This property is already in your account</p>
+              <p className="text-sm text-yellow-700">{resolved.label}</p>
+              <Link
+                href={`/properties/${duplicateId}`}
+                className="inline-block mt-2 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-700 transition-colors"
+              >
+                View Existing Property
+              </Link>
+            </div>
+          )}
+
+          {resolved && !duplicateId && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
               <p className="font-semibold text-green-800">{resolved.label}</p>
               <div className="grid grid-cols-2 gap-2 text-sm text-green-700">

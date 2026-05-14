@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { NotificationPref } from '@/lib/supabase/types';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 export default function SettingsPage() {
   const [prefs, setPrefs] = useState<NotificationPref[]>([]);
@@ -12,6 +13,19 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(false);
   const [tenantId, setTenantId] = useState<string>('');
   const [message, setMessage] = useState('');
+  const [destError, setDestError] = useState('');
+
+  function validateDestination(ch: string, dest: string): string {
+    if (!dest.trim()) return 'This field is required.';
+    if (ch === 'email') {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dest)) return 'Please enter a valid email address.';
+    }
+    if (ch === 'sms' || ch === 'whatsapp') {
+      const digits = dest.replace(/[\s\-().+]/g, '');
+      if (!/^\d{10,15}$/.test(digits)) return `Please enter a valid ${ch === 'sms' ? 'phone' : 'WhatsApp'} number (10-15 digits).`;
+    }
+    return '';
+  }
 
   useEffect(() => {
     loadPrefs();
@@ -42,7 +56,20 @@ export default function SettingsPage() {
   async function addPref(e: React.FormEvent) {
     e.preventDefault();
     if (!tenantId || !destination) return;
+
+    const validationErr = validateDestination(channel, destination);
+    if (validationErr) {
+      setDestError(validationErr);
+      return;
+    }
+    setDestError('');
     setLoading(true);
+
+    // Normalize phone numbers: strip formatting for sms/whatsapp
+    if (channel === 'sms' || channel === 'whatsapp') {
+      const digits = destination.replace(/[\s\-().]/g, '');
+      setDestination(digits.startsWith('+') ? digits : '+1' + digits.replace(/^\+/, ''));
+    }
 
     const supabase = createClient();
     const { error } = await supabase.from('notification_prefs').insert({
@@ -82,6 +109,10 @@ export default function SettingsPage() {
   return (
     <div className="max-w-2xl space-y-8">
       <div>
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/properties' },
+          { label: 'Settings' },
+        ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Settings</h1>
         <p className="text-gray-500 text-sm">Manage your notification preferences and account.</p>
       </div>
@@ -124,33 +155,54 @@ export default function SettingsPage() {
           </div>
         )}
 
-        <form onSubmit={addPref} className="flex flex-col sm:flex-row gap-2">
-          <select
-            value={channel}
-            onChange={e => setChannel(e.target.value as 'email' | 'sms' | 'whatsapp')}
-            className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px]"
-          >
-            <option value="email">Email</option>
-            <option value="sms">SMS</option>
-            <option value="whatsapp">WhatsApp</option>
-          </select>
-          <input
-            type="text"
-            value={destination}
-            onChange={e => setDestination(e.target.value)}
-            placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
-            className="flex-1 px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none min-h-[44px]"
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 min-h-[44px]"
-          >
-            Add
-          </button>
+        <form onSubmit={addPref} className="space-y-2">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <select
+              value={channel}
+              onChange={e => { setChannel(e.target.value as 'email' | 'sms' | 'whatsapp'); setDestError(''); }}
+              className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px]"
+            >
+              <option value="email">Email</option>
+              <option value="sms">SMS</option>
+              <option value="whatsapp">WhatsApp</option>
+            </select>
+            <input
+              type="text"
+              value={destination}
+              onChange={e => { setDestination(e.target.value); setDestError(''); }}
+              placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
+              className={`flex-1 px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none min-h-[44px] ${destError ? 'border-red-500' : ''}`}
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 min-h-[44px]"
+            >
+              Add
+            </button>
+          </div>
+          {destError && <p className="text-red-600 text-sm">{destError}</p>}
         </form>
 
         {message && <p className="text-sm text-green-600 mt-2">{message}</p>}
+      </div>
+
+      {/* Billing */}
+      <div className="bg-white rounded-xl border p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold">Billing</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Manage your subscription, upgrade your plan, or view billing details.
+            </p>
+          </div>
+          <Link
+            href="/settings/billing"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700"
+          >
+            Manage Billing
+          </Link>
+        </div>
       </div>
 
       {/* Team */}

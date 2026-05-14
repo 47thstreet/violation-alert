@@ -4,6 +4,7 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { DashboardNav } from '@/components/dashboard-nav';
 import { MobileNav } from '@/components/mobile-nav';
+import { GlobalSearch } from '@/components/global-search';
 
 export const metadata: Metadata = {
   robots: {
@@ -36,6 +37,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
               <DashboardNav />
             </div>
             <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+              <div className="hidden sm:block w-64">
+                <GlobalSearch />
+              </div>
               <span className="text-sm text-gray-500 truncate hidden sm:inline">{tenant?.org_name || user.email}</span>
               <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full capitalize shrink-0">
                 {tenant?.tier || 'free'}

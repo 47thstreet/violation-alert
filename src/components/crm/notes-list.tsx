@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { PropertyNote, NoteType } from '@/lib/supabase/types';
 import { formatDistanceToNow } from 'date-fns';
+import { useToast } from '@/components/toast';
 
 interface NotesListProps {
   propertyId: string;
@@ -21,6 +22,7 @@ const noteTypeColors: Record<NoteType, string> = {
 
 export function NotesList({ propertyId, tenantId }: NotesListProps) {
   const supabase = createClient();
+  const { toast } = useToast();
   const [notes, setNotes] = useState<PropertyNote[]>([]);
   const [content, setContent] = useState('');
   const [noteType, setNoteType] = useState<NoteType>('general');
@@ -49,6 +51,7 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
       author_name: authorName || null,
     });
     setContent('');
+    toast.success('Note added');
     loadNotes();
   }
 

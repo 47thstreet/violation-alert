@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CrmTabs } from './crm-tabs';
 import type { BuildingDetails, PropertyContact, PropertyDocument, PropertyNote, MaintenanceRequest } from '@/lib/supabase/types';
 
@@ -58,9 +59,12 @@ export default async function CrmPage({ params }: { params: Promise<{ id: string
 
   return (
     <div>
-      <Link href={`/properties/${id}`} className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block">
-        &larr; Back to property
-      </Link>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Properties', href: '/properties' },
+        { label: property.address, href: `/properties/${id}` },
+        { label: 'CRM' },
+      ]} />
 
       <div className="bg-white rounded-xl border p-6 mb-6">
         <div className="flex justify-between items-start">

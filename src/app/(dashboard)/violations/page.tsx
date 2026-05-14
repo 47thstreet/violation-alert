@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { ViolationTable } from '@/components/violation-table';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { EmptyState, CheckmarkIcon } from '@/components/empty-state';
 
 export const metadata: Metadata = {
   title: 'Violations',
@@ -46,21 +48,26 @@ export default async function ViolationsPage() {
 
   return (
     <div>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Violations' },
+      ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">All Violations</h1>
       <p className="text-gray-500 text-sm mb-6">
         {violations?.length || 0} total &middot; {openCount} open &middot; ${totalPenalties.toLocaleString()} in penalties
       </p>
 
-      <div className="bg-white rounded-xl border">
-        {enriched.length > 0 ? (
+      {enriched.length > 0 ? (
+        <div className="bg-white rounded-xl border">
           <ViolationTable violations={enriched} />
-        ) : (
-          <div className="p-12 text-center text-gray-500">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No violations found</h3>
-            <p>Add properties to start monitoring for violations.</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <EmptyState
+          icon={<CheckmarkIcon />}
+          title="No violations found"
+          description="Your properties are clean! We'll alert you when anything changes."
+        />
+      )}
     </div>
   );
 }

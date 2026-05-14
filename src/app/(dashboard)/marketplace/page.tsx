@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { Contractor } from '@/lib/supabase/types';
 import { ContractorCard } from '@/components/contractor-card';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { EmptyState, BriefcaseIcon } from '@/components/empty-state';
 
 const BOROUGHS = ['Manhattan', 'Brooklyn', 'Queens', 'Bronx', 'Staten Island'];
 const RATINGS = [
@@ -82,6 +84,10 @@ export default function MarketplacePage() {
 
   return (
     <div>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Marketplace' },
+      ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">Contractor Marketplace</h1>
       <p className="text-gray-500 text-sm mb-6">
         Find verified contractors to help resolve your building violations.
@@ -191,22 +197,11 @@ export default function MarketplacePage() {
           </div>
         </>
       ) : (
-        <div className="bg-white rounded-xl border p-12 text-center">
-          <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No contractors found</h3>
-          <p className="text-sm text-gray-500">
-            Try adjusting your filters or search terms.
-          </p>
-        </div>
+        <EmptyState
+          icon={<BriefcaseIcon />}
+          title="No contractors yet"
+          description="The contractor marketplace is coming soon."
+        />
       )}
     </div>
   );

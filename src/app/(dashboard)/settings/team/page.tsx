@@ -4,6 +4,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { TeamMember, TeamRole } from '@/lib/supabase/types';
 import Link from 'next/link';
+import { EmptyState, UsersIcon } from '@/components/empty-state';
+import { useToast } from '@/components/toast';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const ROLE_LABELS: Record<TeamRole, string> = {
   owner: 'Owner',
@@ -32,7 +35,7 @@ export default function TeamPage() {
   const [role, setRole] = useState<TeamRole>('viewer');
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-  const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const { toast } = useToast();
   const [tenantId, setTenantId] = useState('');
   const [currentUserEmail, setCurrentUserEmail] = useState('');
   const [isOwner, setIsOwner] = useState(false);
@@ -80,11 +83,6 @@ export default function TeamPage() {
     loadTeam();
   }, [loadTeam]);
 
-  function showMessage(text: string, type: 'success' | 'error') {
-    setMessage({ text, type });
-    setTimeout(() => setMessage(null), 4000);
-  }
-
   async function handleInvite(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
@@ -99,9 +97,9 @@ export default function TeamPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      showMessage(data.error || 'Failed to invite', 'error');
+      toast.error(data.error || 'Failed to invite');
     } else {
-      showMessage(`Invited ${email}`, 'success');
+      toast.success(`Invite sent to ${email}`);
       setEmail('');
       await loadTeam();
     }
@@ -118,11 +116,11 @@ export default function TeamPage() {
     });
 
     if (res.ok) {
-      showMessage('Member removed', 'success');
+      toast.success('Member removed');
       await loadTeam();
     } else {
       const data = await res.json();
-      showMessage(data.error || 'Failed to remove', 'error');
+      toast.error(data.error || 'Failed to remove');
     }
   }
 
@@ -134,11 +132,11 @@ export default function TeamPage() {
     });
 
     if (res.ok) {
-      showMessage('Role updated', 'success');
+      toast.success('Role updated');
       await loadTeam();
     } else {
       const data = await res.json();
-      showMessage(data.error || 'Failed to update role', 'error');
+      toast.error(data.error || 'Failed to update role');
     }
   }
 
@@ -150,11 +148,11 @@ export default function TeamPage() {
     });
 
     if (res.ok) {
-      showMessage(action === 'accept' ? 'Invite accepted' : 'Invite rejected', 'success');
+      toast.success(action === 'accept' ? 'Invite accepted' : 'Invite rejected');
       await loadTeam();
     } else {
       const data = await res.json();
-      showMessage(data.error || 'Failed to process invite', 'error');
+      toast.error(data.error || 'Failed to process invite');
     }
   }
 
@@ -177,31 +175,16 @@ export default function TeamPage() {
   return (
     <div className="max-w-2xl space-y-8">
       <div>
-        <div className="flex items-center gap-2 mb-2">
-          <Link href="/settings" className="text-gray-400 hover:text-gray-600 text-sm">
-            Settings
-          </Link>
-          <span className="text-gray-300">/</span>
-          <span className="text-sm text-gray-600">Team</span>
-        </div>
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/properties' },
+          { label: 'Settings', href: '/settings' },
+          { label: 'Team' },
+        ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Team Members</h1>
         <p className="text-gray-500 text-sm">
           Invite collaborators to view or manage your properties and violations.
         </p>
       </div>
-
-      {/* Status message */}
-      {message && (
-        <div
-          className={`px-4 py-3 rounded-lg text-sm font-medium ${
-            message.type === 'success'
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
-          }`}
-        >
-          {message.text}
-        </div>
-      )}
 
       {/* Pending invites for current user */}
       {pendingInvites.length > 0 && (
@@ -349,9 +332,12 @@ export default function TeamPage() {
           ))}
 
           {members.length === 0 && (
-            <p className="text-sm text-gray-400 text-center py-4">
-              No team members yet. Invite someone above to get started.
-            </p>
+            <EmptyState
+              icon={<UsersIcon />}
+              title="You're the only member"
+              description="Invite your team to collaborate on property management"
+              action={{ label: 'Invite', href: '/settings/team' }}
+            />
           )}
         </div>
       </div>

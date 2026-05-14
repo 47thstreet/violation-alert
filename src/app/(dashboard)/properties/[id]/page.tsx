@@ -1,7 +1,9 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { ViolationTable } from '@/components/violation-table';
+import { ViolationCharts } from '@/components/violation-charts';
 import { ScanNowButton } from '@/components/scan-now-button';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -28,9 +30,11 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
 
   return (
     <div>
-      <Link href="/properties" className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block">
-        &larr; Back to properties
-      </Link>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/properties' },
+        { label: 'Properties', href: '/properties' },
+        { label: property.address },
+      ]} />
 
       <div className="bg-white rounded-xl border p-6 mb-6">
         <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
@@ -75,6 +79,10 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           <ScanNowButton propertyId={id} />
         </div>
       </div>
+
+      {violations && violations.length > 0 && (
+        <ViolationCharts violations={violations} />
+      )}
 
       <div className="bg-white rounded-xl border">
         <div className="p-4 border-b">
