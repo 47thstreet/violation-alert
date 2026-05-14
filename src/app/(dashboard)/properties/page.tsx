@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { PropertyCard } from '@/components/property-card';
+
+export const metadata: Metadata = {
+  title: 'My Properties',
+};
 
 export default async function PropertiesPage() {
   const supabase = await createServerSupabaseClient();

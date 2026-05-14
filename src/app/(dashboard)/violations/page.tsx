@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { ViolationTable } from '@/components/violation-table';
+
+export const metadata: Metadata = {
+  title: 'Violations',
+};
 
 export default async function ViolationsPage() {
   const supabase = await createServerSupabaseClient();

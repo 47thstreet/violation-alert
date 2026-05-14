@@ -12,6 +12,7 @@ const navItems = [
 
 export function DashboardNav() {
   const pathname = usePathname();
+  const isCrmPage = pathname.includes('/crm');
 
   return (
     <nav className="flex gap-1">
@@ -31,6 +32,11 @@ export function DashboardNav() {
           </Link>
         );
       })}
+      {isCrmPage && (
+        <span className="px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-700">
+          CRM
+        </span>
+      )}
     </nav>
   );
 }

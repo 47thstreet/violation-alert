@@ -41,6 +41,12 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
               {property.bbl && <span>BBL: {property.bbl}</span>}
             </div>
           </div>
+          <Link
+            href={`/properties/${id}/crm`}
+            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shrink-0"
+          >
+            CRM / Manage
+          </Link>
         </div>
 
         <div className="grid grid-cols-3 gap-4 mt-6">

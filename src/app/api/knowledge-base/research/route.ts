@@ -36,8 +36,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ data: existing, source: 'cache' });
     }
 
-    // Run AI research (stub for now)
-    const research = await researchViolation(violation_type, violation_code || null, agency);
+    // Run AI research via NVIDIA Nemotron
+    let research;
+    try {
+      research = await researchViolation(violation_type, violation_code || null, agency);
+    } catch (aiErr) {
+      const msg = aiErr instanceof Error ? aiErr.message : String(aiErr);
+      console.error('AI research failed:', msg);
+
+      if (msg.includes('NVIDIA_API_KEY not set')) {
+        return NextResponse.json(
+          { error: 'AI service not configured. Set NVIDIA_API_KEY.' },
+          { status: 503 },
+        );
+      }
+
+      return NextResponse.json(
+        { error: 'AI research failed. Please try again later.' },
+        { status: 502 },
+      );
+    }
 
     // Store in KB for future lookups
     const { data: stored, error } = await supabase

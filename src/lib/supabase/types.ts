@@ -81,6 +81,94 @@ export type ResolutionMethod = 'diy' | 'hired_pro' | 'dismissed' | 'auto_resolve
 export type DiyDifficulty = 'easy' | 'moderate' | 'hard' | 'professional_only';
 export type ViolationAgency = 'DOB' | 'HPD' | 'ECB' | 'DEP' | 'FDNY' | 'DSNY';
 
+// CRM types (005_crm.sql)
+export type BuildingType = 'residential' | 'commercial' | 'mixed';
+export type ContactRole = 'owner' | 'manager' | 'tenant' | 'superintendent' | 'attorney' | 'contractor';
+export type DocumentType = 'insurance' | 'permit' | 'cof_o' | 'lease' | 'inspection' | 'correspondence' | 'other';
+export type NoteType = 'general' | 'maintenance' | 'violation' | 'inspection' | 'legal';
+export type MaintenancePriority = 'low' | 'medium' | 'high' | 'urgent';
+export type MaintenanceStatus = 'open' | 'assigned' | 'in_progress' | 'completed' | 'cancelled';
+export type MaintenanceCategory = 'plumbing' | 'electrical' | 'hvac' | 'structural' | 'pest' | 'other';
+
+export interface BuildingDetails {
+  id: string;
+  property_id: string;
+  tenant_id: string;
+  year_built: number | null;
+  building_class: string | null;
+  building_type: BuildingType | null;
+  total_units: number | null;
+  total_sqft: number | null;
+  floors: number | null;
+  lot_sqft: number | null;
+  zoning: string | null;
+  owner_name: string | null;
+  owner_phone: string | null;
+  owner_email: string | null;
+  management_company: string | null;
+  insurance_provider: string | null;
+  insurance_policy_number: string | null;
+  insurance_expiry: string | null;
+  certificate_of_occupancy: string | null;
+  last_inspection_date: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface PropertyContact {
+  id: string;
+  property_id: string;
+  tenant_id: string;
+  name: string;
+  role: ContactRole;
+  phone: string | null;
+  email: string | null;
+  unit_number: string | null;
+  notes: string | null;
+  created_at: string;
+}
+
+export interface PropertyDocument {
+  id: string;
+  property_id: string;
+  tenant_id: string;
+  name: string;
+  document_type: DocumentType;
+  file_url: string | null;
+  file_size: number | null;
+  uploaded_at: string;
+  expiry_date: string | null;
+  notes: string | null;
+}
+
+export interface PropertyNote {
+  id: string;
+  property_id: string;
+  tenant_id: string;
+  author_name: string | null;
+  content: string;
+  note_type: NoteType;
+  pinned: boolean;
+  created_at: string;
+}
+
+export interface MaintenanceRequest {
+  id: string;
+  property_id: string;
+  tenant_id: string;
+  title: string;
+  description: string | null;
+  priority: MaintenancePriority;
+  status: MaintenanceStatus;
+  unit_number: string | null;
+  category: MaintenanceCategory;
+  assigned_to: string | null;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 // Marketplace types (004_marketplace.sql)
 export type ContractorRequestStatus = 'pending' | 'accepted' | 'in_progress' | 'completed' | 'cancelled';
 
@@ -193,6 +281,11 @@ export interface Database {
       contractors: { Row: DbRow<Contractor>; Insert: DbInsert<Contractor> & { name: string }; Update: DbUpdate<Contractor>; Relationships: never[] };
       contractor_reviews: { Row: DbRow<ContractorReview>; Insert: DbInsert<ContractorReview> & { contractor_id: string; tenant_id: string; rating: number }; Update: DbUpdate<ContractorReview>; Relationships: never[] };
       contractor_requests: { Row: DbRow<ContractorRequest>; Insert: DbInsert<ContractorRequest> & { tenant_id: string; contractor_id: string }; Update: DbUpdate<ContractorRequest>; Relationships: never[] };
+      building_details: { Row: DbRow<BuildingDetails>; Insert: DbInsert<BuildingDetails> & { property_id: string; tenant_id: string }; Update: DbUpdate<BuildingDetails>; Relationships: never[] };
+      property_contacts: { Row: DbRow<PropertyContact>; Insert: DbInsert<PropertyContact> & { property_id: string; tenant_id: string; name: string; role: ContactRole }; Update: DbUpdate<PropertyContact>; Relationships: never[] };
+      property_documents: { Row: DbRow<PropertyDocument>; Insert: DbInsert<PropertyDocument> & { property_id: string; tenant_id: string; name: string }; Update: DbUpdate<PropertyDocument>; Relationships: never[] };
+      property_notes: { Row: DbRow<PropertyNote>; Insert: DbInsert<PropertyNote> & { property_id: string; tenant_id: string; content: string }; Update: DbUpdate<PropertyNote>; Relationships: never[] };
+      maintenance_requests: { Row: DbRow<MaintenanceRequest>; Insert: DbInsert<MaintenanceRequest> & { property_id: string; tenant_id: string; title: string }; Update: DbUpdate<MaintenanceRequest>; Relationships: never[] };
     };
     Views: Record<string, never>;
     Functions: {
