@@ -27,7 +27,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   if (items.length === 0) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-4">
+    <nav aria-label="Breadcrumb" className="mb-6">
       {/* Desktop: show all items */}
       <ol className="hidden sm:flex items-center gap-1.5 text-sm">
         {items.map((item, i) => {
@@ -36,9 +36,9 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             <li key={i} className="flex items-center gap-1.5">
               {i > 0 && <ChevronSeparator />}
               {isLast || !item.href ? (
-                <span className="font-semibold text-gray-900">{item.label}</span>
+                <span className="font-medium text-gray-900">{item.label}</span>
               ) : (
-                <Link href={item.href} className="text-gray-500 hover:text-gray-700 transition-colors">
+                <Link href={item.href} className="text-gray-400 hover:text-gray-600 transition-colors">
                   {item.label}
                 </Link>
               )}
@@ -51,7 +51,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       <ol className="flex sm:hidden items-center gap-1.5 text-sm">
         {items.length > 2 && (
           <li className="flex items-center gap-1.5">
-            <span className="text-gray-400">...</span>
+            <span className="text-gray-300">...</span>
             <ChevronSeparator />
           </li>
         )}
@@ -61,9 +61,9 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             <li key={i} className="flex items-center gap-1.5">
               {i > 0 && <ChevronSeparator />}
               {isLast || !item.href ? (
-                <span className="font-semibold text-gray-900 truncate max-w-[200px]">{item.label}</span>
+                <span className="font-medium text-gray-900 truncate max-w-[200px]">{item.label}</span>
               ) : (
-                <Link href={item.href} className="text-gray-500 hover:text-gray-700 transition-colors truncate max-w-[150px]">
+                <Link href={item.href} className="text-gray-400 hover:text-gray-600 transition-colors truncate max-w-[150px]">
                   {item.label}
                 </Link>
               )}

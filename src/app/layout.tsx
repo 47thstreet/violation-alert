@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   title: {
     template: "%s | ViolationAlert",
     default:
-      "ViolationAlert — NYC Building Violation Monitor & Resolution Platform",
+      "ViolationAlert — Your Buildings, Protected",
   },
   description:
-    "Monitor DOB, HPD, ECB, FDNY, DSNY, DOT, LPC, DEP violations for all your NYC properties. Get instant alerts, AI-powered resolution guides, and connect with licensed contractors. Free for 3 properties.",
+    "Every NYC agency that can fine your building, watched around the clock. Instant alerts, step-by-step resolution guides, and contractor matching. Free for 3 properties, forever.",
   keywords: [
     "NYC violation monitoring",
     "building violation alerts",
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "ViolationAlert",
     title:
-      "ViolationAlert — NYC Building Violation Monitor & Resolution Platform",
+      "ViolationAlert — Your Buildings, Protected",
     description:
-      "Monitor DOB, HPD, ECB violations for all your NYC properties. Instant alerts via email, SMS, or WhatsApp. Free for 3 properties.",
+      "Ten NYC agencies, one dashboard. Violation alerts, resolution guides, and contractor matching. Free for 3 properties.",
     images: [
       {
         url: "/og-image.png",
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "ViolationAlert — NYC Building Violation Monitor & Resolution Platform",
+      "ViolationAlert — Your Buildings, Protected",
     description:
-      "Monitor DOB, HPD, ECB violations for all your NYC properties. Instant alerts via email, SMS, or WhatsApp.",
+      "Ten NYC agencies, one dashboard. Alerts, resolution guides, and contractors. Free for 3 properties.",
     images: ["/og-image.png"],
   },
   robots: {

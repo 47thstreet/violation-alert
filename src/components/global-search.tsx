@@ -197,7 +197,7 @@ export function GlobalSearch() {
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search... (Cmd+K)"
-          className="w-full pl-9 pr-3 py-2 text-sm border rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent min-h-[38px]"
+          className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent min-h-[38px]"
         />
       </div>
 

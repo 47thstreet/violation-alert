@@ -90,40 +90,37 @@ export function ViolationTable({ violations }: ViolationTableProps) {
   return (
     <div>
       {/* Filter bar */}
-      <div className="p-4 border-b space-y-3">
-        {/* Status pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          {(['all', 'open', 'closed'] as const).map(f => (
-            <button
-              key={f}
-              onClick={() => setStatusFilter(f)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors min-h-[36px] ${
-                statusFilter === f
-                  ? f === 'open' ? 'bg-red-100 text-red-700' : f === 'closed' ? 'bg-green-100 text-green-700' : 'bg-gray-900 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              {f === 'all' ? 'All' : f === 'open' ? 'Open' : 'Closed'}
-              <span className="ml-1.5 text-xs opacity-70">{counts[f]}</span>
-            </button>
-          ))}
+      <div className="p-5 border-b border-gray-100 space-y-4">
+        {/* Status pills + count */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            {(['all', 'open', 'closed'] as const).map(f => (
+              <button
+                key={f}
+                onClick={() => setStatusFilter(f)}
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all min-h-[36px] ${
+                  statusFilter === f
+                    ? 'bg-gray-900 text-white shadow-sm'
+                    : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+                }`}
+              >
+                {f === 'all' ? 'All' : f === 'open' ? 'Open' : 'Closed'}
+                <span className="ml-1.5 text-xs opacity-60 tabular-nums">{counts[f]}</span>
+              </button>
+            ))}
+          </div>
 
-          {hasActiveFilters && (
-            <button
-              onClick={() => { setStatusFilter('all'); setSourceFilter('all'); setSeverityFilter('all'); }}
-              className="ml-1 px-2 py-1.5 text-xs text-red-600 hover:text-red-800 font-medium transition-colors"
-            >
-              Clear filters
-            </button>
-          )}
+          <span className="text-xs text-gray-400">
+            {filtered.length} of {violations.length}
+          </span>
         </div>
 
         {/* Dropdowns row */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <select
             value={sourceFilter}
             onChange={e => setSourceFilter(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
           >
             <option value="all">All Agencies</option>
             {sources.map(s => (
@@ -134,7 +131,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
           <select
             value={severityFilter}
             onChange={e => setSeverityFilter(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
           >
             <option value="all">All Severity</option>
             <option value="critical">Critical</option>
@@ -150,7 +147,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
               setSortBy(col);
               setSortDir(dir);
             }}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
           >
             <option value="date-desc">Newest First</option>
             <option value="date-asc">Oldest First</option>
@@ -159,55 +156,59 @@ export function ViolationTable({ violations }: ViolationTableProps) {
             <option value="penalty-desc">Highest Penalty</option>
             <option value="penalty-asc">Lowest Penalty</option>
           </select>
-        </div>
-      </div>
 
-      {/* Results count */}
-      <div className="px-4 py-2 text-xs text-gray-500 border-b bg-gray-50">
-        Showing {filtered.length} of {violations.length} violations
+          {hasActiveFilters && (
+            <button
+              onClick={() => { setStatusFilter('all'); setSourceFilter('all'); setSeverityFilter('all'); }}
+              className="px-3 py-1.5 text-xs text-gray-500 hover:text-gray-700 font-medium transition-colors"
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Desktop table */}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-gray-500 border-b bg-gray-50">
-              <th className="px-4 py-3 font-medium">Agency</th>
-              <th className="px-4 py-3 font-medium">Type</th>
-              <th className="px-4 py-3 font-medium cursor-pointer hover:text-gray-900 select-none" onClick={() => toggleSort('severity')}>
-                Severity {sortBy === 'severity' ? (sortDir === 'desc' ? '↓' : '↑') : ''}
+            <tr className="text-left border-b border-gray-100">
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Agency</th>
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Type</th>
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('severity')}>
+                Severity {sortBy === 'severity' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
               </th>
-              <th className="px-4 py-3 font-medium">Description</th>
-              <th className="px-4 py-3 font-medium cursor-pointer hover:text-gray-900 select-none" onClick={() => toggleSort('date')}>
-                Issued {sortBy === 'date' ? (sortDir === 'desc' ? '↓' : '↑') : ''}
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Description</th>
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('date')}>
+                Issued {sortBy === 'date' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
               </th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium text-right cursor-pointer hover:text-gray-900 select-none" onClick={() => toggleSort('penalty')}>
-                Penalty {sortBy === 'penalty' ? (sortDir === 'desc' ? '↓' : '↑') : ''}
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
+              <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide text-right cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('penalty')}>
+                Penalty {sortBy === 'penalty' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-50">
             {filtered.map(v => (
-              <tr key={v.id} className="border-b last:border-b-0 hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => router.push(`/violations/${v.id}`)}>
-                <td className="px-4 py-3">
-                  <span className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-bold uppercase">
+              <tr key={v.id} className="hover:bg-gray-50/50 cursor-pointer transition-colors group" onClick={() => router.push(`/violations/${v.id}`)}>
+                <td className="px-5 py-3.5">
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     {v.source}
                   </span>
                 </td>
-                <td className="px-4 py-3 font-mono text-xs text-gray-700">{v.violation_type || v.violation_number || 'N/A'}</td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-3.5 font-mono text-xs text-gray-600">{v.violation_type || v.violation_number || '--'}</td>
+                <td className="px-5 py-3.5">
                   <SeverityBadge severity={v.severity} />
                 </td>
-                <td className="px-4 py-3 max-w-xs truncate text-gray-700" title={v.description || ''}>
-                  {v.description || 'N/A'}
+                <td className="px-5 py-3.5 max-w-xs truncate text-gray-600 group-hover:text-gray-900 transition-colors" title={v.description || ''}>
+                  {v.description || '--'}
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-gray-700">{v.issued_date || 'N/A'}</td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-3.5 whitespace-nowrap text-gray-500 tabular-nums">{v.issued_date || '--'}</td>
+                <td className="px-5 py-3.5">
                   <StatusBadge status={v.status} />
                 </td>
-                <td className="px-4 py-3 text-right font-mono text-gray-700">
-                  {v.penalty_amount ? `$${v.penalty_amount.toLocaleString()}` : '-'}
+                <td className="px-5 py-3.5 text-right font-mono text-gray-600 tabular-nums">
+                  {v.penalty_amount ? `$${v.penalty_amount.toLocaleString()}` : '--'}
                 </td>
               </tr>
             ))}
@@ -216,29 +217,29 @@ export function ViolationTable({ violations }: ViolationTableProps) {
       </div>
 
       {/* Mobile card list */}
-      <div className="md:hidden divide-y">
+      <div className="md:hidden divide-y divide-gray-50">
         {filtered.map(v => (
           <div
             key={v.id}
-            className="p-4 hover:bg-gray-50 cursor-pointer active:bg-gray-100 transition-colors"
+            className="px-5 py-4 hover:bg-gray-50/50 cursor-pointer active:bg-gray-100 transition-colors"
             onClick={() => router.push(`/violations/${v.id}`)}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2.5">
               <div className="flex items-center gap-2">
-                <span className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-bold uppercase">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                   {v.source}
                 </span>
                 <SeverityBadge severity={v.severity} />
               </div>
               <StatusBadge status={v.status} />
             </div>
-            <p className="text-sm text-gray-900 line-clamp-2 mb-1">
-              {v.description || v.violation_type || v.violation_number || 'N/A'}
+            <p className="text-sm text-gray-900 line-clamp-2 leading-relaxed">
+              {v.description || v.violation_type || v.violation_number || '--'}
             </p>
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>{v.issued_date || 'N/A'}</span>
+            <div className="flex items-center justify-between text-xs text-gray-400 mt-2">
+              <span className="tabular-nums">{v.issued_date || '--'}</span>
               {v.penalty_amount ? (
-                <span className="font-mono font-medium text-orange-700">
+                <span className="font-mono font-medium text-gray-600">
                   ${v.penalty_amount.toLocaleString()}
                 </span>
               ) : null}
@@ -248,12 +249,12 @@ export function ViolationTable({ violations }: ViolationTableProps) {
       </div>
 
       {filtered.length === 0 && (
-        <div className="p-12 text-center">
-          <p className="text-gray-500 font-medium">No violations match your filters.</p>
+        <div className="px-5 py-16 text-center">
+          <p className="text-gray-400">No violations match your filters.</p>
           {hasActiveFilters && (
             <button
               onClick={() => { setStatusFilter('all'); setSourceFilter('all'); setSeverityFilter('all'); }}
-              className="mt-2 text-sm text-red-600 hover:text-red-800 font-medium"
+              className="mt-3 text-sm text-gray-500 hover:text-gray-700 font-medium transition-colors"
             >
               Clear all filters
             </button>

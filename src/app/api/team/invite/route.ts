@@ -31,23 +31,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Tenant not found' }, { status: 404 });
   }
 
-  // Check caller is owner or admin
-  const isOwner = true; // They own the tenant since user_id matches
-  // Also check if they're an admin via team_members
-  if (!isOwner) {
-    const { data: membership } = await supabase
-      .from('team_members')
-      .select('role')
-      .eq('tenant_id', tenant.id)
-      .eq('user_id', user.id)
-      .eq('status', 'accepted')
-      .in('role', ['owner', 'admin'])
-      .single();
-
-    if (!membership) {
-      return NextResponse.json({ error: 'Only owners and admins can invite' }, { status: 403 });
-    }
-  }
+  // Caller owns the tenant (user_id matched above), so they have owner-level access.
+  // If in the future team members can invite on behalf of a tenant they don't own,
+  // add an explicit team_members role check here.
 
   // Cannot invite yourself
   if (email.toLowerCase() === user.email?.toLowerCase()) {

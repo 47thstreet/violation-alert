@@ -25,9 +25,9 @@ const MAX_TOASTS = 3;
 const AUTO_DISMISS_MS = 4000;
 
 const typeStyles: Record<ToastType, string> = {
-  success: 'bg-green-600 text-white',
+  success: 'bg-gray-900 text-white',
   error: 'bg-red-600 text-white',
-  info: 'bg-blue-600 text-white',
+  info: 'bg-gray-900 text-white',
 };
 
 const typeIcons: Record<ToastType, string> = {
@@ -99,7 +99,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={t.id}
             className={`
-              flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[280px] max-w-sm
+              flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-lg min-w-[280px] max-w-sm
               ${typeStyles[t.type]}
               transition-all duration-200 ease-out
               ${t.removing

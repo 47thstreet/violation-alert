@@ -15,17 +15,17 @@ export function DashboardNav() {
   const isCrmPage = pathname.includes('/crm');
 
   return (
-    <nav className="hidden sm:flex gap-1">
+    <nav className="hidden sm:flex gap-0.5">
       {navItems.map(item => {
         const active = pathname.startsWith(item.href);
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
               active
-                ? 'bg-red-50 text-red-700'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-gray-100 text-gray-900 font-medium'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
           >
             {item.label}
@@ -33,7 +33,7 @@ export function DashboardNav() {
         );
       })}
       {isCrmPage && (
-        <span className="px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-700">
+        <span className="px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-900">
           CRM
         </span>
       )}

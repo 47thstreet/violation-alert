@@ -143,15 +143,15 @@ export function OnboardingWizard() {
   if (dismissed) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden">
         {/* Step indicator */}
-        <div className="flex justify-center gap-2 pt-6 pb-2">
+        <div className="flex justify-center gap-2 pt-8 pb-2">
           {[1, 2, 3, 4].map(s => (
             <div
               key={s}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                s === step ? 'w-8 bg-red-600' : s < step ? 'w-2 bg-red-300' : 'w-2 bg-gray-200'
+              className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
+                s === step ? 'w-8 bg-gray-900' : s < step ? 'w-2 bg-gray-400' : 'w-2 bg-gray-200'
               }`}
             />
           ))}
@@ -159,7 +159,7 @@ export function OnboardingWizard() {
 
         {/* Skip button (steps 1-2 only) */}
         {step <= 2 && (
-          <div className="flex justify-end px-6 pt-1">
+          <div className="flex justify-end px-8 pt-2">
             <button
               onClick={markComplete}
               className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
@@ -169,12 +169,12 @@ export function OnboardingWizard() {
           </div>
         )}
 
-        <div className="px-8 pb-8 pt-2">
+        <div className="px-8 sm:px-10 pb-10 pt-2">
           {/* ---- Step 1: Welcome ---- */}
           {step === 1 && (
             <div className="text-center space-y-5">
-              <div className="w-16 h-16 mx-auto bg-red-50 rounded-2xl flex items-center justify-center">
-                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-16 h-16 mx-auto bg-gray-100 rounded-2xl flex items-center justify-center">
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#1f2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="8" y="6" width="20" height="36" rx="2" />
                   <rect x="28" y="16" width="12" height="26" rx="2" />
                   <line x1="14" y1="12" x2="22" y2="12" />
@@ -198,7 +198,7 @@ export function OnboardingWizard() {
               </div>
               <button
                 onClick={() => setStep(2)}
-                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 active:scale-[0.98] transition-all w-full"
+                className="bg-gray-900 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all w-full"
               >
                 Get Started
               </button>
@@ -225,7 +225,7 @@ export function OnboardingWizard() {
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                     placeholder="123 Main Street, Brooklyn, NY"
-                    className="flex-1 px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none text-sm"
+                    className="flex-1 px-3.5 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none text-sm"
                     onKeyDown={e => e.key === 'Enter' && address.length >= 5 && handleResolve()}
                   />
                   <button
@@ -250,7 +250,7 @@ export function OnboardingWizard() {
                   <button
                     onClick={handleAddAndScan}
                     disabled={adding}
-                    className="bg-red-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-red-700 disabled:opacity-50 transition-colors w-full"
+                    className="bg-gray-900 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all w-full"
                   >
                     {adding ? 'Adding...' : 'Add & Scan'}
                   </button>
@@ -263,13 +263,13 @@ export function OnboardingWizard() {
           {step === 3 && (
             <div className="text-center space-y-6 py-4">
               <div className="relative w-16 h-16 mx-auto">
-                <div className="absolute inset-0 rounded-full border-4 border-red-100" />
-                <div className="absolute inset-0 rounded-full border-4 border-red-600 border-t-transparent animate-spin" />
+                <div className="absolute inset-0 rounded-full border-4 border-gray-100" />
+                <div className="absolute inset-0 rounded-full border-4 border-gray-900 border-t-transparent animate-spin" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-gray-900">Scanning 10+ NYC agencies for violations...</h2>
+                <h2 className="text-xl font-bold text-gray-900">Scanning 10+ NYC agencies...</h2>
                 <div className="mt-4 h-6 flex items-center justify-center">
-                  <p className="text-red-600 font-medium text-sm transition-opacity duration-300">
+                  <p className="text-gray-500 font-medium text-sm transition-opacity duration-300">
                     {AGENCIES[currentAgency]}
                   </p>
                 </div>
@@ -278,7 +278,7 @@ export function OnboardingWizard() {
                 {[0, 1, 2].map(i => (
                   <div
                     key={i}
-                    className="w-2 h-2 bg-red-400 rounded-full animate-bounce"
+                    className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
                     style={{ animationDelay: `${i * 0.15}s` }}
                   />
                 ))}
@@ -322,7 +322,7 @@ export function OnboardingWizard() {
               </div>
               <button
                 onClick={markComplete}
-                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 active:scale-[0.98] transition-all w-full"
+                className="bg-gray-900 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all w-full"
               >
                 Go to Dashboard
               </button>

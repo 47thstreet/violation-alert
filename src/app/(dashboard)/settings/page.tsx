@@ -113,14 +113,14 @@ export default function SettingsPage() {
           { label: 'Home', href: '/properties' },
           { label: 'Settings' },
         ]} />
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Settings</h1>
-        <p className="text-gray-600 text-sm">Manage your notification preferences and account.</p>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight mb-2">Settings</h1>
+        <p className="text-gray-400 text-sm">Manage your notification preferences and account.</p>
       </div>
 
       {/* Notification Preferences */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-        <h2 className="text-lg font-semibold mb-4">Notification Channels</h2>
-        <p className="text-sm text-gray-500 mb-4">
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
+        <h2 className="text-base font-semibold text-gray-900 mb-1">Notification Channels</h2>
+        <p className="text-sm text-gray-400 mb-6">
           Get notified when new violations are found on your properties.
         </p>
 
@@ -160,7 +160,7 @@ export default function SettingsPage() {
             <select
               value={channel}
               onChange={e => { setChannel(e.target.value as 'email' | 'sms' | 'whatsapp'); setDestError(''); }}
-              className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
             >
               <option value="email">Email</option>
               <option value="sms">SMS</option>
@@ -171,12 +171,12 @@ export default function SettingsPage() {
               value={destination}
               onChange={e => { setDestination(e.target.value); setDestError(''); }}
               placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
-              className={`flex-1 px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none min-h-[44px] ${destError ? 'border-red-500' : ''}`}
+              className={`flex-1 px-3.5 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-gray-900 outline-none min-h-[44px] ${destError ? 'border-red-500' : 'border-gray-200'}`}
             />
             <button
               type="submit"
               disabled={loading}
-              className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[44px]"
+              className="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[44px]"
             >
               Add
             </button>
@@ -188,47 +188,47 @@ export default function SettingsPage() {
       </div>
 
       {/* Billing */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-        <div className="flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
+        <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold">Billing</h2>
-            <p className="text-sm text-gray-500 mt-1">
-              Manage your subscription, upgrade your plan, or view billing details.
+            <h2 className="text-base font-semibold text-gray-900">Billing</h2>
+            <p className="text-sm text-gray-400 mt-1">
+              Manage your subscription and billing details.
             </p>
           </div>
           <Link
             href="/settings/billing"
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
+            className="border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors shrink-0"
           >
-            Manage Billing
+            Manage
           </Link>
         </div>
       </div>
 
       {/* Team */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-        <div className="flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
+        <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold">Team</h2>
-            <p className="text-sm text-gray-500 mt-1">
+            <h2 className="text-base font-semibold text-gray-900">Team</h2>
+            <p className="text-sm text-gray-400 mt-1">
               Invite collaborators to view or manage your properties.
             </p>
           </div>
           <Link
             href="/settings/team"
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
+            className="border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors shrink-0"
           >
-            Manage Team
+            Manage
           </Link>
         </div>
       </div>
 
       {/* Account */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-        <h2 className="text-lg font-semibold mb-4">Account</h2>
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
+        <h2 className="text-base font-semibold text-gray-900 mb-5">Account</h2>
         <button
           onClick={handleLogout}
-          className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200"
+          className="text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors"
         >
           Sign out
         </button>

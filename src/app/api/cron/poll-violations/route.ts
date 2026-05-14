@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { fetchAllViolations } from '@/lib/nyc-api';
-import type { ViolationSource } from '@/lib/supabase/types';
+import { batchUpsertViolations, markPropertyPolled } from '@/lib/violations/upsert';
 
 export const maxDuration = 300; // 5 min max for Vercel Pro
 
@@ -44,24 +44,14 @@ export async function GET(req: NextRequest) {
         results.errors.push(`${property.address} [${ae.agency}]: ${ae.error}`);
       }
 
-      // Upsert violations (skip duplicates via source+source_id unique constraint)
-      for (const v of normalizedViolations) {
-        const { error: upsertError } = await supabase
-          .from('violations')
-          .upsert(
-            { property_id: property.id, ...v, source: v.source as ViolationSource },
-            { onConflict: 'source,source_id', ignoreDuplicates: true }
-          );
+      // Batch-upsert violations (replaces sequential one-at-a-time inserts)
+      const { upserted, errors: upsertErrors } = await batchUpsertViolations(
+        supabase, property.id, normalizedViolations
+      );
+      results.newViolations += upserted;
+      results.errors.push(...upsertErrors);
 
-        if (!upsertError) results.newViolations++;
-      }
-
-      // Update last_polled_at
-      await supabase
-        .from('properties')
-        .update({ last_polled_at: new Date().toISOString() })
-        .eq('id', property.id);
-
+      await markPropertyPolled(supabase, property.id);
       results.polled++;
     } catch (err) {
       results.errors.push(`${property.address}: ${err instanceof Error ? err.message : String(err)}`);

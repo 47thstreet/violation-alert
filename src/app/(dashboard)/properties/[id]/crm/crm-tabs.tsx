@@ -28,17 +28,17 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
   const [activeTab, setActiveTab] = useState<TabId>('details');
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
-      <div className="border-b">
-        <nav className="flex gap-0 overflow-x-auto -mb-px">
+    <div className="bg-white rounded-2xl border border-gray-100">
+      <div className="border-b border-gray-100">
+        <nav className="flex gap-0 overflow-x-auto -mb-px px-1">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 sm:px-5 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap min-h-[48px] ${
+              className={`px-5 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap min-h-[48px] ${
                 activeTab === tab.id
-                  ? 'border-red-600 text-red-700'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-gray-900 text-gray-900'
+                  : 'border-transparent text-gray-400 hover:text-gray-600'
               }`}
             >
               {tab.label}
@@ -47,7 +47,7 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
         </nav>
       </div>
 
-      <div className="p-4 sm:p-6">
+      <div className="p-5 sm:p-8">
         {activeTab === 'details' && (
           <BuildingDetailsForm propertyId={propertyId} tenantId={tenantId} details={buildingDetails} />
         )}

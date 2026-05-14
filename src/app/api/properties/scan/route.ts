@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { createServiceClient } from '@/lib/supabase/server';
+import { createServerSupabaseClient, createServiceClient } from '@/lib/supabase/server';
 import { fetchAllViolations } from '@/lib/nyc-api';
-import type { ViolationSource } from '@/lib/supabase/types';
+import { batchUpsertViolations, markPropertyPolled } from '@/lib/violations/upsert';
 
 export const maxDuration = 120; // 2 min max for on-demand scan
 
@@ -60,31 +59,20 @@ export async function POST(req: NextRequest) {
       errors.push(`[${ae.agency}]: ${ae.error}`);
     }
 
-    // Upsert violations (same pattern as cron route)
-    let upsertedCount = 0;
-    for (const v of normalizedViolations) {
-      const { error: upsertError } = await serviceClient
-        .from('violations')
-        .upsert(
-          { property_id: property.id, ...v, source: v.source as ViolationSource },
-          { onConflict: 'source,source_id', ignoreDuplicates: true }
-        );
+    // Batch-upsert violations (shared utility)
+    const { upserted, errors: upsertErrors } = await batchUpsertViolations(
+      serviceClient, property.id, normalizedViolations
+    );
+    errors.push(...upsertErrors);
 
-      if (!upsertError) upsertedCount++;
-      else errors.push(`Upsert error: ${upsertError.message}`);
-    }
-
-    // Update last_polled_at
-    await serviceClient
-      .from('properties')
-      .update({ last_polled_at: new Date().toISOString() })
-      .eq('id', property.id);
+    await markPropertyPolled(serviceClient, property.id);
 
     // Count unique agencies that returned violations
     const agencies = new Set(normalizedViolations.map(v => v.source));
 
     return NextResponse.json({
       violations_found: normalizedViolations.length,
+      upserted_count: upserted,
       agencies_count: agencies.size,
       errors,
     });

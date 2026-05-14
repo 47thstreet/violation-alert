@@ -88,13 +88,13 @@ export default function MarketplacePage() {
         { label: 'Home', href: '/properties' },
         { label: 'Marketplace' },
       ]} />
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Contractor Marketplace</h1>
-      <p className="text-gray-600 text-sm mb-6">
+      <h1 className="text-2xl font-bold text-gray-900 tracking-tight mb-1">Contractor Marketplace</h1>
+      <p className="text-gray-400 text-sm mb-8">
         Find verified contractors to help resolve your building violations.
       </p>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-6">
+      <div className="bg-white rounded-2xl border border-gray-100 p-5 mb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Search */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -103,7 +103,7 @@ export default function MarketplacePage() {
               placeholder="Search by name or company..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent min-h-[44px]"
+              className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function MarketplacePage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
           >
             <option value="">All violation types</option>
             {violationTypes.map((t) => (
@@ -125,7 +125,7 @@ export default function MarketplacePage() {
           <select
             value={boroughFilter}
             onChange={(e) => setBoroughFilter(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
           >
             <option value="">All boroughs</option>
             {BOROUGHS.map((b) => (
@@ -139,7 +139,7 @@ export default function MarketplacePage() {
           <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
+            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 min-h-[44px]"
           >
             {RATINGS.map((r) => (
               <option key={r.value} value={r.value}>
@@ -151,8 +151,7 @@ export default function MarketplacePage() {
 
         {/* Active filters */}
         {(typeFilter || boroughFilter || ratingFilter > 0 || search) && (
-          <div className="flex items-center gap-2 mt-3 pt-3 border-t">
-            <span className="text-xs text-gray-500">Active filters:</span>
+          <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-100">
             {typeFilter && (
               <FilterTag label={typeFilter} onRemove={() => setTypeFilter('')} />
             )}
@@ -172,7 +171,7 @@ export default function MarketplacePage() {
                 setRatingFilter(0);
                 setSearch('');
               }}
-              className="text-xs text-red-600 hover:text-red-700 ml-2"
+              className="text-xs text-gray-400 hover:text-gray-600 ml-1 transition-colors"
             >
               Clear all
             </button>
@@ -187,10 +186,10 @@ export default function MarketplacePage() {
         </div>
       ) : contractors.length > 0 ? (
         <>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-gray-400 mb-5">
             {contractors.length} contractor{contractors.length !== 1 ? 's' : ''} found
           </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {contractors.map((contractor) => (
               <ContractorCard key={contractor.id} contractor={contractor} />
             ))}
@@ -209,9 +208,9 @@ export default function MarketplacePage() {
 
 function FilterTag({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
-    <span className="inline-flex items-center gap-1 bg-red-50 text-red-700 text-xs px-2 py-1 rounded-full">
+    <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full">
       {label}
-      <button onClick={onRemove} className="hover:text-red-900">
+      <button onClick={onRemove} className="hover:text-gray-900 transition-colors">
         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
