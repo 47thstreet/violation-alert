@@ -151,7 +151,7 @@ export function OnboardingWizard() {
             <div
               key={s}
               className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
-                s === step ? 'w-8 bg-gray-900' : s < step ? 'w-2 bg-gray-400' : 'w-2 bg-gray-200'
+                s === step ? 'w-8 bg-indigo-600' : s < step ? 'w-2 bg-indigo-400' : 'w-2 bg-gray-200'
               }`}
             />
           ))}
@@ -173,8 +173,8 @@ export function OnboardingWizard() {
           {/* ---- Step 1: Welcome ---- */}
           {step === 1 && (
             <div className="text-center space-y-5">
-              <div className="w-16 h-16 mx-auto bg-gray-100 rounded-2xl flex items-center justify-center">
-                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#1f2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-16 h-16 mx-auto bg-indigo-50 rounded-2xl flex items-center justify-center">
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#4F46E5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="8" y="6" width="20" height="36" rx="2" />
                   <rect x="28" y="16" width="12" height="26" rx="2" />
                   <line x1="14" y1="12" x2="22" y2="12" />
@@ -198,7 +198,7 @@ export function OnboardingWizard() {
               </div>
               <button
                 onClick={() => setStep(2)}
-                className="bg-gray-900 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all w-full"
+                className="bg-indigo-600 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 w-full btn-press"
               >
                 Get Started
               </button>
@@ -225,13 +225,13 @@ export function OnboardingWizard() {
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                     placeholder="123 Main Street, Brooklyn, NY"
-                    className="flex-1 px-3.5 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none text-sm"
+                    className="flex-1 px-3.5 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm"
                     onKeyDown={e => e.key === 'Enter' && address.length >= 5 && handleResolve()}
                   />
                   <button
                     onClick={handleResolve}
                     disabled={resolving || address.length < 5}
-                    className="bg-gray-900 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors whitespace-nowrap text-sm"
+                    className="bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 transition-all duration-200 whitespace-nowrap text-sm"
                   >
                     {resolving ? 'Looking up...' : 'Look up'}
                   </button>
@@ -250,7 +250,7 @@ export function OnboardingWizard() {
                   <button
                     onClick={handleAddAndScan}
                     disabled={adding}
-                    className="bg-gray-900 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all w-full"
+                    className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all duration-200 w-full btn-press"
                   >
                     {adding ? 'Adding...' : 'Add & Scan'}
                   </button>
@@ -263,8 +263,8 @@ export function OnboardingWizard() {
           {step === 3 && (
             <div className="text-center space-y-6 py-4">
               <div className="relative w-16 h-16 mx-auto">
-                <div className="absolute inset-0 rounded-full border-4 border-gray-100" />
-                <div className="absolute inset-0 rounded-full border-4 border-gray-900 border-t-transparent animate-spin" />
+                <div className="absolute inset-0 rounded-full border-4 border-indigo-100" />
+                <div className="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin" style={{ filter: 'drop-shadow(0 0 6px rgba(79, 70, 229, 0.3))' }} />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-gray-900">Scanning 10+ NYC agencies...</h2>
@@ -278,7 +278,7 @@ export function OnboardingWizard() {
                 {[0, 1, 2].map(i => (
                   <div
                     key={i}
-                    className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                    className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
                     style={{ animationDelay: `${i * 0.15}s` }}
                   />
                 ))}
@@ -322,7 +322,7 @@ export function OnboardingWizard() {
               </div>
               <button
                 onClick={markComplete}
-                className="bg-gray-900 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all w-full"
+                className="bg-indigo-600 text-white px-8 py-3.5 rounded-2xl font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 w-full btn-press"
               >
                 Go to Dashboard
               </button>

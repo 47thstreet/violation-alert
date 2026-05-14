@@ -86,7 +86,7 @@ export default async function PropertiesPage() {
         {canAdd ? (
           <Link
             href="/properties/new"
-            className="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all min-h-[44px] flex items-center shrink-0 text-sm"
+            className="bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 min-h-[44px] flex items-center shrink-0 text-sm btn-press"
           >
             <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -106,31 +106,31 @@ export default async function PropertiesPage() {
       {/* Summary Widgets */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {/* Total Properties */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Properties</p>
-          <p className="text-3xl font-bold text-gray-900 mt-2 tabular-nums">{totalProperties}</p>
+        <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl border border-indigo-100/60 p-5 shadow-sm">
+          <p className="text-xs font-medium text-indigo-500 uppercase tracking-wide">Properties</p>
+          <p className="text-3xl font-bold text-indigo-700 mt-2 tabular-nums">{totalProperties}</p>
         </div>
 
         {/* Active Violations */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Active Violations</p>
-          <p className={`text-3xl font-bold mt-2 tabular-nums ${totalViolations > 0 ? 'text-red-600' : 'text-gray-900'}`}>
+        <div className={`bg-gradient-to-br rounded-2xl border p-5 shadow-sm ${totalViolations > 0 ? 'from-amber-50 to-white border-amber-100/60' : 'from-emerald-50 to-white border-emerald-100/60'}`}>
+          <p className={`text-xs font-medium uppercase tracking-wide ${totalViolations > 0 ? 'text-amber-600' : 'text-emerald-500'}`}>Active Violations</p>
+          <p className={`text-3xl font-bold mt-2 tabular-nums ${totalViolations > 0 ? 'text-amber-700 pulse-badge' : 'text-emerald-600'}`}>
             {totalViolations}
           </p>
         </div>
 
         {/* Pending Resolutions */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Pending</p>
-          <p className={`text-3xl font-bold mt-2 tabular-nums ${pendingResolutions > 0 ? 'text-amber-600' : 'text-gray-900'}`}>
+        <div className={`bg-gradient-to-br rounded-2xl border p-5 shadow-sm ${pendingResolutions > 0 ? 'from-red-50 to-white border-red-100/60' : 'from-emerald-50 to-white border-emerald-100/60'}`}>
+          <p className={`text-xs font-medium uppercase tracking-wide ${pendingResolutions > 0 ? 'text-red-500' : 'text-emerald-500'}`}>Pending</p>
+          <p className={`text-3xl font-bold mt-2 tabular-nums ${pendingResolutions > 0 ? 'text-red-600' : 'text-emerald-600'}`}>
             {pendingResolutions}
           </p>
         </div>
 
         {/* Last Scan */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Last Scan</p>
-          <p className="text-lg font-semibold text-gray-900 mt-2 truncate">
+        <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100/60 p-5 shadow-sm">
+          <p className="text-xs font-medium text-blue-500 uppercase tracking-wide">Last Scan</p>
+          <p className="text-lg font-semibold text-blue-700 mt-2 truncate">
             {lastScan ? lastScanLabel : 'Never'}
           </p>
         </div>

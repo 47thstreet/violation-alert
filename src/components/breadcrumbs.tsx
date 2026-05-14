@@ -36,7 +36,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             <li key={i} className="flex items-center gap-1.5">
               {i > 0 && <ChevronSeparator />}
               {isLast || !item.href ? (
-                <span className="font-medium text-gray-900">{item.label}</span>
+                <span className="font-medium text-indigo-700">{item.label}</span>
               ) : (
                 <Link href={item.href} className="text-gray-400 hover:text-gray-600 transition-colors">
                   {item.label}

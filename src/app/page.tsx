@@ -162,7 +162,7 @@ function StarIcon() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFAF9]">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -170,16 +170,19 @@ export default function Home() {
       />
 
       {/* Header */}
-      <header className="border-b sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+      <header className="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-200/60 shadow-[0_1px_3px_rgb(0,0,0,0.04)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
           <span className="text-xl font-bold text-gray-900">
-            Violation<span className="text-red-600">Alert</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-7 h-7 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">VA</span>
+              Violation<span className="text-indigo-600">Alert</span>
+            </span>
           </span>
           <div className="flex gap-3 items-center">
-            <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2">
+            <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors">
               Sign in
             </Link>
-            <Link href="/signup" className="text-sm bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all">
+            <Link href="/signup" className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 btn-press">
               Get started
             </Link>
           </div>
@@ -187,28 +190,32 @@ export default function Home() {
       </header>
 
       {/* ===== 1. HERO ===== */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
-        <div className="inline-block bg-red-50 text-red-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          Now watching 10+ NYC agencies
+      <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50/80 via-white to-[#FAFAF9]">
+        {/* Animated gradient orb */}
+        <div className="absolute top-1/3 left-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-200/40 to-violet-200/30 blur-3xl animate-orb pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+          <div className="inline-block bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-indigo-100">
+            Now watching 10+ NYC agencies
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight max-w-4xl mx-auto">
+            Your buildings,{' '}
+            <span className="text-indigo-600">protected.</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+            While you sleep, we&apos;re watching every agency in New York City.
+            DOB. HPD. FDNY. ECB. All of them. When something hits your building,
+            you&apos;ll know &mdash; with a plan to fix it.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+            <Link href="/signup" className="bg-indigo-600 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 btn-press">
+              Protect your first property
+            </Link>
+            <a href="#how-it-works" className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-gray-50 hover:border-gray-400 active:scale-[0.97] transition-all duration-200 btn-press">
+              See how it works
+            </a>
+          </div>
+          <p className="text-sm text-gray-500 mt-4">Free for 3 properties. No credit card. No time limit.</p>
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight max-w-4xl mx-auto">
-          Your buildings,{' '}
-          <span className="text-red-600">protected.</span>
-        </h1>
-        <p className="text-lg sm:text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
-          While you sleep, we&apos;re watching every agency in New York City.
-          DOB. HPD. FDNY. ECB. All of them. When something hits your building,
-          you&apos;ll know &mdash; with a plan to fix it.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-          <Link href="/signup" className="bg-red-600 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all shadow-sm">
-            Protect your first property
-          </Link>
-          <a href="#how-it-works" className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-gray-50 active:scale-[0.98] transition-all">
-            See how it works
-          </a>
-        </div>
-        <p className="text-sm text-gray-500 mt-4">Free for 3 properties. No credit card. No time limit.</p>
       </section>
 
       {/* ===== 2. PROBLEM / PAIN ===== */}
@@ -233,7 +240,7 @@ export default function Home() {
               { stat: '3x', label: 'More tenant lawsuits when violations sit unresolved' },
             ].map((item) => (
               <div key={item.stat} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-red-500 mb-2">{item.stat}</div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-2">{item.stat}</div>
                 <p className="text-sm text-gray-400">{item.label}</p>
               </div>
             ))}
@@ -254,9 +261,9 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Monitor */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-red-200 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-5">
-                <svg className="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 card-hover">
+              <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
+                <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
                 </svg>
               </div>
@@ -273,9 +280,9 @@ export default function Home() {
               </ul>
             </div>
             {/* Resolve */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-red-200 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-5">
-                <svg className="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 card-hover">
+              <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
+                <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
               </div>
@@ -292,9 +299,9 @@ export default function Home() {
               </ul>
             </div>
             {/* Connect */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-red-200 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-5">
-                <svg className="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 card-hover">
+              <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
+                <svg className="w-7 h-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                 </svg>
               </div>
@@ -333,10 +340,10 @@ export default function Home() {
                 <Link
                   key={agency.abbr}
                   href={href}
-                  className="bg-white rounded-xl p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all text-center group"
+                  className="bg-white rounded-xl p-5 border border-gray-200 hover:border-indigo-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center group card-hover"
                 >
                   <div className="text-3xl mb-2">{agency.icon}</div>
-                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-red-600 transition-colors">{agency.abbr}</h3>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-indigo-600 transition-colors">{agency.abbr}</h3>
                   <p className="text-xs text-gray-500 mt-1 leading-snug">{agency.desc}</p>
                 </Link>
               );
@@ -365,7 +372,7 @@ export default function Home() {
               <thead>
                 <tr className="border-b-2 border-gray-200">
                   <th className="py-4 px-4 text-sm font-medium text-gray-500 w-48">Feature</th>
-                  <th className="py-4 px-4 text-sm font-bold text-red-600 bg-red-50 rounded-t-lg">ViolationAlert</th>
+                  <th className="py-4 px-4 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-t-lg">ViolationAlert</th>
                   <th className="py-4 px-4 text-sm font-medium text-gray-500">DOB Alerts</th>
                   <th className="py-4 px-4 text-sm font-medium text-gray-500">ViolationWatch</th>
                   <th className="py-4 px-4 text-sm font-medium text-gray-500">DOBGuard</th>
@@ -375,7 +382,7 @@ export default function Home() {
                 {COMPARISON.map((row, i) => (
                   <tr key={row.feature} className={i % 2 === 0 ? 'bg-gray-50' : ''}>
                     <td className="py-3.5 px-4 text-sm font-medium text-gray-700">{row.feature}</td>
-                    <td className="py-3.5 px-4 text-sm font-semibold text-gray-900 bg-red-50">{row.us}</td>
+                    <td className="py-3.5 px-4 text-sm font-semibold text-gray-900 bg-indigo-50">{row.us}</td>
                     <td className="py-3.5 px-4 text-sm text-gray-500">{row.dob}</td>
                     <td className="py-3.5 px-4 text-sm text-gray-500">{row.vwatch}</td>
                     <td className="py-3.5 px-4 text-sm text-gray-500">{row.dguard}</td>
@@ -390,8 +397,8 @@ export default function Home() {
               <div key={row.feature} className="bg-white rounded-xl border p-4">
                 <div className="font-medium text-gray-700 text-sm mb-3">{row.feature}</div>
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="bg-red-50 rounded-lg p-2">
-                    <div className="text-xs text-red-600 font-medium">ViolationAlert</div>
+                  <div className="bg-indigo-50 rounded-lg p-2">
+                    <div className="text-xs text-indigo-600 font-medium">ViolationAlert</div>
                     <div className="font-semibold text-gray-900">{row.us}</div>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-2">
@@ -445,7 +452,7 @@ export default function Home() {
             ].map((item) => (
               <div key={item.step} className="relative">
                 <div className="bg-white rounded-xl p-7 border border-gray-100 shadow-sm h-full">
-                  <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center mb-4">
                     <span className="text-white text-sm font-bold">{item.step}</span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -529,8 +536,8 @@ export default function Home() {
               </Link>
             </div>
             {/* Pro */}
-            <div className="bg-white rounded-2xl border-2 border-red-600 p-8 text-left relative flex flex-col shadow-lg shadow-red-100">
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs px-4 py-1 rounded-full font-medium">
+            <div className="bg-white rounded-2xl border-2 border-indigo-600 p-8 text-left relative flex flex-col shadow-xl shadow-indigo-100/60 ring-1 ring-indigo-100">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs px-4 py-1 rounded-full font-medium">
                 Most popular
               </span>
               <h3 className="font-semibold text-lg text-gray-900">Pro</h3>
@@ -545,7 +552,7 @@ export default function Home() {
                 <li className="flex items-center gap-2"><CheckIcon /> Contractor matching</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Priority support</li>
               </ul>
-              <Link href="/signup" className="mt-8 block text-center bg-red-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all">
+              <Link href="/signup" className="mt-8 block text-center bg-indigo-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.97] transition-all duration-200 btn-press">
                 Try Pro free for 14 days
               </Link>
             </div>
@@ -594,24 +601,24 @@ export default function Home() {
       </section>
 
       {/* ===== 10. FINAL CTA ===== */}
-      <section className="bg-red-600 py-16 sm:py-20">
+      <section className="bg-gradient-to-br from-indigo-600 to-indigo-700 py-16 sm:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white">
             Know before they knock.
           </h2>
-          <p className="text-red-100 text-lg mt-4 max-w-xl mx-auto">
+          <p className="text-indigo-100 text-lg mt-4 max-w-xl mx-auto">
             Your first three properties are free. No credit card.
             No time limit. Just protection.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-            <Link href="/signup" className="bg-white text-red-600 px-8 py-3.5 rounded-lg text-lg font-semibold hover:bg-red-50 active:scale-[0.98] transition-all">
+            <Link href="/signup" className="bg-white text-indigo-700 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl active:scale-[0.97] transition-all duration-200 btn-press">
               Protect your first property
             </Link>
-            <a href="mailto:sales@violationalert.com" className="border border-white/50 text-white px-8 py-3.5 rounded-lg text-lg font-medium hover:bg-white/10 transition-colors">
+            <a href="mailto:sales@violationalert.com" className="border border-white/40 text-white px-8 py-3.5 rounded-xl text-lg font-medium hover:bg-white/10 active:scale-[0.97] transition-all duration-200 btn-press">
               Talk to sales
             </a>
           </div>
-          <p className="text-red-100 text-sm mt-4">30 seconds to set up. Watching your building by tonight.</p>
+          <p className="text-indigo-200 text-sm mt-4">30 seconds to set up. Watching your building by tonight.</p>
         </div>
       </section>
 
@@ -620,7 +627,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <span className="text-sm font-semibold text-white">
-              Violation<span className="text-red-500">Alert</span>
+              Violation<span className="text-indigo-400">Alert</span>
             </span>
             <p className="text-sm">Built in Brooklyn. Protecting buildings across all 5 boroughs.</p>
             <div className="flex gap-6 text-sm">

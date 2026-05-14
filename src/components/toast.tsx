@@ -25,9 +25,9 @@ const MAX_TOASTS = 3;
 const AUTO_DISMISS_MS = 4000;
 
 const typeStyles: Record<ToastType, string> = {
-  success: 'bg-gray-900 text-white',
-  error: 'bg-red-600 text-white',
-  info: 'bg-gray-900 text-white',
+  success: 'bg-emerald-600 text-white shadow-emerald-200/40',
+  error: 'bg-red-600 text-white shadow-red-200/40',
+  info: 'bg-indigo-600 text-white shadow-indigo-200/40',
 };
 
 const typeIcons: Record<ToastType, string> = {
@@ -124,29 +124,21 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {/* Inline keyframes for slide-in animation */}
       <style>{`
         @keyframes slide-in {
-          from {
+          0% {
             opacity: 0;
-            transform: translateX(1rem);
+            transform: translateY(0.75rem) scale(0.97);
           }
-          to {
+          70% {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(-2px) scale(1.01);
           }
-        }
-        @media (max-width: 639px) {
-          @keyframes slide-in {
-            from {
-              opacity: 0;
-              transform: translateY(1rem);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
           }
         }
         .animate-slide-in {
-          animation: slide-in 0.2s ease-out;
+          animation: slide-in 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
       `}</style>
     </ToastContext.Provider>

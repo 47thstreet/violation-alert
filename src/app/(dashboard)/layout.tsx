@@ -26,13 +26,14 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .single();
 
   return (
-    <div className="min-h-screen bg-[#f8f8fa]">
-      <header className="bg-white/95 backdrop-blur-md border-b border-gray-200/60 sticky top-0 z-10">
+    <div className="min-h-screen bg-[#FAFAF9]">
+      <header className="bg-white/95 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200/40 shadow-[0_1px_3px_rgb(0,0,0,0.04)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-5 sm:gap-8">
-              <Link href="/properties" className="text-xl font-bold text-gray-900 shrink-0 tracking-tight">
-                Violation<span className="text-red-600">Alert</span>
+              <Link href="/properties" className="text-xl font-bold text-gray-900 shrink-0 tracking-tight flex items-center gap-1.5">
+                <span className="w-7 h-7 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">VA</span>
+                Violation<span className="text-indigo-600">Alert</span>
               </Link>
               <DashboardNav />
             </div>
@@ -42,7 +43,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
               </div>
               <span className="text-sm text-gray-500 truncate hidden sm:inline max-w-[180px]">{tenant?.org_name || user.email}</span>
               <span className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize shrink-0 ${
-                tenant?.tier === 'pro' ? 'bg-red-50 text-red-700' : 'bg-gray-100 text-gray-600'
+                tenant?.tier === 'pro' ? 'bg-indigo-50 text-indigo-700' : 'bg-gray-100 text-gray-600'
               }`}>
                 {tenant?.tier || 'free'}
               </span>

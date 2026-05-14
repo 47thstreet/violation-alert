@@ -100,8 +100,8 @@ export function ViolationTable({ violations }: ViolationTableProps) {
                 onClick={() => setStatusFilter(f)}
                 className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all min-h-[36px] ${
                   statusFilter === f
-                    ? 'bg-gray-900 text-white shadow-sm'
-                    : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200'
+                    : 'bg-gray-100 text-gray-500 hover:bg-indigo-50 hover:text-indigo-600'
                 }`}
               >
                 {f === 'all' ? 'All' : f === 'open' ? 'Open' : 'Closed'}
@@ -120,7 +120,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
           <select
             value={sourceFilter}
             onChange={e => setSourceFilter(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           >
             <option value="all">All Agencies</option>
             {sources.map(s => (
@@ -131,7 +131,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
           <select
             value={severityFilter}
             onChange={e => setSeverityFilter(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           >
             <option value="all">All Severity</option>
             <option value="critical">Critical</option>
@@ -147,7 +147,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
               setSortBy(col);
               setSortDir(dir);
             }}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 min-h-[36px] bg-white text-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           >
             <option value="date-desc">Newest First</option>
             <option value="date-asc">Oldest First</option>
@@ -190,7 +190,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
           </thead>
           <tbody className="divide-y divide-gray-50">
             {filtered.map(v => (
-              <tr key={v.id} className="hover:bg-gray-50/50 cursor-pointer transition-colors group" onClick={() => router.push(`/violations/${v.id}`)}>
+              <tr key={v.id} className="hover:bg-indigo-50/30 cursor-pointer transition-all duration-150 group border-l-2 border-l-transparent hover:border-l-indigo-500" onClick={() => router.push(`/violations/${v.id}`)}>
                 <td className="px-5 py-3.5">
                   <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     {v.source}
@@ -269,8 +269,8 @@ function StatusBadge({ status }: { status: string | null }) {
   const normalized = normalizeStatus(status);
   const isOpen = normalized === 'open';
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-      isOpen ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
+    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors ${
+      isOpen ? 'bg-red-100 text-red-700 shadow-sm shadow-red-200/50' : 'bg-emerald-100 text-emerald-700'
     }`}>
       {isOpen ? 'Open' : 'Closed'}
     </span>
@@ -281,16 +281,16 @@ function SeverityBadge({ severity }: { severity: string | null }) {
   const { label } = normalizeSeverity(severity);
 
   const colors: Record<string, string> = {
-    'Critical': 'bg-red-100 text-red-700',
-    'Hazardous': 'bg-orange-100 text-orange-700',
+    'Critical': 'bg-red-600 text-white font-bold shadow-sm shadow-red-300',
+    'Hazardous': 'bg-amber-100 text-amber-800 font-semibold',
     'Minor': 'bg-yellow-100 text-yellow-800',
-    'Active': 'bg-red-100 text-red-700',
+    'Active': 'bg-red-100 text-red-700 font-semibold',
     'Info': 'bg-blue-100 text-blue-700',
     'Unknown': 'bg-gray-100 text-gray-600',
   };
 
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[label] || colors['Unknown']}`}>
+    <span className={`text-xs px-2.5 py-0.5 rounded-full ${colors[label] || colors['Unknown']}`}>
       {label}
     </span>
   );

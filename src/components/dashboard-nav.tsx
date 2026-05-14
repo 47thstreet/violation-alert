@@ -22,10 +22,10 @@ export function DashboardNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-sm transition-all duration-200 ${
               active
-                ? 'bg-gray-100 text-gray-900 font-medium'
-                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                ? 'bg-indigo-50 text-indigo-700 font-medium'
+                : 'text-gray-500 hover:text-indigo-600 hover:bg-indigo-50/50'
             }`}
           >
             {item.label}
@@ -33,7 +33,7 @@ export function DashboardNav() {
         );
       })}
       {isCrmPage && (
-        <span className="px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-900">
+        <span className="px-3 py-1.5 rounded-lg text-sm font-medium bg-indigo-50 text-indigo-700">
           CRM
         </span>
       )}

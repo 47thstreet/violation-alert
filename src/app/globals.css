@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #FAFAF9;
   --foreground: #171717;
+
+  /* Brand palette */
+  --brand-primary: #4F46E5;
+  --brand-primary-light: #6366F1;
+  --brand-primary-dark: #4338CA;
+  --brand-primary-50: #EEF2FF;
+  --brand-primary-100: #E0E7FF;
+
+  --brand-accent: #F59E0B;
+  --brand-accent-light: #FBBF24;
+  --brand-accent-50: #FFFBEB;
+
+  --brand-success: #10B981;
+  --brand-success-light: #34D399;
+  --brand-success-50: #ECFDF5;
+
+  --brand-danger: #EF4444;
+  --brand-danger-light: #F87171;
+  --brand-danger-50: #FEF2F2;
+
+  --brand-info: #3B82F6;
+  --brand-info-50: #EFF6FF;
+
+  /* Surfaces */
+  --surface-bg: #FAFAF9;
+  --surface-card: #FFFFFF;
+  --surface-elevated: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --surface-hover: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+
+  /* Easing curves (from Emil Kowalski's philosophy) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @theme inline {
@@ -23,4 +55,96 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Global micro-interactions ===== */
+@media (hover: hover) and (pointer: fine) {
+  .card-hover {
+    transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out), border-color 200ms ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--surface-hover);
+  }
+}
+
+/* Button press feedback */
+.btn-press {
+  transition: transform 160ms var(--ease-out), box-shadow 200ms ease, background-color 200ms ease;
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Pulse animation for active violation counts */
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.pulse-badge {
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+/* Status dot pulse */
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+.dot-pulse {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+/* Stagger fade-in for cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 400ms var(--ease-out) both;
+}
+
+/* Gradient orb glow */
+@keyframes orb-float {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+}
+.animate-orb {
+  animation: orb-float 6s ease-in-out infinite;
+}
+
+/* Scroll-triggered fade in */
+@keyframes scrollFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-orb,
+  .pulse-badge,
+  .dot-pulse {
+    animation: none;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
 }
