@@ -198,7 +198,7 @@ export function OnboardingWizard() {
               </div>
               <button
                 onClick={() => setStep(2)}
-                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-full"
+                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 active:scale-[0.98] transition-all w-full"
               >
                 Get Started
               </button>
@@ -316,13 +316,13 @@ export function OnboardingWizard() {
                     )}
                   </p>
                 </div>
-                <p className="text-gray-400 text-sm mt-4">
+                <p className="text-gray-500 text-sm mt-4">
                   We&apos;ll scan daily and alert you to new violations.
                 </p>
               </div>
               <button
                 onClick={markComplete}
-                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-full"
+                className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 active:scale-[0.98] transition-all w-full"
               >
                 Go to Dashboard
               </button>

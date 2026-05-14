@@ -55,7 +55,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Hire a Pro</h2>
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400" />
@@ -67,7 +67,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
 
   if (contractors.length === 0) {
     return (
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Hire a Pro</h2>
         <p className="text-sm text-gray-500 mb-3">
           No contractors found for this violation type yet.
@@ -99,7 +99,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
           <Link
             key={contractor.id}
             href={`/marketplace/${contractor.id}`}
-            className="border rounded-lg p-4 hover:shadow-sm transition-shadow"
+            className="border border-gray-100 rounded-lg p-4 hover:shadow-md transition-all"
           >
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">

@@ -28,7 +28,7 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
   const [activeTab, setActiveTab] = useState<TabId>('details');
 
   return (
-    <div className="bg-white rounded-xl border">
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
       <div className="border-b">
         <nav className="flex gap-0 overflow-x-auto -mb-px">
           {tabs.map(tab => (

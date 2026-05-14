@@ -115,7 +115,7 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
           </div>
         ))}
         {notes.length === 0 && (
-          <p className="text-center text-gray-400 py-8 text-sm">No notes yet. Add one above.</p>
+          <p className="text-center text-gray-500 py-8 text-sm">No notes yet. Add one above.</p>
         )}
       </div>
     </div>

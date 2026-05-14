@@ -160,7 +160,7 @@ export default function SettingsPage() {
             <select
               value={channel}
               onChange={e => { setChannel(e.target.value as 'email' | 'sms' | 'whatsapp'); setDestError(''); }}
-              className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px]"
+              className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
             >
               <option value="email">Email</option>
               <option value="sms">SMS</option>
@@ -198,7 +198,7 @@ export default function SettingsPage() {
           </div>
           <Link
             href="/settings/billing"
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
           >
             Manage Billing
           </Link>
@@ -216,7 +216,7 @@ export default function SettingsPage() {
           </div>
           <Link
             href="/settings/team"
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
           >
             Manage Team
           </Link>

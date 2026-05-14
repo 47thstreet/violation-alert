@@ -204,14 +204,14 @@ export function GlobalSearch() {
       {open && query.trim() && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-xl shadow-lg z-50 overflow-hidden max-h-[400px] overflow-y-auto">
           {loading ? (
-            <div className="p-4 text-center text-sm text-gray-400">Searching...</div>
+            <div className="p-4 text-center text-sm text-gray-500">Searching...</div>
           ) : results.length === 0 ? (
-            <div className="p-4 text-center text-sm text-gray-400">No results found</div>
+            <div className="p-4 text-center text-sm text-gray-500">No results found</div>
           ) : (
             <>
               {propertyResults.length > 0 && (
                 <div>
-                  <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50">
+                  <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50">
                     Properties
                   </div>
                   {propertyResults.map(result => {
@@ -233,7 +233,7 @@ export function GlobalSearch() {
                         </svg>
                         <div className="min-w-0">
                           <div className="font-medium truncate">{result.title}</div>
-                          <div className="text-xs text-gray-400 truncate">{result.subtitle}</div>
+                          <div className="text-xs text-gray-500 truncate">{result.subtitle}</div>
                         </div>
                       </button>
                     );
@@ -243,7 +243,7 @@ export function GlobalSearch() {
 
               {violationResults.length > 0 && (
                 <div>
-                  <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50">
+                  <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50">
                     Violations
                   </div>
                   {violationResults.map(result => {
@@ -262,7 +262,7 @@ export function GlobalSearch() {
                         </svg>
                         <div className="min-w-0">
                           <div className="font-medium truncate">{result.title}</div>
-                          <div className="text-xs text-gray-400 truncate">{result.subtitle}</div>
+                          <div className="text-xs text-gray-500 truncate">{result.subtitle}</div>
                         </div>
                       </button>
                     );

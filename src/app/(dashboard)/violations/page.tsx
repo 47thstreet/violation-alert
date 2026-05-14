@@ -53,12 +53,12 @@ export default async function ViolationsPage() {
         { label: 'Violations' },
       ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">All Violations</h1>
-      <p className="text-gray-500 text-sm mb-6">
+      <p className="text-gray-600 text-sm mb-6">
         {violations?.length || 0} total &middot; {openCount} open &middot; ${totalPenalties.toLocaleString()} in penalties
       </p>
 
       {enriched.length > 0 ? (
-        <div className="bg-white rounded-xl border">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
           <ViolationTable violations={enriched} />
         </div>
       ) : (

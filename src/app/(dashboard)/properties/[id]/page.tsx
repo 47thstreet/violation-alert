@@ -84,9 +84,9 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
         <ViolationCharts violations={violations} />
       )}
 
-      <div className="bg-white rounded-xl border">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
         <div className="p-4 border-b">
-          <h2 className="text-lg font-semibold">Violations</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Violations</h2>
         </div>
         {violations && violations.length > 0 ? (
           <ViolationTable violations={violations} />

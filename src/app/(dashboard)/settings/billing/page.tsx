@@ -122,7 +122,7 @@ export default function BillingPage() {
           ]} />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Billing</h1>
         </div>
-        <div className="bg-white rounded-xl border p-8 text-center text-gray-400">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 text-center text-gray-500">
           Loading billing information...
         </div>
       </div>
@@ -138,7 +138,7 @@ export default function BillingPage() {
           { label: 'Billing' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Billing</h1>
-        <p className="text-gray-500 text-sm">Manage your subscription and billing details.</p>
+        <p className="text-gray-600 text-sm">Manage your subscription and billing details.</p>
       </div>
 
       {message && (
@@ -152,7 +152,7 @@ export default function BillingPage() {
       )}
 
       {/* Current Plan */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-semibold text-gray-900">Current Plan</h2>
@@ -169,7 +169,7 @@ export default function BillingPage() {
             <button
               onClick={() => handleUpgrade('pro')}
               disabled={actionLoading}
-              className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
+              className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
             >
               {actionLoading ? 'Loading...' : 'Upgrade to Pro'}
             </button>
@@ -211,13 +211,13 @@ export default function BillingPage() {
       </div>
 
       {/* Plan Comparison */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-6">Compare Plans</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {/* Free */}
           <div className={`rounded-xl border p-5 ${tier === 'free' ? 'border-gray-400 bg-gray-50' : 'border-gray-200'}`}>
             <h3 className="font-semibold text-gray-900">Free</h3>
-            <p className="text-2xl font-bold mt-1">$0<span className="text-sm text-gray-400 font-normal">/mo</span></p>
+            <p className="text-2xl font-bold mt-1">$0<span className="text-sm text-gray-500 font-normal">/mo</span></p>
             <ul className="mt-4 space-y-2">
               {PLAN_FEATURES.free.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
@@ -229,7 +229,7 @@ export default function BillingPage() {
               ))}
             </ul>
             {tier === 'free' && (
-              <div className="mt-4 text-center text-xs text-gray-400 font-medium uppercase">Current plan</div>
+              <div className="mt-4 text-center text-xs text-gray-500 font-medium uppercase">Current plan</div>
             )}
           </div>
 
@@ -239,7 +239,7 @@ export default function BillingPage() {
               <h3 className="font-semibold text-gray-900">Pro</h3>
               <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full">Popular</span>
             </div>
-            <p className="text-2xl font-bold mt-1">$29<span className="text-sm text-gray-400 font-normal">/mo</span></p>
+            <p className="text-2xl font-bold mt-1">$29<span className="text-sm text-gray-500 font-normal">/mo</span></p>
             <ul className="mt-4 space-y-2">
               {PLAN_FEATURES.pro.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-gray-600">

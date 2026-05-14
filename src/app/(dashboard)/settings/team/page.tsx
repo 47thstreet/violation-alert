@@ -162,7 +162,7 @@ export default function TeamPage() {
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-48 mb-4" />
           <div className="h-4 bg-gray-200 rounded w-80 mb-8" />
-          <div className="bg-white rounded-xl border p-6 space-y-4">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 space-y-4">
             <div className="h-6 bg-gray-200 rounded w-40" />
             <div className="h-12 bg-gray-200 rounded" />
             <div className="h-12 bg-gray-200 rounded" />
@@ -181,7 +181,7 @@ export default function TeamPage() {
           { label: 'Team' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Team Members</h1>
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-600 text-sm">
           Invite collaborators to view or manage your properties and violations.
         </p>
       </div>
@@ -220,7 +220,7 @@ export default function TeamPage() {
 
       {/* Invite form (owner/admin only) */}
       {isOwner && (
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold mb-4">Invite Team Member</h2>
           <form onSubmit={handleInvite} className="flex gap-2">
             <input
@@ -228,13 +228,13 @@ export default function TeamPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="colleague@example.com"
-              className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none"
+              className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
               required
             />
             <select
               value={role}
               onChange={e => setRole(e.target.value as TeamRole)}
-              className="border rounded-lg px-3 py-2 text-sm"
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
             >
               <option value="viewer">Viewer</option>
               <option value="editor">Editor</option>
@@ -243,23 +243,23 @@ export default function TeamPage() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all"
             >
               {loading ? 'Inviting...' : 'Invite'}
             </button>
           </form>
-          <p className="text-xs text-gray-400 mt-2">
+          <p className="text-xs text-gray-500 mt-2">
             Viewers can see properties and violations. Editors can also make changes. Admins can manage the team.
           </p>
         </div>
       )}
 
       {/* Team list */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">
           Current Team
           {members.length > 0 && (
-            <span className="text-sm font-normal text-gray-400 ml-2">
+            <span className="text-sm font-normal text-gray-500 ml-2">
               ({members.length} member{members.length !== 1 ? 's' : ''})
             </span>
           )}
@@ -274,7 +274,7 @@ export default function TeamPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-900">{currentUserEmail}</p>
-                <p className="text-xs text-gray-400">You</p>
+                <p className="text-xs text-gray-500">You</p>
               </div>
             </div>
             <span className={`text-xs font-bold px-2 py-1 rounded ${ROLE_COLORS.owner}`}>
@@ -296,7 +296,7 @@ export default function TeamPage() {
                       {member.status}
                     </span>
                     {member.accepted_at && (
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-gray-500">
                         Joined {new Date(member.accepted_at).toLocaleDateString()}
                       </span>
                     )}

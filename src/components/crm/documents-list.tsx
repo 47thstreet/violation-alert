@@ -134,15 +134,15 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
                   View File
                 </a>
               )}
-              {doc.notes && <p className="text-sm text-gray-400 mt-1">{doc.notes}</p>}
+              {doc.notes && <p className="text-sm text-gray-500 mt-1">{doc.notes}</p>}
             </div>
-            <button onClick={() => handleDelete(doc.id)} className="text-sm text-gray-400 hover:text-red-600 ml-4 shrink-0">
+            <button onClick={() => handleDelete(doc.id)} className="text-sm text-gray-500 hover:text-red-600 transition-colors ml-4 shrink-0">
               Delete
             </button>
           </div>
         ))}
         {documents.length === 0 && (
-          <p className="text-center text-gray-400 py-8 text-sm">No documents added yet.</p>
+          <p className="text-center text-gray-500 py-8 text-sm">No documents added yet.</p>
         )}
       </div>
     </div>

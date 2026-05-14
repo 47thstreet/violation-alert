@@ -199,7 +199,7 @@ export function MaintenanceList({ propertyId, tenantId }: MaintenanceListProps) 
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="text-center text-gray-400 py-8 text-sm">
+          <p className="text-center text-gray-500 py-8 text-sm">
             {filter === 'all' ? 'No maintenance requests yet.' : `No ${filter.replace('_', ' ')} requests.`}
           </p>
         )}

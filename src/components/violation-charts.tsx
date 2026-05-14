@@ -83,7 +83,7 @@ export function ViolationCharts({ violations }: { violations: Violation[] }) {
   return (
     <div className="space-y-6 mb-6">
       {/* Severity Breakdown */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Severity Breakdown</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {(Object.keys(SEVERITY_CONFIG) as Array<keyof typeof severityData>).map(key => {
@@ -100,7 +100,7 @@ export function ViolationCharts({ violations }: { violations: Violation[] }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Violations by Agency */}
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">By Agency</h3>
           <div className="space-y-3">
             {agencyData.entries.map(([agency, count]) => (
@@ -122,13 +122,13 @@ export function ViolationCharts({ violations }: { violations: Violation[] }) {
               </div>
             ))}
             {agencyData.entries.length === 0 && (
-              <p className="text-sm text-gray-400">No data</p>
+              <p className="text-sm text-gray-500">No data</p>
             )}
           </div>
         </div>
 
         {/* Violations by Month */}
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Last 12 Months</h3>
           <div className="flex items-end gap-1 sm:gap-2 h-40">
             {monthlyData.months.map(m => (

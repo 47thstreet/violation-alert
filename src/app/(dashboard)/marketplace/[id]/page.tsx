@@ -77,7 +77,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
       ]} />
 
       {/* Profile Header */}
-      <div className="bg-white rounded-xl border p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex items-start gap-5 flex-wrap">
           <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
             {contractor.profile_image_url ? (
@@ -141,7 +141,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
             ) : (
               <button
                 onClick={() => setQuoteRequested(true)}
-                className="bg-red-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                className="bg-red-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
               >
                 Request Quote
               </button>
@@ -199,7 +199,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
 
       {/* Services & Coverage */}
       <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Violation Types Served</h2>
           {contractor.violation_types_served && contractor.violation_types_served.length > 0 ? (
             <div className="flex flex-wrap gap-2">
@@ -214,7 +214,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
           )}
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Service Areas</h2>
           {contractor.boroughs_served && contractor.boroughs_served.length > 0 ? (
             <div className="flex flex-wrap gap-2">
@@ -231,7 +231,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
       </div>
 
       {/* Reviews */}
-      <div className="bg-white rounded-xl border">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
         <div className="p-6 border-b">
           <h2 className="text-lg font-semibold text-gray-900">
             Reviews ({reviews.length})
@@ -265,7 +265,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
                       </div>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-gray-500">
                     {new Date(review.created_at).toLocaleDateString()}
                   </span>
                 </div>

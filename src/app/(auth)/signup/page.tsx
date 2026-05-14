@@ -116,7 +116,7 @@ export default function SignupPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Company / Org name <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Company / Org name <span className="text-gray-500 font-normal">(optional)</span></label>
             <input
               type="text"
               value={orgName}
@@ -166,7 +166,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors min-h-[48px]"
+            className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[48px]"
           >
             {loading ? 'Creating account...' : 'Create account'}
           </button>
@@ -177,7 +177,7 @@ export default function SignupPage() {
           </p>
         </form>
 
-        <p className="text-center text-xs text-gray-400 mt-4">
+        <p className="text-center text-xs text-gray-500 mt-4">
           Free plan includes 3 properties. Upgrade anytime.
         </p>
       </div>

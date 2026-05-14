@@ -45,7 +45,7 @@ export function ScanNowButton({ propertyId }: ScanNowButtonProps) {
       <button
         onClick={handleScan}
         disabled={scanning}
-        className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors flex items-center gap-2"
+        className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all flex items-center gap-2"
       >
         {scanning ? (
           <>

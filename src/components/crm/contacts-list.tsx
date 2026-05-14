@@ -169,16 +169,16 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
                 {c.email && <span>{c.email}</span>}
                 {c.unit_number && <span>Unit {c.unit_number}</span>}
               </div>
-              {c.notes && <p className="text-sm text-gray-400 mt-1">{c.notes}</p>}
+              {c.notes && <p className="text-sm text-gray-500 mt-1">{c.notes}</p>}
             </div>
             <div className="flex gap-2 ml-4 shrink-0">
-              <button onClick={() => startEdit(c)} className="text-sm text-gray-400 hover:text-gray-600">Edit</button>
-              <button onClick={() => handleDelete(c.id)} className="text-sm text-gray-400 hover:text-red-600">Delete</button>
+              <button onClick={() => startEdit(c)} className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Edit</button>
+              <button onClick={() => handleDelete(c.id)} className="text-sm text-gray-500 hover:text-red-600 transition-colors">Delete</button>
             </div>
           </div>
         ))}
         {contacts.length === 0 && (
-          <p className="text-center text-gray-400 py-8 text-sm">No contacts added yet.</p>
+          <p className="text-center text-gray-500 py-8 text-sm">No contacts added yet.</p>
         )}
       </div>
     </div>

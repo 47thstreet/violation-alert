@@ -66,7 +66,7 @@ export default async function CrmPage({ params }: { params: Promise<{ id: string
         { label: 'CRM' },
       ]} />
 
-      <div className="bg-white rounded-xl border p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex justify-between items-start">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{property.address}</h1>

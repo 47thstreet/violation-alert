@@ -89,12 +89,12 @@ export default function MarketplacePage() {
         { label: 'Marketplace' },
       ]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-2">Contractor Marketplace</h1>
-      <p className="text-gray-500 text-sm mb-6">
+      <p className="text-gray-600 text-sm mb-6">
         Find verified contractors to help resolve your building violations.
       </p>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border p-4 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Search */}
           <div className="sm:col-span-2 lg:col-span-1">

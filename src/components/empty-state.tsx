@@ -10,7 +10,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
   return (
-    <div className="bg-white rounded-xl border p-12 flex flex-col items-center text-center">
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-12 flex flex-col items-center text-center">
       <div className="w-12 h-12 flex items-center justify-center text-gray-400 mb-4">
         {icon}
       </div>
@@ -19,7 +19,7 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
       {action && (
         <Link
           href={action.href}
-          className="inline-block bg-red-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-red-700 transition-colors"
+          className="inline-block bg-red-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-red-700 active:scale-[0.98] transition-all"
         >
           {action.label}
         </Link>

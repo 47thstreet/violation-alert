@@ -9,7 +9,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
   return (
     <Link
       href={`/marketplace/${contractor.id}`}
-      className="bg-white rounded-xl border p-5 hover:shadow-md transition-shadow block"
+      className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all block"
     >
       <div className="flex items-start gap-4">
         {/* Avatar */}
@@ -46,7 +46,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
       <div className="flex items-center gap-1.5 mt-3">
         <StarRating rating={contractor.avg_rating} />
         <span className="text-sm font-medium text-gray-900">{contractor.avg_rating.toFixed(1)}</span>
-        <span className="text-xs text-gray-400">({contractor.review_count} reviews)</span>
+        <span className="text-xs text-gray-500">({contractor.review_count} reviews)</span>
       </div>
 
       {/* Violation Types */}
@@ -58,7 +58,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
             </span>
           ))}
           {contractor.violation_types_served.length > 3 && (
-            <span className="text-xs text-gray-400">+{contractor.violation_types_served.length - 3} more</span>
+            <span className="text-xs text-gray-500">+{contractor.violation_types_served.length - 3} more</span>
           )}
         </div>
       )}
