@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface ResolvedAddress {
   bin: string | null;
@@ -144,7 +145,7 @@ export function OnboardingWizard() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden">
+      <div className="glass-modal rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden">
         {/* Step indicator */}
         <div className="flex justify-center gap-2 pt-8 pb-2">
           {[1, 2, 3, 4].map(s => (
@@ -170,9 +171,17 @@ export function OnboardingWizard() {
         )}
 
         <div className="px-8 sm:px-10 pb-10 pt-2">
+          <AnimatePresence mode="wait">
           {/* ---- Step 1: Welcome ---- */}
           {step === 1 && (
-            <div className="text-center space-y-5">
+            <motion.div
+              key="step-1"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="text-center space-y-5"
+            >
               <div className="w-16 h-16 mx-auto bg-indigo-50 rounded-2xl flex items-center justify-center">
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#4F46E5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="8" y="6" width="20" height="36" rx="2" />
@@ -202,12 +211,19 @@ export function OnboardingWizard() {
               >
                 Get Started
               </button>
-            </div>
+            </motion.div>
           )}
 
           {/* ---- Step 2: Add Property ---- */}
           {step === 2 && (
-            <div className="space-y-5">
+            <motion.div
+              key="step-2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="space-y-5"
+            >
               <div className="text-center">
                 <h2 className="text-xl font-bold text-gray-900">Add Your First Property</h2>
                 <p className="text-gray-500 text-sm mt-1">Enter an NYC address to look up the building.</p>
@@ -256,12 +272,19 @@ export function OnboardingWizard() {
                   </button>
                 </div>
               )}
-            </div>
+            </motion.div>
           )}
 
           {/* ---- Step 3: Scanning ---- */}
           {step === 3 && (
-            <div className="text-center space-y-6 py-4">
+            <motion.div
+              key="step-3"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="text-center space-y-6 py-4"
+            >
               <div className="relative w-16 h-16 mx-auto">
                 <div className="absolute inset-0 rounded-full border-4 border-indigo-100" />
                 <div className="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin" style={{ filter: 'drop-shadow(0 0 6px rgba(79, 70, 229, 0.3))' }} />
@@ -283,12 +306,19 @@ export function OnboardingWizard() {
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* ---- Step 4: Done ---- */}
           {step === 4 && scanResult && (
-            <div className="text-center space-y-5">
+            <motion.div
+              key="step-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="text-center space-y-5"
+            >
               <div className="w-16 h-16 mx-auto bg-green-50 rounded-2xl flex items-center justify-center">
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="#16a34a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="24" cy="24" r="18" />
@@ -326,8 +356,9 @@ export function OnboardingWizard() {
               >
                 Go to Dashboard
               </button>
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
         </div>
       </div>
 

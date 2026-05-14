@@ -38,7 +38,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
               {isLast || !item.href ? (
                 <span className="font-medium text-indigo-700">{item.label}</span>
               ) : (
-                <Link href={item.href} className="text-gray-400 hover:text-gray-600 transition-colors">
+                <Link href={item.href} className="text-gray-400 hover:text-gray-600 breadcrumb-link">
                   {item.label}
                 </Link>
               )}
@@ -63,7 +63,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
               {isLast || !item.href ? (
                 <span className="font-medium text-gray-900 truncate max-w-[200px]">{item.label}</span>
               ) : (
-                <Link href={item.href} className="text-gray-400 hover:text-gray-600 transition-colors truncate max-w-[150px]">
+                <Link href={item.href} className="text-gray-400 hover:text-gray-600 breadcrumb-link truncate max-w-[150px]">
                   {item.label}
                 </Link>
               )}

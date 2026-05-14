@@ -114,13 +114,13 @@ export default function SettingsPage() {
           { label: 'Settings' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 tracking-tight mb-2">Settings</h1>
-        <p className="text-gray-400 text-sm">Manage your notification preferences and account.</p>
+        <p className="text-gray-500 mt-1 text-sm">Manage your notification preferences and account.</p>
       </div>
 
       {/* Notification Preferences */}
       <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
         <h2 className="text-base font-semibold text-gray-900 mb-1">Notification Channels</h2>
-        <p className="text-sm text-gray-400 mb-6">
+        <p className="text-sm text-gray-500 mb-6">
           Get notified when new violations are found on your properties.
         </p>
 
@@ -137,15 +137,15 @@ export default function SettingsPage() {
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => togglePref(p.id, p.enabled)}
-                    className={`text-xs px-3 py-1.5 rounded min-h-[36px] min-w-[36px] ${
-                      p.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'
+                    className={`text-xs font-medium px-3 py-1.5 rounded-lg min-h-[36px] min-w-[36px] transition-all duration-200 ${
+                      p.enabled ? 'bg-emerald-50 text-emerald-700' : 'bg-gray-200 text-gray-500'
                     }`}
                   >
                     {p.enabled ? 'On' : 'Off'}
                   </button>
                   <button
                     onClick={() => deletePref(p.id)}
-                    className="text-xs text-red-600 hover:text-red-700 px-2 py-1.5 min-h-[36px]"
+                    className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 min-h-[36px]"
                   >
                     Remove
                   </button>
@@ -160,7 +160,7 @@ export default function SettingsPage() {
             <select
               value={channel}
               onChange={e => { setChannel(e.target.value as 'email' | 'sms' | 'whatsapp'); setDestError(''); }}
-              className="border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
             >
               <option value="email">Email</option>
               <option value="sms">SMS</option>
@@ -171,12 +171,12 @@ export default function SettingsPage() {
               value={destination}
               onChange={e => { setDestination(e.target.value); setDestError(''); }}
               placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
-              className={`flex-1 px-3.5 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none min-h-[44px] ${destError ? 'border-red-500' : 'border-gray-200'}`}
+              className={`flex-1 px-4 py-2.5 border rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] ${destError ? 'border-red-500' : 'border-gray-200'}`}
             />
             <button
               type="submit"
               disabled={loading}
-              className="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 transition-all min-h-[44px]"
+              className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md min-h-[44px]"
             >
               Add
             </button>
@@ -192,13 +192,13 @@ export default function SettingsPage() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <h2 className="text-base font-semibold text-gray-900">Billing</h2>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               Manage your subscription and billing details.
             </p>
           </div>
           <Link
             href="/settings/billing"
-            className="border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors shrink-0"
+            className="border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200 shrink-0"
           >
             Manage
           </Link>
@@ -210,13 +210,13 @@ export default function SettingsPage() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <h2 className="text-base font-semibold text-gray-900">Team</h2>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               Invite collaborators to view or manage your properties.
             </p>
           </div>
           <Link
             href="/settings/team"
-            className="border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors shrink-0"
+            className="border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200 shrink-0"
           >
             Manage
           </Link>

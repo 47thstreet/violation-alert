@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'motion/react';
 import type { Violation } from '@/lib/supabase/types';
 
 interface ViolationTableProps {
@@ -176,21 +177,28 @@ export function ViolationTable({ violations }: ViolationTableProps) {
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Agency</th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Type</th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('severity')}>
-                Severity {sortBy === 'severity' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
+                Severity {sortBy === 'severity' && <span className="sort-arrow" data-dir={sortDir}>{'\u2193'}</span>}
               </th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Description</th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('date')}>
-                Issued {sortBy === 'date' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
+                Issued {sortBy === 'date' && <span className="sort-arrow" data-dir={sortDir}>{'\u2193'}</span>}
               </th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
               <th className="px-5 py-3.5 text-xs font-medium text-gray-400 uppercase tracking-wide text-right cursor-pointer hover:text-gray-600 select-none transition-colors" onClick={() => toggleSort('penalty')}>
-                Penalty {sortBy === 'penalty' ? (sortDir === 'desc' ? '\u2193' : '\u2191') : ''}
+                Penalty {sortBy === 'penalty' && <span className="sort-arrow" data-dir={sortDir}>{'\u2193'}</span>}
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {filtered.map(v => (
-              <tr key={v.id} className="hover:bg-indigo-50/30 cursor-pointer transition-all duration-150 group border-l-2 border-l-transparent hover:border-l-indigo-500" onClick={() => router.push(`/violations/${v.id}`)}>
+            {filtered.map((v, index) => (
+              <motion.tr
+                key={v.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2, delay: index * 0.03 }}
+                className="cursor-pointer group table-row-hover"
+                onClick={() => router.push(`/violations/${v.id}`)}
+              >
                 <td className="px-5 py-3.5">
                   <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     {v.source}
@@ -210,7 +218,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
                 <td className="px-5 py-3.5 text-right font-mono text-gray-600 tabular-nums">
                   {v.penalty_amount ? `$${v.penalty_amount.toLocaleString()}` : '--'}
                 </td>
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>
@@ -218,9 +226,12 @@ export function ViolationTable({ violations }: ViolationTableProps) {
 
       {/* Mobile card list */}
       <div className="md:hidden divide-y divide-gray-50">
-        {filtered.map(v => (
-          <div
+        {filtered.map((v, index) => (
+          <motion.div
             key={v.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: index * 0.03 }}
             className="px-5 py-4 hover:bg-gray-50/50 cursor-pointer active:bg-gray-100 transition-colors"
             onClick={() => router.push(`/violations/${v.id}`)}
           >
@@ -244,7 +255,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
                 </span>
               ) : null}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 
 type ToastType = 'success' | 'error' | 'info';
 
@@ -41,11 +42,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
   const removeToast = useCallback((id: string) => {
-    // Mark as removing to trigger slide-out
-    setToasts(prev => prev.map(t => t.id === id ? { ...t, removing: true } : t));
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
-    }, 200);
+    setToasts(prev => prev.filter(t => t.id !== id));
     const timer = timersRef.current.get(id);
     if (timer) {
       clearTimeout(timer);
@@ -95,52 +92,37 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-sm:right-1/2 max-sm:translate-x-1/2 max-sm:w-[calc(100%-2rem)]"
         aria-live="polite"
       >
-        {toasts.map(t => (
-          <div
-            key={t.id}
-            className={`
-              flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-lg min-w-[280px] max-w-sm
-              ${typeStyles[t.type]}
-              transition-all duration-200 ease-out
-              ${t.removing
-                ? 'opacity-0 translate-x-4 max-sm:translate-x-0 max-sm:translate-y-4'
-                : 'opacity-100 translate-x-0 translate-y-0 animate-slide-in'
-              }
-            `}
-            role="alert"
-          >
-            <span className="text-lg font-bold leading-none shrink-0">{typeIcons[t.type]}</span>
-            <p className="text-sm font-medium flex-1">{t.message}</p>
-            <button
-              onClick={() => removeToast(t.id)}
-              className="shrink-0 opacity-70 hover:opacity-100 transition-opacity text-lg leading-none ml-2"
-              aria-label="Close"
+        <AnimatePresence>
+          {toasts.map(t => (
+            <motion.div
+              key={t.id}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 26 }}
+              className={`
+                relative overflow-hidden flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-lg min-w-[280px] max-w-sm
+                ${typeStyles[t.type]}
+              `}
+              role="alert"
             >
-              &times;
-            </button>
-          </div>
-        ))}
+              <span className="text-lg font-bold leading-none shrink-0">{typeIcons[t.type]}</span>
+              <p className="text-sm font-medium flex-1">{t.message}</p>
+              <button
+                onClick={() => removeToast(t.id)}
+                className="shrink-0 opacity-70 hover:opacity-100 transition-opacity text-lg leading-none ml-2"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              {/* Auto-dismiss countdown bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20">
+                <div className="h-full bg-white/50 toast-progress" />
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-      {/* Inline keyframes for slide-in animation */}
-      <style>{`
-        @keyframes slide-in {
-          0% {
-            opacity: 0;
-            transform: translateY(0.75rem) scale(0.97);
-          }
-          70% {
-            opacity: 1;
-            transform: translateY(-2px) scale(1.01);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        .animate-slide-in {
-          animation: slide-in 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-      `}</style>
     </ToastContext.Provider>
   );
 }

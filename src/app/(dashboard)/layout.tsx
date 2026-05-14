@@ -5,6 +5,11 @@ import { redirect } from 'next/navigation';
 import { DashboardNav } from '@/components/dashboard-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { GlobalSearch } from '@/components/global-search';
+import { PageTransition } from '@/components/page-transition';
+import { ScrollToTop } from '@/components/scroll-to-top';
+import { NavigationProgress } from '@/components/navigation-progress';
+import { KeyboardHints } from '@/components/keyboard-hints';
+import { HeaderScrollShadow } from '@/components/header-scroll-shadow';
 
 export const metadata: Metadata = {
   robots: {
@@ -27,7 +32,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="min-h-screen bg-[#FAFAF9]">
-      <header className="bg-white/95 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200/40 shadow-[0_1px_3px_rgb(0,0,0,0.04)]">
+      <NavigationProgress />
+      <ScrollToTop />
+      <KeyboardHints />
+      <HeaderScrollShadow className="glass-nav sticky top-0 z-10 border-b border-gray-200/40 header-scroll-shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-5 sm:gap-8">
@@ -50,10 +58,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
             </div>
           </div>
         </div>
-      </header>
+      </HeaderScrollShadow>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 pb-24 sm:pb-10">
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </main>
 
       {/* Mobile bottom navigation */}

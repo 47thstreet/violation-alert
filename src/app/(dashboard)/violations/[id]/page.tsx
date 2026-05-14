@@ -16,6 +16,7 @@ import { ViolationNotes } from '@/components/violation-notes';
 import { ViolationActivity } from '@/components/violation-activity';
 import { HowToFixSection } from '@/components/violation-detail/how-to-fix';
 import { ResolutionStatusSection } from '@/components/violation-detail/resolution-status';
+import { useToast } from '@/components/toast';
 
 /** Map violation source string to agency enum */
 function sourceToAgency(source: string): ViolationAgency {
@@ -55,11 +56,13 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
   const [kbEntry, setKbEntry] = useState<ViolationKnowledgeBase | null>(null);
   const [resolution, setResolution] = useState<ResolutionTracking | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [kbLoading, setKbLoading] = useState(false);
   const [activeNotesTab, setActiveNotesTab] = useState<'notes' | 'activity'>('notes');
   const [tenantId, setTenantId] = useState<string | null>(null);
 
   const supabase = createClient();
+  const { toast } = useToast();
 
   // Unwrap params
   useEffect(() => {
@@ -72,62 +75,92 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
 
     async function load() {
       setLoading(true);
+      setLoadError(null);
 
-      // 1. Get violation first (everything depends on it)
-      const { data: v } = await supabase
-        .from('violations')
-        .select('*')
-        .eq('id', violationId!)
-        .single();
-
-      if (!v) {
-        setLoading(false);
-        return;
-      }
-      setViolation(v);
-
-      // 2. Fire parallel requests for property, tenant, and resolution
-      const [propertyResult, tenantResult, resolutionResult] = await Promise.all([
-        supabase.from('properties').select('*').eq('id', v.property_id).single(),
-        supabase.auth.getUser().then(async ({ data: { user } }) => {
-          if (!user) return null;
-          const { data: t } = await supabase
-            .from('tenants')
-            .select('id')
-            .eq('user_id', user.id)
-            .single();
-          return t;
-        }),
-        supabase
-          .from('resolution_tracking')
+      try {
+        // 1. Get violation first (everything depends on it)
+        const { data: v, error: vError } = await supabase
+          .from('violations')
           .select('*')
-          .eq('violation_id', violationId!)
-          .single(),
-      ]);
-
-      if (propertyResult.data) setProperty(propertyResult.data);
-      if (tenantResult) setTenantId(tenantResult.id);
-      if (resolutionResult.data) setResolution(resolutionResult.data);
-
-      // 3. KB lookup (depends on violation data)
-      if (v.violation_type && v.source) {
-        setKbLoading(true);
-        const agency = sourceToAgency(v.source);
-        const { data: kb } = await supabase
-          .from('violation_knowledge_base')
-          .select('*')
-          .eq('violation_type', v.violation_type)
-          .eq('agency', agency)
+          .eq('id', violationId!)
           .single();
-        if (kb) setKbEntry(kb);
-        setKbLoading(false);
+
+        if (vError) {
+          toast.error('Failed to load violation details');
+          setLoadError('Could not load violation data. Please try again.');
+          setLoading(false);
+          return;
+        }
+
+        if (!v) {
+          setLoading(false);
+          return;
+        }
+        setViolation(v);
+
+        // 2. Fire parallel requests for property, tenant, and resolution
+        const [propertyResult, tenantResult, resolutionResult] = await Promise.all([
+          supabase.from('properties').select('*').eq('id', v.property_id).single()
+            .then(res => {
+              if (res.error) toast.error('Failed to load property info');
+              return res;
+            }),
+          supabase.auth.getUser().then(async ({ data: { user } }) => {
+            if (!user) return null;
+            const { data: t, error: tErr } = await supabase
+              .from('tenants')
+              .select('id')
+              .eq('user_id', user.id)
+              .single();
+            if (tErr) toast.error('Failed to load tenant info');
+            return t;
+          }),
+          supabase
+            .from('resolution_tracking')
+            .select('*')
+            .eq('violation_id', violationId!)
+            .single()
+            .then(res => {
+              // Not an error if no resolution exists yet (PGRST116)
+              if (res.error && res.error.code !== 'PGRST116') {
+                toast.error('Failed to load resolution status');
+              }
+              return res;
+            }),
+        ]);
+
+        if (propertyResult.data) setProperty(propertyResult.data);
+        if (tenantResult) setTenantId(tenantResult.id);
+        if (resolutionResult.data) setResolution(resolutionResult.data);
+
+        // 3. KB lookup (depends on violation data)
+        if (v.violation_type && v.source) {
+          setKbLoading(true);
+          try {
+            const agency = sourceToAgency(v.source);
+            const { data: kb } = await supabase
+              .from('violation_knowledge_base')
+              .select('*')
+              .eq('violation_type', v.violation_type)
+              .eq('agency', agency)
+              .single();
+            if (kb) setKbEntry(kb);
+          } catch {
+            // KB lookup is non-critical, silently fail
+          }
+          setKbLoading(false);
+        }
+      } catch (err) {
+        console.error('Violation detail load error:', err);
+        toast.error('Something went wrong loading this violation');
+        setLoadError('An unexpected error occurred. Please try again.');
       }
 
       setLoading(false);
     }
 
     load();
-  }, [violationId]);
+  }, [violationId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (
@@ -137,11 +170,28 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
     );
   }
 
+  if (loadError) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 px-4">
+        <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-5">
+          <svg className="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h2 className="text-xl font-bold text-gray-900 mb-2">Failed to load violation</h2>
+        <p className="text-sm text-gray-500 mb-6 text-center max-w-md">{loadError}</p>
+        <Link href="/violations" className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all">
+          Back to violations
+        </Link>
+      </div>
+    );
+  }
+
   if (!violation) {
     return (
       <div className="text-center py-20">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Violation not found</h2>
-        <Link href="/violations" className="text-indigo-600 hover:text-indigo-800 text-sm">
+        <Link href="/violations" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors text-sm">
           Back to violations
         </Link>
       </div>
@@ -166,14 +216,14 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
               </span>
               <span className="text-gray-200">|</span>
               <span
-                className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
-                  violation.status === 'open' ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'
+                className={`text-xs font-medium px-2.5 py-1 rounded-full ${
+                  violation.status === 'open' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'
                 }`}
               >
                 {violation.status || 'Unknown'}
               </span>
               {violation.severity && (
-                <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${severityColor(violation.severity)}`}>
+                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${severityColor(violation.severity)}`}>
                   {violation.severity}
                 </span>
               )}

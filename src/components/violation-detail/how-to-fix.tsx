@@ -99,7 +99,7 @@ export function HowToFixSection({
           {/* Meta Grid */}
           <div className="grid grid-cols-2 gap-3">
             {(kbEntry.estimated_cost_min != null || kbEntry.estimated_cost_max != null) && (
-              <div className="bg-gray-50 rounded-lg p-3">
+              <div className="bg-gray-50 rounded-xl p-3">
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Est. Cost</p>
                 <p className="text-sm font-semibold text-gray-900">
                   ${kbEntry.estimated_cost_min?.toLocaleString() || '?'} - $
@@ -108,13 +108,13 @@ export function HowToFixSection({
               </div>
             )}
             {kbEntry.timeline_days != null && (
-              <div className="bg-gray-50 rounded-lg p-3">
+              <div className="bg-gray-50 rounded-xl p-3">
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Timeline</p>
                 <p className="text-sm font-semibold text-gray-900">{kbEntry.timeline_days} days</p>
               </div>
             )}
             {kbEntry.diy_difficulty && (
-              <div className="bg-gray-50 rounded-lg p-3">
+              <div className="bg-gray-50 rounded-xl p-3">
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">Difficulty</p>
                 <span
                   className={`text-xs font-medium px-2 py-0.5 rounded-full ${
@@ -126,7 +126,7 @@ export function HowToFixSection({
               </div>
             )}
             {kbEntry.ai_generated && (
-              <div className="bg-gray-50 rounded-lg p-3">
+              <div className="bg-gray-50 rounded-xl p-3">
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">Source</p>
                 <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">
                   AI Generated

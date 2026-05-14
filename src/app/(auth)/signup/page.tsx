@@ -92,7 +92,7 @@ export default function SignupPage() {
   if (success) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-sm border p-8 max-w-md text-center">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-md text-center success-appear">
           <h2 className="text-xl font-semibold mb-2">Check your email</h2>
           <p className="text-gray-500">We sent a confirmation link to <strong>{email}</strong></p>
         </div>
@@ -108,11 +108,11 @@ export default function SignupPage() {
           <p className="text-gray-500 mt-2">Never miss a building violation again</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border p-6 sm:p-8 space-y-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 space-y-4">
           <h2 className="text-xl font-semibold">Create account</h2>
 
           {error && (
-            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm">{error}</div>
+            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm error-slide-in">{error}</div>
           )}
 
           <button
@@ -126,7 +126,7 @@ export default function SignupPage() {
                 },
               });
             }}
-            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 rounded-xl py-3 px-4 font-medium text-gray-700 hover:bg-gray-50 active:scale-[0.97] transition-all min-h-[48px]"
+            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 rounded-xl py-2.5 px-4 font-medium text-gray-700 hover:bg-gray-50 active:scale-[0.97] min-h-[48px] google-btn"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -139,7 +139,7 @@ export default function SignupPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+              <div className="w-full border-t border-gray-100" />
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="bg-white px-4 text-gray-500">or</span>
@@ -154,7 +154,7 @@ export default function SignupPage() {
               type="text"
               value={orgName}
               onChange={e => setOrgName(e.target.value)}
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 outline-none min-h-[44px] auth-input"
               placeholder="Brooklyn Properties LLC"
             />
           </div>
@@ -167,10 +167,10 @@ export default function SignupPage() {
               onChange={e => setEmail(e.target.value)}
               onBlur={() => setEmailTouched(true)}
               required
-              className={`w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm ${emailError ? 'border-red-500' : ''}`}
+              className={`w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 outline-none min-h-[44px] auth-input ${emailError ? 'border-red-500' : ''}`}
               placeholder="you@company.com"
             />
-            {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
+            {emailError && <p className="text-red-600 text-sm mt-1 error-slide-in">{emailError}</p>}
           </div>
 
           <div>
@@ -181,7 +181,7 @@ export default function SignupPage() {
               onChange={e => setPassword(e.target.value)}
               required
               minLength={8}
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 outline-none min-h-[44px] auth-input"
               placeholder="Min 8 characters"
             />
             {pwStrength && (
@@ -199,7 +199,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all min-h-[48px]"
+            className="w-full bg-indigo-600 text-white py-2.5 rounded-xl font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md min-h-[48px]"
           >
             {loading ? 'Creating account...' : 'Create account'}
           </button>
@@ -208,7 +208,7 @@ export default function SignupPage() {
 
           <p className="text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <Link href="/login" className="text-indigo-600 font-medium hover:text-indigo-800 hover:underline">Sign in</Link>
+            <Link href="/login" className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">Sign in</Link>
           </p>
         </div>
 

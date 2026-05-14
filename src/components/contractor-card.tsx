@@ -9,7 +9,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
   return (
     <Link
       href={`/marketplace/${contractor.id}`}
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 block"
+      className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 block"
     >
       <div className="flex items-start gap-4">
         {/* Avatar */}
@@ -31,7 +31,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-semibold text-gray-900 truncate">{contractor.name}</h3>
             {contractor.verified && (
-              <span className="flex-shrink-0 bg-blue-100 text-blue-700 text-xs px-1.5 py-0.5 rounded-full font-medium">
+              <span className="flex-shrink-0 bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
                 Verified
               </span>
             )}
@@ -53,7 +53,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
       {contractor.violation_types_served && contractor.violation_types_served.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-3">
           {contractor.violation_types_served.slice(0, 3).map((type) => (
-            <span key={type} className="bg-indigo-50 text-indigo-600 text-xs px-2 py-0.5 rounded-full">
+            <span key={type} className="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-1 rounded-full">
               {type}
             </span>
           ))}
@@ -67,7 +67,7 @@ export function ContractorCard({ contractor }: ContractorCardProps) {
       {contractor.boroughs_served && contractor.boroughs_served.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">
           {contractor.boroughs_served.map((borough) => (
-            <span key={borough} className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
+            <span key={borough} className="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">
               {borough}
             </span>
           ))}

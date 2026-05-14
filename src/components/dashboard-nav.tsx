@@ -22,7 +22,7 @@ export function DashboardNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`px-3 py-1.5 rounded-lg text-sm transition-all duration-200 ${
+            className={`px-3 py-1.5 rounded-lg text-sm nav-item-hover ${
               active
                 ? 'bg-indigo-50 text-indigo-700 font-medium'
                 : 'text-gray-500 hover:text-indigo-600 hover:bg-indigo-50/50'

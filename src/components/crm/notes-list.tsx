@@ -69,12 +69,12 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
   return (
     <div>
       {/* Add note form */}
-      <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+      <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-4 mb-4 space-y-3">
         <div className="flex gap-3">
           <input placeholder="Your name (optional)" value={authorName} onChange={e => setAuthorName(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm w-40 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] w-40" />
           <select value={noteType} onChange={e => setNoteType(e.target.value as NoteType)}
-            className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]">
             {noteTypes.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
           </select>
         </div>
@@ -84,9 +84,9 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
           value={content}
           onChange={e => setContent(e.target.value)}
           rows={3}
-          className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
         />
-        <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+        <button type="submit" className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md">
           Add Note
         </button>
       </form>
@@ -94,21 +94,21 @@ export function NotesList({ propertyId, tenantId }: NotesListProps) {
       {/* Notes feed */}
       <div className="space-y-2">
         {notes.map(note => (
-          <div key={note.id} className={`bg-white border rounded-lg p-4 ${note.pinned ? 'border-indigo-200 ring-1 ring-indigo-100' : ''}`}>
+          <div key={note.id} className={`bg-white border rounded-xl p-4 ${note.pinned ? 'border-indigo-200 ring-1 ring-indigo-100' : 'border-gray-100'}`}>
             <div className="flex justify-between items-start mb-2">
               <div className="flex items-center gap-2">
                 {note.pinned && <span className="text-xs text-indigo-500 font-medium">Pinned</span>}
-                <span className={`text-xs px-2 py-0.5 rounded-full ${noteTypeColors[note.note_type]}`}>
+                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${noteTypeColors[note.note_type]}`}>
                   {note.note_type}
                 </span>
                 {note.author_name && <span className="text-sm font-medium text-gray-700">{note.author_name}</span>}
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-500 shrink-0 ml-4">
                 <span>{formatDistanceToNow(new Date(note.created_at), { addSuffix: true })}</span>
-                <button onClick={() => togglePin(note)} className="hover:text-indigo-600" title={note.pinned ? 'Unpin' : 'Pin'}>
+                <button onClick={() => togglePin(note)} className="hover:text-indigo-600 transition-colors" title={note.pinned ? 'Unpin' : 'Pin'}>
                   {note.pinned ? 'Unpin' : 'Pin'}
                 </button>
-                <button onClick={() => handleDelete(note.id)} className="hover:text-indigo-600">Delete</button>
+                <button onClick={() => handleDelete(note.id)} className="hover:text-red-600 transition-colors">Delete</button>
               </div>
             </div>
             <p className="text-sm text-gray-800 whitespace-pre-wrap">{note.content}</p>

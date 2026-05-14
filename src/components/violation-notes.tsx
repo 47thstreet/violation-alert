@@ -98,18 +98,18 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
   return (
     <div>
       {/* Add note form */}
-      <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+      <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-4 mb-4 space-y-3">
         <div className="flex gap-3 flex-wrap">
           <input
             placeholder="Your name (optional)"
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm w-40 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] w-40"
           />
           <select
             value={noteType}
             onChange={(e) => setNoteType(e.target.value as ViolationNoteType)}
-            className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
           >
             {violationNoteTypes.map((t) => (
               <option key={t} value={t}>
@@ -124,12 +124,12 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={3}
-          className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
         />
         <button
           type="submit"
           disabled={submitting || !content.trim()}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {submitting ? 'Adding...' : 'Add Note'}
         </button>
@@ -142,8 +142,8 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
           return (
             <div
               key={note.id}
-              className={`bg-white border rounded-lg p-4 ${
-                note.pinned ? 'border-indigo-200 ring-1 ring-indigo-100' : ''
+              className={`bg-white border rounded-xl p-4 ${
+                note.pinned ? 'border-indigo-200 ring-1 ring-indigo-100' : 'border-gray-100'
               }`}
             >
               <div className="flex justify-between items-start mb-2">
@@ -157,7 +157,7 @@ export function ViolationNotes({ violationSourceId, propertyId, tenantId }: Viol
                     </span>
                   )}
                   <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${violationNoteTypeColors[displayType]}`}
+                    className={`text-xs font-medium px-2.5 py-1 rounded-full ${violationNoteTypeColors[displayType]}`}
                   >
                     {violationNoteTypeLabels[displayType]}
                   </span>

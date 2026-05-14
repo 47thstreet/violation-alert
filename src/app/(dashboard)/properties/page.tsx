@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import Link from 'next/link';
-import { PropertyCard } from '@/components/property-card';
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import { AnimatedPropertyGrid } from '@/components/animated-property-grid';
 import { PropertiesEmptyOrOnboarding } from '@/components/properties-empty-or-onboarding';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -140,15 +140,10 @@ export default async function PropertiesPage() {
       {(!properties || properties.length === 0) ? (
         <PropertiesEmptyOrOnboarding />
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {properties.map(property => (
-            <PropertyCard
-              key={property.id}
-              property={property}
-              violationCount={countMap.get(property.id) || 0}
-            />
-          ))}
-        </div>
+        <AnimatedPropertyGrid
+          properties={properties}
+          violationCounts={Object.fromEntries(countMap)}
+        />
       )}
     </div>
   );

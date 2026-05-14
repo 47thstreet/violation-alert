@@ -93,7 +93,7 @@ export function BuildingDetailsForm({ propertyId, tenantId, details }: BuildingD
             <select
               value={form.building_type}
               onChange={e => update('building_type', e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
             >
               <option value="">Select...</option>
               {buildingTypes.map(t => (
@@ -139,7 +139,7 @@ export function BuildingDetailsForm({ propertyId, tenantId, details }: BuildingD
           value={form.notes}
           onChange={e => update('notes', e.target.value)}
           rows={3}
-          className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
         />
       </div>
 
@@ -147,7 +147,7 @@ export function BuildingDetailsForm({ propertyId, tenantId, details }: BuildingD
         <button
           type="submit"
           disabled={saving}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
+          className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
         >
           {saving ? 'Saving...' : 'Save Details'}
         </button>
@@ -170,7 +170,7 @@ function Field({ label, value, onChange, type = 'text' }: {
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
       />
     </div>
   );

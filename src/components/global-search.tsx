@@ -197,7 +197,7 @@ export function GlobalSearch() {
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search... (Cmd+K)"
-          className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent min-h-[38px]"
+          className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 min-h-[38px] search-input-expand"
         />
       </div>
 
@@ -221,8 +221,8 @@ export function GlobalSearch() {
                         key={result.id}
                         onClick={() => selectResult(result)}
                         onMouseEnter={() => setActiveIndex(flatIdx)}
-                        className={`w-full text-left px-3 py-2.5 flex items-center gap-3 text-sm transition-colors ${
-                          activeIndex === flatIdx ? 'bg-red-50 text-red-700' : 'hover:bg-gray-50'
+                        className={`w-full text-left px-3 py-2.5 flex items-center gap-3 text-sm search-result-item search-result-active ${
+                          activeIndex === flatIdx ? 'bg-indigo-50 text-indigo-700' : 'hover:bg-gray-50'
                         }`}
                       >
                         <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -253,8 +253,8 @@ export function GlobalSearch() {
                         key={result.id}
                         onClick={() => selectResult(result)}
                         onMouseEnter={() => setActiveIndex(flatIdx)}
-                        className={`w-full text-left px-3 py-2.5 flex items-center gap-3 text-sm transition-colors ${
-                          activeIndex === flatIdx ? 'bg-red-50 text-red-700' : 'hover:bg-gray-50'
+                        className={`w-full text-left px-3 py-2.5 flex items-center gap-3 text-sm search-result-item search-result-active ${
+                          activeIndex === flatIdx ? 'bg-indigo-50 text-indigo-700' : 'hover:bg-gray-50'
                         }`}
                       >
                         <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

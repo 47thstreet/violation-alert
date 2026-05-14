@@ -13,12 +13,12 @@ interface ContactsListProps {
 const roles: ContactRole[] = ['owner', 'manager', 'tenant', 'superintendent', 'attorney', 'contractor'];
 
 const roleColors: Record<ContactRole, string> = {
-  owner: 'bg-blue-100 text-blue-700',
-  manager: 'bg-purple-100 text-purple-700',
-  tenant: 'bg-green-100 text-green-700',
-  superintendent: 'bg-orange-100 text-orange-700',
-  attorney: 'bg-red-100 text-red-700',
-  contractor: 'bg-yellow-100 text-yellow-700',
+  owner: 'bg-indigo-50 text-indigo-700',
+  manager: 'bg-purple-50 text-purple-700',
+  tenant: 'bg-emerald-50 text-emerald-700',
+  superintendent: 'bg-orange-50 text-orange-700',
+  attorney: 'bg-red-50 text-red-700',
+  contractor: 'bg-yellow-50 text-yellow-700',
 };
 
 export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
@@ -115,40 +115,40 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
         <p className="text-sm text-gray-500">{contacts.length} contact{contacts.length !== 1 ? 's' : ''}</p>
         <button
           onClick={() => { resetForm(); setShowForm(!showForm); }}
-          className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+          className="bg-indigo-600 text-white text-sm px-3 py-1.5 rounded-xl font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md"
         >
           {showForm ? 'Cancel' : '+ Add Contact'}
         </button>
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+        <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-4 mb-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <input required placeholder="Name *" value={form.name} onChange={e => { setForm(f => ({ ...f, name: e.target.value })); setFormErrors(fe => ({ ...fe, name: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.name ? 'border-red-500' : ''}`} />
+                className={`w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] ${formErrors.name ? 'border-red-500' : ''}`} />
               {formErrors.name && <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>}
             </div>
             <select value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value as ContactRole }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]">
               {roles.map(r => <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>)}
             </select>
             <div>
               <input placeholder="Phone" value={form.phone} onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setFormErrors(fe => ({ ...fe, phone: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.phone ? 'border-red-500' : ''}`} />
+                className={`w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] ${formErrors.phone ? 'border-red-500' : ''}`} />
               {formErrors.phone && <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>}
             </div>
             <div>
               <input placeholder="Email" type="email" value={form.email} onChange={e => { setForm(f => ({ ...f, email: e.target.value })); setFormErrors(fe => ({ ...fe, email: '' })); }}
-                className={`w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${formErrors.email ? 'border-red-500' : ''}`} />
+                className={`w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px] ${formErrors.email ? 'border-red-500' : ''}`} />
               {formErrors.email && <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>}
             </div>
             <input placeholder="Unit #" value={form.unit_number} onChange={e => setForm(f => ({ ...f, unit_number: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
           </div>
           <textarea placeholder="Notes" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-          <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
+          <button type="submit" className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md">
             {editingId ? 'Update Contact' : 'Add Contact'}
           </button>
         </form>
@@ -156,11 +156,11 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
 
       <div className="space-y-2">
         {contacts.map(c => (
-          <div key={c.id} className="bg-white border rounded-lg p-4 flex justify-between items-start">
+          <div key={c.id} className="bg-white border border-gray-100 rounded-xl p-4 flex justify-between items-start">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-medium text-gray-900">{c.name}</span>
-                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${roleColors[c.role]}`}>
+                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${roleColors[c.role]}`}>
                   {c.role}
                 </span>
               </div>
@@ -172,8 +172,8 @@ export function ContactsList({ propertyId, tenantId }: ContactsListProps) {
               {c.notes && <p className="text-sm text-gray-500 mt-1">{c.notes}</p>}
             </div>
             <div className="flex gap-2 ml-4 shrink-0">
-              <button onClick={() => startEdit(c)} className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Edit</button>
-              <button onClick={() => handleDelete(c.id)} className="text-sm text-gray-500 hover:text-red-600 transition-colors">Delete</button>
+              <button onClick={() => startEdit(c)} className="border border-gray-200 text-gray-700 rounded-xl px-3 py-1.5 text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">Edit</button>
+              <button onClick={() => handleDelete(c.id)} className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg px-3 py-1.5 text-sm transition-all duration-200">Delete</button>
             </div>
           </div>
         ))}

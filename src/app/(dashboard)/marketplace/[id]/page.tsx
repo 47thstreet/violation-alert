@@ -61,7 +61,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
     return (
       <div className="text-center py-20">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Contractor not found</h2>
-        <Link href="/marketplace" className="text-indigo-600 hover:text-indigo-800 text-sm">
+        <Link href="/marketplace" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors text-sm">
           Back to marketplace
         </Link>
       </div>
@@ -77,7 +77,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
       ]} />
 
       {/* Profile Header */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex items-start gap-5 flex-wrap">
           <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
             {contractor.profile_image_url ? (
@@ -97,7 +97,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
             <div className="flex items-center gap-2 mb-1">
               <h1 className="text-2xl font-bold text-gray-900">{contractor.name}</h1>
               {contractor.verified && (
-                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
                   Verified
                 </span>
               )}
@@ -141,7 +141,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
             ) : (
               <button
                 onClick={() => setQuoteRequested(true)}
-                className="bg-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all"
+                className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 Request Quote
               </button>
@@ -151,7 +151,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
 
         {/* Bio */}
         {contractor.description && (
-          <p className="text-sm text-gray-600 mt-4 pt-4 border-t">{contractor.description}</p>
+          <p className="text-sm text-gray-600 mt-4 pt-4 border-t border-gray-100">{contractor.description}</p>
         )}
 
         {/* Contact & Details */}
@@ -199,12 +199,12 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
 
       {/* Services & Coverage */}
       <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Violation Types Served</h2>
           {contractor.violation_types_served && contractor.violation_types_served.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {contractor.violation_types_served.map((type) => (
-                <span key={type} className="bg-indigo-50 text-indigo-600 text-sm px-3 py-1 rounded-full">
+                <span key={type} className="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-1 rounded-full">
                   {type}
                 </span>
               ))}
@@ -214,12 +214,12 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
           )}
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Service Areas</h2>
           {contractor.boroughs_served && contractor.boroughs_served.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {contractor.boroughs_served.map((borough) => (
-                <span key={borough} className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full">
+                <span key={borough} className="bg-gray-100 text-gray-700 text-xs font-medium px-2.5 py-1 rounded-full">
                   {borough}
                 </span>
               ))}
@@ -231,15 +231,15 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
       </div>
 
       {/* Reviews */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
-        <div className="p-6 border-b">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+        <div className="p-6 border-b border-gray-100">
           <h2 className="text-lg font-semibold text-gray-900">
             Reviews ({reviews.length})
           </h2>
         </div>
 
         {reviews.length > 0 ? (
-          <div className="divide-y">
+          <div className="divide-y divide-gray-100">
             {reviews.map((review) => (
               <div key={review.id} className="p-6">
                 <div className="flex items-center justify-between mb-2">
@@ -270,7 +270,7 @@ export default function ContractorProfilePage({ params }: { params: Promise<{ id
                   </span>
                 </div>
                 {review.violation_type && (
-                  <span className="bg-indigo-50 text-indigo-600 text-xs px-2 py-0.5 rounded-full mb-2 inline-block">
+                  <span className="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-1 rounded-full mb-2 inline-block">
                     {review.violation_type}
                   </span>
                 )}

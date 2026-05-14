@@ -55,7 +55,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Hire a Pro</h2>
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400" />
@@ -67,14 +67,14 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
 
   if (contractors.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Hire a Pro</h2>
         <p className="text-sm text-gray-500 mb-3">
           No contractors found for this violation type yet.
         </p>
         <Link
           href="/marketplace"
-          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
         >
           Browse all contractors &rarr;
         </Link>
@@ -83,12 +83,12 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
   }
 
   return (
-    <div className="bg-white rounded-xl border p-6">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">Hire a Pro</h2>
         <Link
           href={`/marketplace?type=${encodeURIComponent(violationType)}`}
-          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+          className="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
         >
           View all &rarr;
         </Link>
@@ -99,7 +99,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
           <Link
             key={contractor.id}
             href={`/marketplace/${contractor.id}`}
-            className="border border-gray-100 rounded-lg p-4 hover:shadow-md transition-all"
+            className="bg-white border border-gray-100 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
           >
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -119,7 +119,7 @@ export function ContractorMatch({ violationType, borough }: ContractorMatchProps
                 <div className="flex items-center gap-1.5">
                   <p className="text-sm font-semibold text-gray-900 truncate">{contractor.name}</p>
                   {contractor.verified && (
-                    <span className="flex-shrink-0 bg-blue-100 text-blue-700 text-xs px-1.5 py-0.5 rounded-full">
+                    <span className="flex-shrink-0 bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
                       Verified
                     </span>
                   )}

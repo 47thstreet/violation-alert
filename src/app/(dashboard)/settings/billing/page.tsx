@@ -138,7 +138,7 @@ export default function BillingPage() {
           { label: 'Billing' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Billing</h1>
-        <p className="text-gray-600 text-sm">Manage your subscription and billing details.</p>
+        <p className="text-gray-500 mt-1 text-sm">Manage your subscription and billing details.</p>
       </div>
 
       {message && (
@@ -152,7 +152,7 @@ export default function BillingPage() {
       )}
 
       {/* Current Plan */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-semibold text-gray-900">Current Plan</h2>
@@ -169,7 +169,7 @@ export default function BillingPage() {
             <button
               onClick={() => handleUpgrade('pro')}
               disabled={actionLoading}
-              className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
+              className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
               {actionLoading ? 'Loading...' : 'Upgrade to Pro'}
             </button>
@@ -177,7 +177,7 @@ export default function BillingPage() {
             <button
               onClick={handleManageSubscription}
               disabled={actionLoading}
-              className="border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 transition-colors"
+              className="border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {actionLoading ? 'Loading...' : 'Manage Subscription'}
             </button>
@@ -211,7 +211,7 @@ export default function BillingPage() {
       </div>
 
       {/* Plan Comparison */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-6">Compare Plans</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {/* Free */}
@@ -256,7 +256,7 @@ export default function BillingPage() {
               <button
                 onClick={() => handleUpgrade('pro')}
                 disabled={actionLoading}
-                className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 disabled:opacity-50"
+                className="mt-4 w-full bg-indigo-600 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 Upgrade
               </button>
@@ -282,7 +282,7 @@ export default function BillingPage() {
             ) : (
               <a
                 href="mailto:sales@violationalert.com"
-                className="mt-4 block w-full text-center border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50"
+                className="mt-4 block w-full text-center border border-gray-200 text-gray-700 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-all duration-200"
               >
                 Contact Sales
               </a>

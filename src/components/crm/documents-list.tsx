@@ -78,32 +78,32 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
         <p className="text-sm text-gray-500">{documents.length} document{documents.length !== 1 ? 's' : ''}</p>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+          className="bg-indigo-600 text-white text-sm px-3 py-1.5 rounded-xl font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md"
         >
           {showForm ? 'Cancel' : '+ Add Document'}
         </button>
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+        <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-4 mb-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input required placeholder="Document Name *" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
             <select value={form.document_type} onChange={e => setForm(f => ({ ...f, document_type: e.target.value as DocumentType }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]">
               {docTypes.map(t => <option key={t} value={t}>{docTypeLabels[t]}</option>)}
             </select>
             <input placeholder="File URL (paste link)" value={form.file_url} onChange={e => setForm(f => ({ ...f, file_url: e.target.value }))}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
             <div>
               <label className="block text-xs text-gray-500 mb-1">Expiry Date</label>
               <input type="date" value={form.expiry_date} onChange={e => setForm(f => ({ ...f, expiry_date: e.target.value }))}
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
             </div>
           </div>
           <textarea placeholder="Notes" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-          <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]" />
+          <button type="submit" className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md">
             Add Document
           </button>
         </form>
@@ -111,18 +111,18 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
 
       <div className="space-y-2">
         {documents.map(doc => (
-          <div key={doc.id} className="bg-white border rounded-lg p-4 flex justify-between items-start">
+          <div key={doc.id} className="bg-white border border-gray-100 rounded-xl p-4 flex justify-between items-start">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-medium text-gray-900">{doc.name}</span>
-                <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
                   {docTypeLabels[doc.document_type]}
                 </span>
                 {isExpired(doc.expiry_date) && (
-                  <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">Expired</span>
+                  <span className="text-xs font-medium bg-red-50 text-red-700 px-2.5 py-1 rounded-full">Expired</span>
                 )}
                 {expiringSoon(doc.expiry_date) && (
-                  <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">Expiring Soon</span>
+                  <span className="text-xs font-medium bg-yellow-50 text-yellow-700 px-2.5 py-1 rounded-full">Expiring Soon</span>
                 )}
               </div>
               <div className="flex flex-wrap gap-x-4 text-sm text-gray-500">
@@ -130,13 +130,13 @@ export function DocumentsList({ propertyId, tenantId }: DocumentsListProps) {
                 <span>Added: {new Date(doc.uploaded_at).toLocaleDateString()}</span>
               </div>
               {doc.file_url && (
-                <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline mt-1 inline-block">
+                <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mt-1 inline-block">
                   View File
                 </a>
               )}
               {doc.notes && <p className="text-sm text-gray-500 mt-1">{doc.notes}</p>}
             </div>
-            <button onClick={() => handleDelete(doc.id)} className="text-sm text-gray-500 hover:text-red-600 transition-colors ml-4 shrink-0">
+            <button onClick={() => handleDelete(doc.id)} className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg px-3 py-1.5 text-sm transition-all duration-200 ml-4 shrink-0">
               Delete
             </button>
           </div>

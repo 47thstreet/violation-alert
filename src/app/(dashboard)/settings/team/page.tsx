@@ -16,9 +16,9 @@ const ROLE_LABELS: Record<TeamRole, string> = {
 };
 
 const ROLE_COLORS: Record<TeamRole, string> = {
-  owner: 'bg-purple-100 text-purple-700',
-  admin: 'bg-blue-100 text-blue-700',
-  editor: 'bg-green-100 text-green-700',
+  owner: 'bg-indigo-50 text-indigo-700',
+  admin: 'bg-purple-50 text-purple-700',
+  editor: 'bg-emerald-50 text-emerald-700',
   viewer: 'bg-gray-100 text-gray-600',
 };
 
@@ -181,7 +181,7 @@ export default function TeamPage() {
           { label: 'Team' },
         ]} />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Team Members</h1>
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-500 mt-1 text-sm">
           Invite collaborators to view or manage your properties and violations.
         </p>
       </div>
@@ -201,13 +201,13 @@ export default function TeamPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleInviteAction(invite.id, 'accept')}
-                    className="bg-green-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-green-700"
+                    className="bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     Accept
                   </button>
                   <button
                     onClick={() => handleInviteAction(invite.id, 'reject')}
-                    className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-200"
+                    className="border border-gray-200 text-gray-700 px-3 py-1.5 rounded-xl text-sm font-medium hover:bg-gray-50 active:scale-[0.97] transition-all duration-200"
                   >
                     Decline
                   </button>
@@ -220,7 +220,7 @@ export default function TeamPage() {
 
       {/* Invite form (owner/admin only) */}
       {isOwner && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-lg font-semibold mb-4">Invite Team Member</h2>
           <form onSubmit={handleInvite} className="flex gap-2">
             <input
@@ -228,13 +228,13 @@ export default function TeamPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="colleague@example.com"
-              className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+              className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
               required
             />
             <select
               value={role}
               onChange={e => setRole(e.target.value as TeamRole)}
-              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
             >
               <option value="viewer">Viewer</option>
               <option value="editor">Editor</option>
@@ -243,7 +243,7 @@ export default function TeamPage() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all"
+              className="bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
               {loading ? 'Inviting...' : 'Invite'}
             </button>
@@ -255,7 +255,7 @@ export default function TeamPage() {
       )}
 
       {/* Team list */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">
           Current Team
           {members.length > 0 && (
@@ -309,7 +309,7 @@ export default function TeamPage() {
                     <select
                       value={member.role}
                       onChange={e => handleRoleChange(member.id, e.target.value as TeamRole)}
-                      className="text-xs border rounded px-2 py-1"
+                      className="text-xs border border-gray-200 rounded-xl px-2 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[32px]"
                     >
                       <option value="viewer">Viewer</option>
                       <option value="editor">Editor</option>
@@ -317,7 +317,7 @@ export default function TeamPage() {
                     </select>
                     <button
                       onClick={() => handleRemove(member.id)}
-                      className="text-xs text-red-600 hover:text-red-700 font-medium"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200"
                     >
                       Remove
                     </button>

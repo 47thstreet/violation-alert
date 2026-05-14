@@ -39,11 +39,11 @@ function LoginForm() {
           <p className="text-gray-500 mt-2">NYC Building Violation Monitor</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border p-6 sm:p-8 space-y-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 space-y-4">
           <h2 className="text-xl font-semibold">Sign in</h2>
 
           {error && (
-            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm">{error}</div>
+            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm error-slide-in">{error}</div>
           )}
 
           <button
@@ -57,7 +57,7 @@ function LoginForm() {
                 },
               });
             }}
-            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 rounded-xl py-3 px-4 font-medium text-gray-700 hover:bg-gray-50 active:scale-[0.97] transition-all min-h-[48px]"
+            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 rounded-xl py-2.5 px-4 font-medium text-gray-700 hover:bg-gray-50 active:scale-[0.97] min-h-[48px] google-btn"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -70,7 +70,7 @@ function LoginForm() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+              <div className="w-full border-t border-gray-100" />
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="bg-white px-4 text-gray-500">or</span>
@@ -86,7 +86,7 @@ function LoginForm() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 outline-none min-h-[44px] auth-input"
               placeholder="you@company.com"
             />
           </div>
@@ -98,14 +98,14 @@ function LoginForm() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none min-h-[44px] text-base sm:text-sm"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 outline-none min-h-[44px] auth-input"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 transition-all min-h-[48px]"
+            className="w-full bg-indigo-600 text-white py-2.5 rounded-xl font-medium hover:bg-indigo-700 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md min-h-[48px]"
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
@@ -114,7 +114,7 @@ function LoginForm() {
 
           <p className="text-center text-sm text-gray-500">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-indigo-600 font-medium hover:text-indigo-800 hover:underline">Sign up</Link>
+            <Link href="/signup" className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">Sign up</Link>
           </p>
         </div>
       </div>

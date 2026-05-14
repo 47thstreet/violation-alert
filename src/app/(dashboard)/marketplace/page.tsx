@@ -89,12 +89,12 @@ export default function MarketplacePage() {
         { label: 'Marketplace' },
       ]} />
       <h1 className="text-2xl font-bold text-gray-900 tracking-tight mb-1">Contractor Marketplace</h1>
-      <p className="text-gray-400 text-sm mb-8">
+      <p className="text-gray-500 mt-1 mb-8 text-sm">
         Find verified contractors to help resolve your building violations.
       </p>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-5 mb-8">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Search */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -103,7 +103,7 @@ export default function MarketplacePage() {
               placeholder="Search by name or company..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function MarketplacePage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
+            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
           >
             <option value="">All violation types</option>
             {violationTypes.map((t) => (
@@ -125,7 +125,7 @@ export default function MarketplacePage() {
           <select
             value={boroughFilter}
             onChange={(e) => setBoroughFilter(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
+            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
           >
             <option value="">All boroughs</option>
             {BOROUGHS.map((b) => (
@@ -139,7 +139,7 @@ export default function MarketplacePage() {
           <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[44px]"
+            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 min-h-[44px]"
           >
             {RATINGS.map((r) => (
               <option key={r.value} value={r.value}>
