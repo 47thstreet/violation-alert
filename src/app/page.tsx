@@ -193,8 +193,6 @@ export default function Home() {
       <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-indigo-950 to-indigo-900">
         {/* Dot pattern overlay */}
         <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-        {/* Glowing indigo orb */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-indigo-500/30 to-violet-500/20 blur-3xl pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
           <div className="inline-block bg-white/10 text-indigo-200 text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-white/10 backdrop-blur-sm">
             Now watching 10+ NYC agencies
