@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { DashboardNav } from '@/components/dashboard-nav';
+import { MobileNav } from '@/components/mobile-nav';
 
 export const metadata: Metadata = {
   robots: {
@@ -28,15 +29,15 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-8">
-              <Link href="/properties" className="text-xl font-bold text-gray-900">
+            <div className="flex items-center gap-4 sm:gap-8">
+              <Link href="/properties" className="text-xl font-bold text-gray-900 shrink-0">
                 ViolationAlert
               </Link>
               <DashboardNav />
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">{tenant?.org_name || user.email}</span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full capitalize">
+            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+              <span className="text-sm text-gray-500 truncate hidden sm:inline">{tenant?.org_name || user.email}</span>
+              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full capitalize shrink-0">
                 {tenant?.tier || 'free'}
               </span>
             </div>
@@ -44,9 +45,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-24 sm:pb-8">
         {children}
       </main>
+
+      {/* Mobile bottom navigation */}
+      <MobileNav />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ResolvedAddress {
   bin: string | null;
@@ -14,11 +15,20 @@ interface ResolvedAddress {
   label: string;
 }
 
+interface ScanResult {
+  violations_found: number;
+  agencies_count: number;
+  errors: string[];
+}
+
 export default function NewPropertyPage() {
   const [address, setAddress] = useState('');
   const [resolved, setResolved] = useState<ResolvedAddress | null>(null);
   const [loading, setLoading] = useState(false);
   const [resolving, setResolving] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const [scanResult, setScanResult] = useState<ScanResult | null>(null);
+  const [newPropertyId, setNewPropertyId] = useState<string | null>(null);
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -26,6 +36,8 @@ export default function NewPropertyPage() {
     setResolving(true);
     setError('');
     setResolved(null);
+    setScanResult(null);
+    setNewPropertyId(null);
 
     try {
       const res = await fetch('/api/properties/resolve', {
@@ -63,22 +75,38 @@ export default function NewPropertyPage() {
 
     if (!tenant) { setError('No tenant found'); setLoading(false); return; }
 
-    const { error: insertError } = await supabase.from('properties').insert({
+    const { data: inserted, error: insertError } = await supabase.from('properties').insert({
       tenant_id: tenant.id,
       address: resolved.label,
       borough: resolved.borough,
       bin: resolved.bin,
       bbl: resolved.bbl,
       zip: resolved.zip,
-    });
+    }).select('id').single();
 
-    if (insertError) {
-      setError(insertError.message);
+    if (insertError || !inserted) {
+      setError(insertError?.message || 'Failed to add property');
       setLoading(false);
-    } else {
-      router.push('/properties');
-      router.refresh();
+      return;
     }
+
+    setNewPropertyId(inserted.id);
+    setLoading(false);
+
+    // Immediately trigger a scan
+    setScanning(true);
+    try {
+      const res = await fetch('/api/properties/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ property_id: inserted.id }),
+      });
+      const data = await res.json();
+      setScanResult(data);
+    } catch {
+      setScanResult({ violations_found: 0, agencies_count: 0, errors: ['Scan failed — violations will appear after the next polling cycle'] });
+    }
+    setScanning(false);
   }
 
   return (
@@ -90,47 +118,88 @@ export default function NewPropertyPage() {
         <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm mb-4">{error}</div>
       )}
 
-      <div className="bg-white rounded-xl border p-6 space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">NYC Address</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
-              placeholder="123 Main Street, Brooklyn, NY"
-              className="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
-              onKeyDown={e => e.key === 'Enter' && handleResolve()}
-            />
-            <button
-              onClick={handleResolve}
-              disabled={resolving || address.length < 5}
-              className="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors whitespace-nowrap"
+      {/* Scan results after adding */}
+      {scanning && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-4 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3" />
+          <p className="font-semibold text-blue-800">Scanning for violations...</p>
+          <p className="text-sm text-blue-600 mt-1">Checking DOB, HPD, ECB, FDNY, DSNY, DOT, and more</p>
+        </div>
+      )}
+
+      {scanResult && newPropertyId && !scanning && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-4">
+          <p className="font-semibold text-green-800 text-lg">Property added successfully</p>
+          <p className="text-green-700 mt-1">
+            Found {scanResult.violations_found} violation{scanResult.violations_found !== 1 ? 's' : ''}
+            {scanResult.agencies_count > 0 && ` across ${scanResult.agencies_count} agenc${scanResult.agencies_count !== 1 ? 'ies' : 'y'}`}
+          </p>
+          {scanResult.errors.length > 0 && (
+            <p className="text-orange-600 text-sm mt-2">
+              {scanResult.errors.length} agency error{scanResult.errors.length !== 1 ? 's' : ''} (partial results)
+            </p>
+          )}
+          <div className="flex gap-3 mt-4">
+            <Link
+              href={`/properties/${newPropertyId}`}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
             >
-              {resolving ? 'Looking up...' : 'Look up'}
-            </button>
+              View Property
+            </Link>
+            <Link
+              href="/properties"
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+            >
+              All Properties
+            </Link>
           </div>
         </div>
+      )}
 
-        {resolved && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
-            <p className="font-semibold text-green-800">{resolved.label}</p>
-            <div className="grid grid-cols-2 gap-2 text-sm text-green-700">
-              {resolved.bin && <p>BIN: {resolved.bin}</p>}
-              {resolved.bbl && <p>BBL: {resolved.bbl}</p>}
-              {resolved.borough && <p>Borough: {resolved.borough}</p>}
-              {resolved.zip && <p>ZIP: {resolved.zip}</p>}
+      {/* Hide the form once scan results are shown */}
+      {!scanResult && (
+        <div className="bg-white rounded-xl border p-6 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">NYC Address</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={address}
+                onChange={e => setAddress(e.target.value)}
+                placeholder="123 Main Street, Brooklyn, NY"
+                className="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                onKeyDown={e => e.key === 'Enter' && handleResolve()}
+              />
+              <button
+                onClick={handleResolve}
+                disabled={resolving || address.length < 5}
+                className="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors whitespace-nowrap"
+              >
+                {resolving ? 'Looking up...' : 'Look up'}
+              </button>
             </div>
-            <button
-              onClick={handleAdd}
-              disabled={loading}
-              className="mt-2 bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
-            >
-              {loading ? 'Adding...' : 'Add This Property'}
-            </button>
           </div>
-        )}
-      </div>
+
+          {resolved && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
+              <p className="font-semibold text-green-800">{resolved.label}</p>
+              <div className="grid grid-cols-2 gap-2 text-sm text-green-700">
+                {resolved.bin && <p>BIN: {resolved.bin}</p>}
+                {resolved.bbl && <p>BBL: {resolved.bbl}</p>}
+                {resolved.borough && <p>Borough: {resolved.borough}</p>}
+                {resolved.zip && <p>ZIP: {resolved.zip}</p>}
+              </div>
+              <button
+                onClick={handleAdd}
+                disabled={loading || scanning}
+                className="mt-2 bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
+              >
+                {loading ? 'Adding...' : 'Add This Property'}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

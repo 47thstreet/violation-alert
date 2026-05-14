@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { ViolationTable } from '@/components/violation-table';
+import { ScanNowButton } from '@/components/scan-now-button';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -32,10 +33,10 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       </Link>
 
       <div className="bg-white rounded-xl border p-6 mb-6">
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{property.address}</h1>
-            <div className="flex gap-4 mt-2 text-sm text-gray-500">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{property.address}</h1>
+            <div className="flex flex-wrap gap-2 sm:gap-4 mt-2 text-sm text-gray-500">
               {property.borough && <span>{property.borough}</span>}
               {property.bin && <span>BIN: {property.bin}</span>}
               {property.bbl && <span>BBL: {property.bbl}</span>}
@@ -43,13 +44,13 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           </div>
           <Link
             href={`/properties/${id}/crm`}
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shrink-0"
+            className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shrink-0 w-full sm:w-auto text-center"
           >
             CRM / Manage
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6">
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-sm text-gray-500">Total Violations</p>
             <p className="text-2xl font-bold text-gray-900">{violations?.length || 0}</p>
@@ -64,12 +65,15 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           </div>
         </div>
 
-        <p className="text-xs text-gray-400 mt-4">
-          {property.last_polled_at
-            ? `Last checked ${formatDistanceToNow(new Date(property.last_polled_at), { addSuffix: true })}`
-            : 'Not yet checked — violations will appear after the next polling cycle'
-          }
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+          <p className="text-xs text-gray-400">
+            {property.last_polled_at
+              ? `Last checked ${formatDistanceToNow(new Date(property.last_polled_at), { addSuffix: true })}`
+              : 'Not yet checked'
+            }
+          </p>
+          <ScanNowButton propertyId={id} />
+        </div>
       </div>
 
       <div className="bg-white rounded-xl border">

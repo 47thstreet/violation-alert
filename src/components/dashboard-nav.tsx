@@ -15,7 +15,7 @@ export function DashboardNav() {
   const isCrmPage = pathname.includes('/crm');
 
   return (
-    <nav className="flex gap-1">
+    <nav className="hidden sm:flex gap-1">
       {navItems.map(item => {
         const active = pathname.startsWith(item.href);
         return (

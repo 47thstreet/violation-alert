@@ -482,9 +482,9 @@ export default function ViolationDetailPage({ params }: { params: Promise<{ id: 
                   );
                 })}
               </div>
-              <div className="flex justify-between text-xs text-gray-500">
+              <div className="flex justify-between text-[10px] sm:text-xs text-gray-500">
                 {STATUS_FLOW.map((s) => (
-                  <span key={s} className={s === resolution.status ? 'text-red-700 font-medium' : ''}>
+                  <span key={s} className={`text-center ${s === resolution.status ? 'text-red-700 font-medium' : ''}`}>
                     {STATUS_LABELS[s]}
                   </span>
                 ))}

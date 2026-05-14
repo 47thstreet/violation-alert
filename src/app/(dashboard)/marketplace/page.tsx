@@ -89,15 +89,15 @@ export default function MarketplacePage() {
 
       {/* Filters */}
       <div className="bg-white rounded-xl border p-4 mb-6">
-        <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Search */}
-          <div className="flex-1 min-w-[200px]">
+          <div className="sm:col-span-2 lg:col-span-1">
             <input
               type="text"
               placeholder="Search by name or company..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent min-h-[44px]"
             />
           </div>
 
@@ -105,7 +105,7 @@ export default function MarketplacePage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
           >
             <option value="">All violation types</option>
             {violationTypes.map((t) => (
@@ -119,7 +119,7 @@ export default function MarketplacePage() {
           <select
             value={boroughFilter}
             onChange={(e) => setBoroughFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
           >
             <option value="">All boroughs</option>
             {BOROUGHS.map((b) => (
@@ -133,7 +133,7 @@ export default function MarketplacePage() {
           <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px]"
           >
             {RATINGS.map((r) => (
               <option key={r.value} value={r.value}>

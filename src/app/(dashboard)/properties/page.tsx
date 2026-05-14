@@ -39,7 +39,7 @@ export default async function PropertiesPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Properties</h1>
           <p className="text-gray-500 text-sm mt-1">
@@ -49,14 +49,14 @@ export default async function PropertiesPage() {
         {canAdd ? (
           <Link
             href="/properties/new"
-            className="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+            className="bg-red-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-red-700 transition-colors min-h-[44px] flex items-center shrink-0"
           >
             Add Property
           </Link>
         ) : (
           <Link
             href="/settings"
-            className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+            className="bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg font-medium hover:bg-gray-300 transition-colors min-h-[44px] flex items-center shrink-0"
           >
             Upgrade to add more
           </Link>

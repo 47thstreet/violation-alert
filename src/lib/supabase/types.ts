@@ -90,6 +90,10 @@ export type MaintenancePriority = 'low' | 'medium' | 'high' | 'urgent';
 export type MaintenanceStatus = 'open' | 'assigned' | 'in_progress' | 'completed' | 'cancelled';
 export type MaintenanceCategory = 'plumbing' | 'electrical' | 'hvac' | 'structural' | 'pest' | 'other';
 
+// Team/Collaborator types (006_collaborators.sql)
+export type TeamRole = 'owner' | 'admin' | 'editor' | 'viewer';
+export type InviteStatus = 'pending' | 'accepted' | 'rejected';
+
 export interface BuildingDetails {
   id: string;
   property_id: string;
@@ -151,6 +155,18 @@ export interface PropertyNote {
   note_type: NoteType;
   pinned: boolean;
   created_at: string;
+}
+
+export interface TeamMember {
+  id: string;
+  tenant_id: string;
+  user_id: string | null;
+  invited_email: string;
+  role: TeamRole;
+  status: InviteStatus;
+  invited_by: string | null;
+  invited_at: string;
+  accepted_at: string | null;
 }
 
 export interface MaintenanceRequest {
@@ -286,6 +302,7 @@ export interface Database {
       property_documents: { Row: DbRow<PropertyDocument>; Insert: DbInsert<PropertyDocument> & { property_id: string; tenant_id: string; name: string }; Update: DbUpdate<PropertyDocument>; Relationships: never[] };
       property_notes: { Row: DbRow<PropertyNote>; Insert: DbInsert<PropertyNote> & { property_id: string; tenant_id: string; content: string }; Update: DbUpdate<PropertyNote>; Relationships: never[] };
       maintenance_requests: { Row: DbRow<MaintenanceRequest>; Insert: DbInsert<MaintenanceRequest> & { property_id: string; tenant_id: string; title: string }; Update: DbUpdate<MaintenanceRequest>; Relationships: never[] };
+      team_members: { Row: DbRow<TeamMember>; Insert: DbInsert<TeamMember> & { tenant_id: string; invited_email: string }; Update: DbUpdate<TeamMember>; Relationships: never[] };
     };
     Views: Record<string, never>;
     Functions: {

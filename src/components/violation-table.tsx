@@ -22,12 +22,12 @@ export function ViolationTable({ violations }: ViolationTableProps) {
 
   return (
     <div>
-      <div className="flex gap-2 p-4 border-b">
+      <div className="flex flex-wrap gap-2 p-4 border-b">
         {(['all', 'open', 'closed'] as const).map(f => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors min-h-[36px] ${
               filter === f
                 ? 'bg-red-100 text-red-700'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -40,7 +40,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
           <select
             value={sourceFilter}
             onChange={e => setSourceFilter(e.target.value)}
-            className="text-sm border rounded-lg px-2 py-1"
+            className="text-sm border rounded-lg px-2 py-1.5 min-h-[36px]"
           >
             <option value="all">All Sources</option>
             <option value="dob">DOB</option>
@@ -50,7 +50,8 @@ export function ViolationTable({ violations }: ViolationTableProps) {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-gray-500 border-b">
@@ -95,6 +96,44 @@ export function ViolationTable({ violations }: ViolationTableProps) {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile card list */}
+      <div className="md:hidden divide-y">
+        {filtered.map(v => (
+          <div
+            key={v.id}
+            className="p-4 hover:bg-gray-50 cursor-pointer active:bg-gray-100"
+            onClick={() => router.push(`/violations/${v.id}`)}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-bold uppercase">
+                  {v.source}
+                </span>
+                <SeverityBadge severity={v.severity} />
+              </div>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                v.status === 'open'
+                  ? 'bg-red-100 text-red-700'
+                  : 'bg-green-100 text-green-700'
+              }`}>
+                {v.status || 'Unknown'}
+              </span>
+            </div>
+            <p className="text-sm text-gray-900 line-clamp-2 mb-1">
+              {v.description || v.violation_number || 'N/A'}
+            </p>
+            <div className="flex items-center justify-between text-xs text-gray-500">
+              <span>{v.issued_date || 'N/A'}</span>
+              {v.penalty_amount ? (
+                <span className="font-mono font-medium text-orange-700">
+                  ${v.penalty_amount.toLocaleString()}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        ))}
       </div>
 
       {filtered.length === 0 && (

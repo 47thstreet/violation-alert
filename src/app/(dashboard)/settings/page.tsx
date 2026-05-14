@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { NotificationPref } from '@/lib/supabase/types';
 
@@ -95,17 +96,17 @@ export default function SettingsPage() {
         {prefs.length > 0 && (
           <div className="space-y-2 mb-6">
             {prefs.map(p => (
-              <div key={p.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
-                <div className="flex items-center gap-3">
-                  <span className="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded uppercase">
+              <div key={p.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3 gap-2">
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded uppercase shrink-0">
                     {p.channel}
                   </span>
-                  <span className="text-sm">{p.destination}</span>
+                  <span className="text-sm truncate">{p.destination}</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => togglePref(p.id, p.enabled)}
-                    className={`text-xs px-2 py-1 rounded ${
+                    className={`text-xs px-3 py-1.5 rounded min-h-[36px] min-w-[36px] ${
                       p.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'
                     }`}
                   >
@@ -113,7 +114,7 @@ export default function SettingsPage() {
                   </button>
                   <button
                     onClick={() => deletePref(p.id)}
-                    className="text-xs text-red-600 hover:text-red-700"
+                    className="text-xs text-red-600 hover:text-red-700 px-2 py-1.5 min-h-[36px]"
                   >
                     Remove
                   </button>
@@ -123,11 +124,11 @@ export default function SettingsPage() {
           </div>
         )}
 
-        <form onSubmit={addPref} className="flex gap-2">
+        <form onSubmit={addPref} className="flex flex-col sm:flex-row gap-2">
           <select
             value={channel}
             onChange={e => setChannel(e.target.value as 'email' | 'sms' | 'whatsapp')}
-            className="border rounded-lg px-3 py-2 text-sm"
+            className="border rounded-lg px-3 py-2.5 text-sm min-h-[44px]"
           >
             <option value="email">Email</option>
             <option value="sms">SMS</option>
@@ -138,18 +139,36 @@ export default function SettingsPage() {
             value={destination}
             onChange={e => setDestination(e.target.value)}
             placeholder={channel === 'email' ? 'email@example.com' : '+1234567890'}
-            className="flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none"
+            className="flex-1 px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none min-h-[44px]"
           />
           <button
             type="submit"
             disabled={loading}
-            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50"
+            className="bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 min-h-[44px]"
           >
             Add
           </button>
         </form>
 
         {message && <p className="text-sm text-green-600 mt-2">{message}</p>}
+      </div>
+
+      {/* Team */}
+      <div className="bg-white rounded-xl border p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold">Team</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Invite collaborators to view or manage your properties.
+            </p>
+          </div>
+          <Link
+            href="/settings/team"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700"
+          >
+            Manage Team
+          </Link>
+        </div>
       </div>
 
       {/* Account */}

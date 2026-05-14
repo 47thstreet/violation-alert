@@ -30,12 +30,12 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
   return (
     <div className="bg-white rounded-xl border">
       <div className="border-b">
-        <nav className="flex gap-0 overflow-x-auto">
+        <nav className="flex gap-0 overflow-x-auto -mb-px">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+              className={`px-4 sm:px-5 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap min-h-[48px] ${
                 activeTab === tab.id
                   ? 'border-red-600 text-red-700'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -47,7 +47,7 @@ export function CrmTabs({ propertyId, tenantId, buildingDetails }: CrmTabsProps)
         </nav>
       </div>
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         {activeTab === 'details' && (
           <BuildingDetailsForm propertyId={propertyId} tenantId={tenantId} details={buildingDetails} />
         )}

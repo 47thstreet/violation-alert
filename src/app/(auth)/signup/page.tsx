@@ -79,7 +79,7 @@ export default function SignupPage() {
           <p className="text-gray-500 mt-2">Never miss a building violation again</p>
         </div>
 
-        <form onSubmit={handleSignup} className="bg-white rounded-xl shadow-sm border p-8 space-y-4">
+        <form onSubmit={handleSignup} className="bg-white rounded-xl shadow-sm border p-6 sm:p-8 space-y-4">
           <h2 className="text-xl font-semibold">Create account</h2>
 
           {error && (
@@ -92,7 +92,7 @@ export default function SignupPage() {
               type="text"
               value={orgName}
               onChange={e => setOrgName(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="Brooklyn Properties LLC"
             />
           </div>
@@ -104,7 +104,7 @@ export default function SignupPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="you@company.com"
             />
           </div>
@@ -117,7 +117,7 @@ export default function SignupPage() {
               onChange={e => setPassword(e.target.value)}
               required
               minLength={8}
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              className="w-full px-3 py-2.5 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none min-h-[44px] text-base sm:text-sm"
               placeholder="Min 8 characters"
             />
           </div>
@@ -125,7 +125,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 text-white py-2.5 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors"
+            className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors min-h-[48px]"
           >
             {loading ? 'Creating account...' : 'Create account'}
           </button>
