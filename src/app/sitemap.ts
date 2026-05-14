@@ -5,7 +5,7 @@ const SITE_URL = 'https://violationalert.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const agencyPages: MetadataRoute.Sitemap = AGENCIES.map((agency) => ({
-    url: `${SITE_URL}/violations/${agency.slug}`,
+    url: `${SITE_URL}/agency/${agency.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.8,

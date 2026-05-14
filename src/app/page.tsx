@@ -328,7 +328,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {AGENCIES.map((agency) => {
               const agencyData = AGENCY_DATA.find((a) => a.abbr === agency.abbr);
-              const href = agencyData ? `/violations/${agencyData.slug}` : '#';
+              const href = agencyData ? `/agency/${agencyData.slug}` : '#';
               return (
                 <Link
                   key={agency.abbr}

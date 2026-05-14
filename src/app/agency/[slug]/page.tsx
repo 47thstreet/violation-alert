@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const agency = getAgencyBySlug(slug);
   if (!agency) return {};
 
-  const title = `${agency.fullName} Violations -- NYC Violation Monitor`;
+  const title = `${agency.fullName} Violations \u2014 NYC Violation Monitor`;
   const description = `Check ${agency.abbr} violations for your NYC property. ${agency.description.slice(0, 120)}... Monitor ${agency.abbr} violations with instant alerts.`;
 
   return {
@@ -35,12 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `${agency.abbr} fines NYC`,
     ],
     alternates: {
-      canonical: `/violations/${slug}`,
+      canonical: `/agency/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `/violations/${slug}`,
+      url: `/agency/${slug}`,
       siteName: 'ViolationAlert',
       type: 'website',
       images: [
@@ -77,7 +77,7 @@ export default async function AgencyPage({ params }: Props) {
       '@type': 'WebPage',
       name: `${agency.fullName} Violations`,
       description: agency.description,
-      url: `https://violationalert.com/violations/${slug}`,
+      url: `https://violationalert.com/agency/${slug}`,
       isPartOf: {
         '@type': 'WebSite',
         name: 'ViolationAlert',
@@ -154,7 +154,8 @@ export default async function AgencyPage({ params }: Props) {
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-            {agency.fullName} Violations
+            {agency.fullName} Violations{' '}
+            <span className="text-red-600">&mdash; NYC Violation Monitor</span>
           </h1>
           <p className="text-lg text-gray-500 mt-4 leading-relaxed max-w-3xl">
             {agency.description}
@@ -354,7 +355,7 @@ export default async function AgencyPage({ params }: Props) {
             {otherAgencies.map((other) => (
               <Link
                 key={other.slug}
-                href={`/violations/${other.slug}`}
+                href={`/agency/${other.slug}`}
                 className="bg-white rounded-xl p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all group"
               >
                 <div className="flex items-center gap-3 mb-2">

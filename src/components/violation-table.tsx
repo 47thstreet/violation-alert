@@ -13,9 +13,18 @@ export function ViolationTable({ violations }: ViolationTableProps) {
   const [filter, setFilter] = useState<'all' | 'open' | 'closed'>('all');
   const [sourceFilter, setSourceFilter] = useState<string>('all');
 
+  const normalizeStatus = (s: string | null) => {
+    if (!s) return 'unknown';
+    const lower = s.toLowerCase().trim();
+    if (lower === 'open' || lower === 'active') return 'open';
+    if (lower === 'close' || lower === 'closed' || lower === 'resolved') return 'closed';
+    return lower;
+  };
+
   const filtered = violations.filter(v => {
-    if (filter === 'open' && v.status !== 'open') return false;
-    if (filter === 'closed' && v.status === 'open') return false;
+    const status = normalizeStatus(v.status);
+    if (filter === 'open' && status !== 'open') return false;
+    if (filter === 'closed' && status !== 'closed') return false;
     if (sourceFilter !== 'all' && v.source !== sourceFilter) return false;
     return true;
   });
@@ -81,13 +90,7 @@ export function ViolationTable({ violations }: ViolationTableProps) {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">{v.issued_date || 'N/A'}</td>
                 <td className="px-4 py-3">
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                    v.status === 'open'
-                      ? 'bg-red-100 text-red-700'
-                      : 'bg-green-100 text-green-700'
-                  }`}>
-                    {v.status || 'Unknown'}
-                  </span>
+                  <StatusBadge status={v.status} />
                 </td>
                 <td className="px-4 py-3 text-right font-mono">
                   {v.penalty_amount ? `$${v.penalty_amount.toLocaleString()}` : '-'}
@@ -145,21 +148,47 @@ export function ViolationTable({ violations }: ViolationTableProps) {
   );
 }
 
-function SeverityBadge({ severity }: { severity: string | null }) {
-  if (!severity) return <span className="text-gray-400 text-xs">Unknown</span>;
+function StatusBadge({ status }: { status: string | null }) {
+  if (!status) return <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">Unknown</span>;
+  const lower = status.toLowerCase().trim();
+  const isOpen = lower === 'open' || lower === 'active';
+  const label = isOpen ? 'Open' : 'Closed';
+  return (
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+      isOpen ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
+    }`}>
+      {label}
+    </span>
+  );
+}
 
-  const colors: Record<string, string> = {
-    'immediately-hazardous': 'bg-red-100 text-red-700',
-    'hazardous': 'bg-orange-100 text-orange-700',
-    'non-hazardous': 'bg-yellow-100 text-yellow-700',
-    'info': 'bg-blue-100 text-blue-700',
-    'SERIOUS': 'bg-red-100 text-red-700',
-    'NON-SERIOUS': 'bg-yellow-100 text-yellow-700',
-  };
+function SeverityBadge({ severity }: { severity: string | null }) {
+  if (!severity) return <span className="text-gray-500 text-xs">Unknown</span>;
+
+  const lower = severity.toLowerCase();
+  let color = 'bg-gray-100 text-gray-700';
+  let label = severity;
+
+  if (lower.includes('immediately') || lower.includes('critical')) {
+    color = 'bg-red-100 text-red-700';
+    label = 'Critical';
+  } else if (lower.includes('hazardous') && !lower.includes('non')) {
+    color = 'bg-orange-100 text-orange-700';
+    label = 'Hazardous';
+  } else if (lower.includes('non-hazardous') || lower.includes('non-serious')) {
+    color = 'bg-yellow-100 text-yellow-800';
+    label = 'Minor';
+  } else if (lower.includes('info') || lower.includes('class i')) {
+    color = 'bg-blue-100 text-blue-700';
+    label = 'Info';
+  } else if (lower.includes('active') || lower.includes('violation')) {
+    color = 'bg-red-100 text-red-700';
+    label = 'Active';
+  }
 
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[severity] || 'bg-gray-100 text-gray-700'}`}>
-      {severity}
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${color}`}>
+      {label}
     </span>
   );
 }
