@@ -18,7 +18,7 @@ const SITE_URL = "https://violationalert.com";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#dc2626",
+  themeColor: "#4F46E5",
 };
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "ViolationAlert — Your Buildings, Protected",
   },
   description:
-    "Every NYC agency that can fine your building, watched around the clock. Instant alerts, step-by-step resolution guides, and contractor matching. Free for 3 properties, forever.",
+    "Every NYC agency that can fine your building, watched around the clock. Instant alerts, step-by-step resolution guides, and contractor matching for NYC property owners.",
   keywords: [
     "NYC violation monitoring",
     "building violation alerts",

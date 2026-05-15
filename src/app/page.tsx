@@ -28,16 +28,16 @@ const COMPARISON = [
   { feature: 'Agencies monitored', us: '10+', dob: 'DOB + 311', vwatch: '8+', dguard: '6' },
   { feature: 'How to fix it', us: 'Step-by-step guides', dob: 'Not included', vwatch: 'Not included', dguard: 'Risk scores only' },
   { feature: 'Find a contractor', us: 'Built in', dob: 'No', vwatch: 'No', dguard: 'No' },
-  { feature: 'Free tier', us: '3 properties, forever', dob: 'None', vwatch: 'Trial only', dguard: 'Search only' },
+  { feature: 'Free trial', us: '14 days, no card', dob: 'None', vwatch: 'Trial only', dguard: 'Search only' },
   { feature: 'Alert channels', us: 'Email, SMS, WhatsApp', dob: 'Email', vwatch: 'Email, SMS', dguard: 'SMS' },
-  { feature: 'Starting price', us: 'Free / $29', dob: '$19/mo', vwatch: '$9.99/mo', dguard: '$49.99/10' },
+  { feature: 'Starting price', us: '$19/mo (10+ agencies)', dob: '$19/mo (DOB only)', vwatch: '$9.99/mo', dguard: '$49.99/10' },
 ];
 
 const FAQ_ITEMS = [
   {
-    question: 'Is this really free?',
+    question: 'How much does it cost?',
     answer:
-      'Completely. Add up to 3 properties, get daily DOB scans and email alerts, and use it as long as you want. No credit card. No trial period. No catch.',
+      'Starter is $19/month for up to 5 properties with all 10+ agencies, daily monitoring, and email alerts. Pro is $49/month for unlimited properties, 15-minute checks, SMS/WhatsApp, AI resolution guides, and contractor matching. Both come with a 14-day free trial — no credit card required.',
   },
   {
     question: 'How is this different from DOB Alerts?',
@@ -89,14 +89,14 @@ const jsonLd = [
     offers: [
       {
         '@type': 'Offer',
-        price: '0',
+        price: '19',
         priceCurrency: 'USD',
-        name: 'Free',
-        description: 'Up to 3 properties, daily DOB checks, email alerts',
+        name: 'Starter',
+        description: 'Up to 5 properties, all 10+ agencies, daily monitoring, email alerts',
       },
       {
         '@type': 'Offer',
-        price: '29',
+        price: '49',
         priceCurrency: 'USD',
         name: 'Pro',
         description:
@@ -213,7 +213,7 @@ export default function Home() {
             </a>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-5">
-            <p className="text-sm text-indigo-300/70">Free for 3 properties. No credit card required.</p>
+            <p className="text-sm text-indigo-300/70">14-day free trial. No credit card required.</p>
             <span className="text-sm text-indigo-300/50">|</span>
             <div className="flex items-center gap-1.5 text-sm text-indigo-300/70">
               <span className="text-amber-400">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
@@ -522,25 +522,27 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Start free. Stay free if you want.</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">No trials. No gimmicks. Upgrade only when your portfolio demands it.</p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">DOB Alerts charges $19/mo for one agency. We cover ten &mdash; starting at $19.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Free */}
+            {/* Starter */}
             <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
-              <h3 className="font-semibold text-lg text-gray-900">Free</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$0<span className="text-base text-gray-500 font-normal">/forever</span></p>
-              <p className="text-sm text-gray-500 mt-2">Real protection, no strings attached</p>
+              <h3 className="font-semibold text-lg text-gray-900">Starter</h3>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$19<span className="text-base text-gray-500 font-normal">/mo</span></p>
+              <p className="text-sm text-gray-500 mt-2">Same price as DOB Alerts &mdash; 10x the coverage</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
-                <li className="flex items-center gap-2"><CheckIcon /> 3 properties included</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Daily DOB monitoring</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Up to 5 properties</li>
+                <li className="flex items-center gap-2"><CheckIcon /> <strong>All 10+ agencies</strong></li>
+                <li className="flex items-center gap-2"><CheckIcon /> Daily monitoring</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Email alerts</li>
-                <li className="flex items-center gap-2"><CheckIcon /> No credit card, ever</li>
-                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Multi-agency coverage</li>
-                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Resolution guides</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Resolution guides</li>
+                <li className="flex items-center gap-2 text-gray-500"><XIcon /> SMS &amp; WhatsApp</li>
+                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Contractor matching</li>
               </ul>
               <Link href="/signup" className="mt-8 block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl text-sm hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">
-                Add your building &mdash; free
+                Start 14-day free trial
               </Link>
+              <p className="text-xs text-gray-400 text-center mt-2">No credit card required.</p>
             </div>
             {/* Pro */}
             <div className="bg-white rounded-2xl border-2 border-indigo-600 p-8 text-left relative flex flex-col shadow-xl ring-4 ring-indigo-50 hover:-translate-y-0.5 transition-all duration-200">
@@ -548,19 +550,20 @@ export default function Home() {
                 Most popular
               </span>
               <h3 className="font-semibold text-lg text-gray-900">Pro</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$29<span className="text-base text-gray-500 font-normal">/mo</span></p>
-              <p className="text-sm text-gray-500 mt-2">Less than the cost of one missed violation</p>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$49<span className="text-base text-gray-500 font-normal">/mo</span></p>
+              <p className="text-sm text-gray-500 mt-2">For serious landlords and property managers</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
                 <li className="flex items-center gap-2"><CheckIcon /> Unlimited properties</li>
                 <li className="flex items-center gap-2"><CheckIcon /> <strong>All 10+ agencies</strong></li>
                 <li className="flex items-center gap-2"><CheckIcon /> Checks every 15 minutes</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Email, SMS, and WhatsApp</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Resolution guides for every violation</li>
+                <li className="flex items-center gap-2"><CheckIcon /> AI resolution guides</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Contractor matching</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Priority support</li>
+                <li className="flex items-center gap-2"><CheckIcon /> CRM &amp; building management</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Team collaboration</li>
               </ul>
               <Link href="/signup" className="mt-8 block text-center bg-indigo-600 text-white font-semibold py-3 rounded-xl text-sm shadow-sm hover:bg-indigo-700 hover:shadow-md active:scale-[0.97] transition-all duration-200">
-                Try Pro free for 14 days
+                Start 14-day free trial
               </Link>
               <p className="text-xs text-gray-400 text-center mt-2">Cancel anytime. No credit card needed.</p>
             </div>
@@ -568,11 +571,11 @@ export default function Home() {
             <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
               <h3 className="font-semibold text-lg text-gray-900">Enterprise</h3>
               <p className="text-4xl font-bold mt-2 text-gray-900">Custom</p>
-              <p className="text-sm text-gray-500 mt-2">For portfolios that can&apos;t afford blind spots</p>
+              <p className="text-sm text-gray-500 mt-2">For portfolios with 50+ properties</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
                 <li className="flex items-center gap-2"><CheckIcon /> Everything in Pro</li>
                 <li className="flex items-center gap-2"><CheckIcon /> API access</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Team accounts and roles</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Volume pricing ($2-5/property)</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Webhook integrations</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Dedicated account manager</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Custom reporting</li>
@@ -615,8 +618,8 @@ export default function Home() {
             Know before they knock.
           </h2>
           <p className="text-lg text-indigo-200 mt-4 max-w-xl mx-auto">
-            Your first three properties are free. No credit card.
-            No time limit. Just protection.
+            Start your 14-day free trial today. No credit card.
+            No commitment. Just protection.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
             <Link href="/signup" className="bg-white text-gray-900 px-8 py-3.5 rounded-xl text-lg font-semibold hover:bg-indigo-50 hover:shadow-xl active:scale-[0.97] transition-all duration-200">
