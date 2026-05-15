@@ -30,14 +30,14 @@ const COMPARISON = [
   { feature: 'Find a contractor', us: 'Built in', dob: 'No', vwatch: 'No', dguard: 'No' },
   { feature: 'Free trial', us: '14 days, no card', dob: 'None', vwatch: 'Trial only', dguard: 'Search only' },
   { feature: 'Alert channels', us: 'Email, SMS, WhatsApp', dob: 'Email', vwatch: 'Email, SMS', dguard: 'SMS' },
-  { feature: 'Starting price', us: '$19/mo (10+ agencies)', dob: '$19/mo (DOB only)', vwatch: '$9.99/mo', dguard: '$49.99/10' },
+  { feature: 'Starting price', us: '$29/mo (10+ agencies)', dob: '$19/mo (DOB only)', vwatch: '$9.99/mo', dguard: '$49.99/10' },
 ];
 
 const FAQ_ITEMS = [
   {
     question: 'How much does it cost?',
     answer:
-      'Starter is $19/month for up to 5 properties with all 10+ agencies, daily monitoring, and email alerts. Pro is $49/month for unlimited properties, 15-minute checks, SMS/WhatsApp, AI resolution guides, and contractor matching. Both come with a 14-day free trial — no credit card required.',
+      'Starter is $29/month for up to 3 properties with all 10+ agencies. Professional is $79/month for up to 25 properties with 15-minute checks, AI resolution, contractor matching, and a mini CRM. Portfolio is $199/month for unlimited properties with the full CRM suite, maintenance tracking, and a dedicated account manager. All plans include a 14-day free trial — no credit card required.',
   },
   {
     question: 'How is this different from DOB Alerts?',
@@ -89,16 +89,16 @@ const jsonLd = [
     offers: [
       {
         '@type': 'Offer',
-        price: '19',
+        price: '29',
         priceCurrency: 'USD',
         name: 'Starter',
-        description: 'Up to 5 properties, all 10+ agencies, daily monitoring, email alerts',
+        description: 'Up to 3 properties, all 10+ agencies, 6-hour monitoring, email alerts',
       },
       {
         '@type': 'Offer',
-        price: '49',
+        price: '79',
         priceCurrency: 'USD',
-        name: 'Pro',
+        name: 'Professional',
         description:
           'Unlimited properties, 15-min checks, 10+ agencies, email + SMS + WhatsApp, AI resolution engine, contractor marketplace',
       },
@@ -522,68 +522,73 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Start free. Stay free if you want.</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">DOB Alerts charges $19/mo for one agency. We cover ten &mdash; starting at $19.</p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">DOB Alerts charges $19/mo for one agency. We cover ten &mdash; starting at $29.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Starter */}
             <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
               <h3 className="font-semibold text-lg text-gray-900">Starter</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$19<span className="text-base text-gray-500 font-normal">/mo</span></p>
-              <p className="text-sm text-gray-500 mt-2">Same price as DOB Alerts &mdash; 10x the coverage</p>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$29<span className="text-base text-gray-500 font-normal">/mo</span></p>
+              <p className="text-sm text-gray-500 mt-2">For landlords with a few buildings</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
-                <li className="flex items-center gap-2"><CheckIcon /> Up to 5 properties</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Up to 3 properties</li>
                 <li className="flex items-center gap-2"><CheckIcon /> <strong>All 10+ agencies</strong></li>
-                <li className="flex items-center gap-2"><CheckIcon /> Daily monitoring</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Monitoring every 6 hours</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Email alerts</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Resolution guides</li>
-                <li className="flex items-center gap-2 text-gray-500"><XIcon /> SMS &amp; WhatsApp</li>
-                <li className="flex items-center gap-2 text-gray-500"><XIcon /> Contractor matching</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Basic resolution guides</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Marketplace browsing</li>
+                <li className="flex items-center gap-2 text-gray-400"><XIcon /> SMS &amp; WhatsApp</li>
+                <li className="flex items-center gap-2 text-gray-400"><XIcon /> CRM &amp; building management</li>
               </ul>
               <Link href="/signup" className="mt-8 block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl text-sm hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">
                 Start 14-day free trial
               </Link>
               <p className="text-xs text-gray-400 text-center mt-2">No credit card required.</p>
             </div>
-            {/* Pro */}
+            {/* Professional */}
             <div className="bg-white rounded-2xl border-2 border-indigo-600 p-8 text-left relative flex flex-col shadow-xl ring-4 ring-indigo-50 hover:-translate-y-0.5 transition-all duration-200">
               <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs px-4 py-1 rounded-full font-medium shadow-sm">
                 Most popular
               </span>
-              <h3 className="font-semibold text-lg text-gray-900">Pro</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">$49<span className="text-base text-gray-500 font-normal">/mo</span></p>
-              <p className="text-sm text-gray-500 mt-2">For serious landlords and property managers</p>
+              <h3 className="font-semibold text-lg text-gray-900">Professional</h3>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$79<span className="text-base text-gray-500 font-normal">/mo</span></p>
+              <p className="text-sm text-gray-500 mt-2">For property managers growing their portfolio</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
-                <li className="flex items-center gap-2"><CheckIcon /> Unlimited properties</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Up to 25 properties</li>
                 <li className="flex items-center gap-2"><CheckIcon /> <strong>All 10+ agencies</strong></li>
                 <li className="flex items-center gap-2"><CheckIcon /> Checks every 15 minutes</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Email, SMS, and WhatsApp</li>
-                <li className="flex items-center gap-2"><CheckIcon /> AI resolution guides</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Contractor matching</li>
-                <li className="flex items-center gap-2"><CheckIcon /> CRM &amp; building management</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Team collaboration</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Email + SMS alerts</li>
+                <li className="flex items-center gap-2"><CheckIcon /> <strong>AI-powered resolution guides</strong></li>
+                <li className="flex items-center gap-2"><CheckIcon /> Contractor quotes &amp; matching</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Up to 5 team members</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Mini CRM (notes &amp; contacts)</li>
               </ul>
               <Link href="/signup" className="mt-8 block text-center bg-indigo-600 text-white font-semibold py-3 rounded-xl text-sm shadow-sm hover:bg-indigo-700 hover:shadow-md active:scale-[0.97] transition-all duration-200">
                 Start 14-day free trial
               </Link>
               <p className="text-xs text-gray-400 text-center mt-2">Cancel anytime. No credit card needed.</p>
             </div>
-            {/* Enterprise */}
+            {/* Portfolio */}
             <div className="bg-white rounded-2xl border border-gray-200 p-8 text-left flex flex-col transition-all duration-200">
-              <h3 className="font-semibold text-lg text-gray-900">Enterprise</h3>
-              <p className="text-4xl font-bold mt-2 text-gray-900">Custom</p>
-              <p className="text-sm text-gray-500 mt-2">For portfolios with 50+ properties</p>
+              <h3 className="font-semibold text-lg text-gray-900">Portfolio</h3>
+              <p className="text-4xl font-bold mt-2 text-gray-900">$199<span className="text-base text-gray-500 font-normal">/mo</span></p>
+              <p className="text-sm text-gray-500 mt-2">Full building management for large portfolios</p>
               <ul className="mt-6 space-y-3 text-sm text-gray-600 flex-1">
-                <li className="flex items-center gap-2"><CheckIcon /> Everything in Pro</li>
-                <li className="flex items-center gap-2"><CheckIcon /> API access</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Volume pricing ($2-5/property)</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Webhook integrations</li>
+                <li className="flex items-center gap-2"><CheckIcon /> <strong>Unlimited properties</strong></li>
+                <li className="flex items-center gap-2"><CheckIcon /> Everything in Professional</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Email + SMS + WhatsApp</li>
+                <li className="flex items-center gap-2"><CheckIcon /> <strong>Full CRM suite</strong></li>
+                <li className="flex items-center gap-2"><CheckIcon /> Building details &amp; documents</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Maintenance tracking</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Unlimited team members</li>
+                <li className="flex items-center gap-2"><CheckIcon /> Priority contractor matching</li>
+                <li className="flex items-center gap-2"><CheckIcon /> API access &amp; webhooks</li>
                 <li className="flex items-center gap-2"><CheckIcon /> Dedicated account manager</li>
-                <li className="flex items-center gap-2"><CheckIcon /> Custom reporting</li>
-                <li className="flex items-center gap-2"><CheckIcon /> SLA guarantee</li>
               </ul>
-              <a href="mailto:sales@violationalert.com" className="mt-8 block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl text-sm hover:bg-gray-50 active:scale-[0.97] transition-all duration-200">
-                Contact sales
-              </a>
+              <Link href="/signup" className="mt-8 block text-center bg-gray-900 text-white font-semibold py-3 rounded-xl text-sm shadow-sm hover:bg-gray-800 hover:shadow-md active:scale-[0.97] transition-all duration-200">
+                Start 14-day free trial
+              </Link>
+              <p className="text-xs text-gray-400 text-center mt-2">No credit card required.</p>
             </div>
           </div>
         </div>
